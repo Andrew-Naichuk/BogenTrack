@@ -154,6 +154,14 @@ textarea {
     min-height: 120px;
 }
 
+datalist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
 .contentContainer {
     display: flex;
     flex-direction: column;
@@ -168,6 +176,13 @@ textarea {
     background-color: var(--secondary-bg-color);
     border-radius: var(--radius-default);
 }
+
+.arrowsScoreList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 
 
 /* BUTTONS */

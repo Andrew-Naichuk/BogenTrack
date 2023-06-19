@@ -1,6 +1,7 @@
 // Global Pool
 const allScreens = document.querySelectorAll('section');
 const signOutButton = document.querySelector('#signOutBtn');
+let currentSelectedSession;
 
 // It's important for screen variable name and its id in html to be the same 
 // since logic of show-hide screen function relies on it so hard.
@@ -45,6 +46,7 @@ const cancelNewSessionButton = document.querySelector('#cancelNewSessionBtn');
 const SessionScreen = document.querySelector('#SessionScreen');
 const backToSessionListButton = document.querySelector('#backToSessionListBtn');
 const createRoundButton = document.querySelector('#createRoundBtn');
+const roundsListContainer = document.querySelector('#roundsListContainer');
 
 
 
@@ -56,3 +58,5 @@ const arrowsCounter = document.querySelector('#arrowsCount');
 const removeArrowButton = document.querySelector('#removeArrowBtn');
 const addArrowButton = document.querySelector('#addArrowBtn');
 const arrowsScoreList = document.querySelector('#arrowsScoreList');
+const createRoundTimeField = document.querySelector('#newRoundTime');
+const createRoundCommentField = document.querySelector('#newRoundComment');
