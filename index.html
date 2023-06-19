@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BogenTrack App</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+
+    <script src="./elements.js" defer></script>
+    <script src="./app.js" defer></script>
+
+</head>
+<body>
+
+    <!-- Initial App Screen -->
+    <section id="entryScreen">
+
+        <form id="loginForm" class="visible">
+            <h1>Log In</h1>
+
+            <label for="loginEmail">Email</label>
+            <input type="email" name="email" id="loginEmail">
+            
+            <label for="loginPassword">Password</label>
+            <input type="password" name="password" id="loginPassword">
+    
+            <input type="button" id="mainLoginBtn" class="primary" value="Log In">
+            
+            <h6 class="faded">or</h6>
+
+            <input type="button" id="googleLoginBtn" class="secondary" value="Continue with Google">
+
+            <h6 class="faded">New to BogenTrack? Sign up now!</h6>
+            <input type="button" id="toSignUpBtn" class="secondary" value="Create an Account">
+        </form>
+    
+        <form id="signupForm" class="hidden">
+            <h1>New Account</h1>
+            
+            <label for="signupEmail">Your Email</label>
+            <input type="email" name="email" id="signupEmail">
+            
+            <label for="signupPassword">Create Password</label>
+            <input type="password" name="password" id="signupPassword">
+            <h6 class="faded">Password should be min. 6 symbols long.</h6>
+    
+            <input type="button" id="mainSignupBtn" class="primary" value="Create an Account">
+
+            <h6 class="faded">Already have account? Log in!</h6>
+            <input type="button" id="toLoginBtn" class="secondary" value="Log In">
+        </form>
+
+    </section>
+
+    <!-- Sessions List Screen -->
+    <section id="sessionsListScreen" class="hidden">
+        <header>
+            <h2>Sessions</h2>
+            <button id="signOutBtn" type="button" class="secondary">Sign Out</button>
+        </header>
+
+        <div class="contentContainer" id="sessionsListContainer">
+
+        </div>
+
+        <footer>
+            <button id="createSessionBtn" type="button" class="primary">Create Session</button>
+        </footer>
+    </section>
+
+    <!-- Create Session Screen -->
+    <section id="createSessionScreen" class="hidden">
+        <header>
+            <h2>Create Session</h2>
+        </header>
+
+        <div class="contentContainer">
+
+            <label for="newSessionDate">Session Date</label>
+            <input type="date" name="newSessionDate" id="newSessionDate">
+
+            <label for="newSessionComment">Session Comment</label>
+            <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..."></textarea>
+        
+        </div>
+
+        <footer>
+            <button id="saveNewSessionBtn" type="button" class="primary">Save</button>
+            <button id="cancelNewSessionBtn" type="button" class="secondary">Cancel</button>
+        </footer>
+    </section>
+
+    <!-- Open Session Screen -->
+    <section id="SessionScreen" class="hidden">
+
+        <header>
+            <button id="backToSessionListBtn" type="button" class="secondary">Back</button>
+            <h2>Session</h2>
+            <button id="editSessionBtn" type="button" class="secondary">Edit</button>
+        </header>
+
+        <div class="contentContainer">
+
+        </div>
+
+        <footer>
+            <button id="createRoundBtn" type="button" class="primary">Create Round</button>
+        </footer>
+
+    </section>
+
+
+    <!-- Create Round Screen -->
+    <section id="createRoundScreen" class="hidden">
+
+        <header>
+            <h2>Create Round</h2>
+        </header>
+
+        <div class="contentContainer">
+
+            <label for="newRoundTime">Finish Time</label>
+            <input type="time" name="newRoundTime" id="newRoundTime">
+
+            <label for="arrowsClicker">Number of Arrows</label>
+            <div class="arrowsClicker" id="arrowsClicker">
+                <button id="removeArrowBtn" type="button" class="primary">-</button>
+                <h5 id="arrowsCount">6</h5>
+                <button id="addArrowBtn" type="button" class="primary">+</button>
+            </div>
+
+            <div class="arrowsScoreList" id="arrowsScoreList">
+
+            </div>
+
+
+            <label for="newRoundComment">Round Comment</label>
+            <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..."></textarea>
+
+        </div>
+
+        <footer>
+            <button id="saveNewRoundBtn" type="button" class="primary">Save</button>
+            <button id="cancelNewRoundBtn" type="button" class="secondary">Cancel</button>
+        </footer>
+
+    </section>
+
+</body>
+</html>
+
+
+

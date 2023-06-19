@@ -1,0 +1,210 @@
+:root {
+    --main-bg-color: #ffffff;
+    --secondary-bg-color:rgb(237, 243, 247);
+    --main-text-color: #202020;
+    --secondary-text-color: #5a5a5a;
+    --main-accent-color: #e98409;
+
+    --button-bg-color: #1771a2;
+    --button-hover-color: #1193d8;
+    --button-text-color: #ffffff;
+
+    --shadow-min: rgba(0, 0, 0, 0.05) 0px 2px 20px;
+    --shadow-default: rgba(0, 0, 0, 0.07) 0px 5px 30px;
+
+    --radius-min: 4px;
+    --radius-default: 8px;
+    --radius-max: 999px;
+}
+
+/* DEFAULTS RESET */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  font-family: sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+
+/* TYPOGRAPHY */
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+
+
+
+/* SERVICE CLASSES */
+.hidden {
+    display: none;
+}
+.visible {
+    display: flex;
+}
+.faded {
+    opacity: 0.5;
+}
+
+
+/* KEY ELEMENTS */
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    min-height: 100vh;
+}
+
+header, .arrowsClicker {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    max-width: 340px;
+    padding: 20px;
+    gap: 12px;
+    background-color: var(--main-bg-color);
+    box-shadow: var(--shadow-default);
+    border-radius: var(--radius-default);
+}
+
+article {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    background-color: var(--main-bg-color);
+    box-shadow: var(--shadow-min);
+    border-radius: var(--radius-max);
+}
+
+input, label, textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 4px;
+}
+
+textarea {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 50vh;
+    min-height: 120px;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+    min-height: 90vh;
+    padding-bottom: 60px;
+    gap: 12px;
+}
+
+.arrowsClicker{
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--radius-default);
+}
+
+
+/* BUTTONS */
+input[type="button"], button {
+    background-color: var(--main-bg-color);
+    padding: 6px 12px;
+    min-width: 36px;
+    max-width: 300px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    box-shadow: none;
+    border-radius: var(--radius-min);
+    transition: 0.3s;
+}
+
+input[type="button"].primary, button.primary {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+}
+
+input[type="button"].secondary, button.secondary {
+    background-color: transparent;
+    color: var(--button-bg-color);
+}
+
+input[type="button"]:hover, button:hover {
+    cursor: pointer;
+    background-color: var(--button-hover-color);
+    box-shadow: var(--shadow-default);
+}
+
+input[type="button"].secondary:hover, button.secondary:hover {
+    color: var(--button-text-color);
+}
+
+footer>button {
+    width: 100%;
+    padding: 10px;
+}
