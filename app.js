@@ -31,9 +31,15 @@ function showScreen(screen) {
     allScreens.forEach(element => {
         if (element.id === screen) {
             element.classList.remove('hidden');
+            element.classList.remove('fadeOut');
+
+            element.classList.add('fadeIn');
             element.classList.add('visible');
         } else {
+            element.classList.remove('fadeIn');
             element.classList.remove('visible');
+
+            element.classList.add('fadeOut');
             element.classList.add('hidden');
         }
     });
@@ -168,13 +174,25 @@ saveNewSessionButton.addEventListener('click', function(){
             "rounds": [],
         };
         (async function(){
-            try {
+            const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+            const doc = await docRef.get();
+            if (doc.exists) {
+                try {
                 // Pushing populated session object to the DB
                 await db.collection("btUsers").doc(auth.currentUser.uid).update({
                     sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
                 });
             } catch (error) {
                 console.log(error);
+            }
+            } else {
+                try {
+                    await db.collection("btUsers").doc(auth.currentUser.uid).set({
+                        sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
             }
         })();
         // Setting fields values back to default
@@ -361,7 +379,13 @@ async function getSessions(){
                 sessionsListContainer.appendChild(renderedSession);
             });
         } else {
-            console.log('No data yet')
+            const noSessionsNotice = document.createElement("div");
+            noSessionsNotice.className = 'screenNotice'
+            noSessionsNotice.innerHTML = `
+                <h4>Looks Empty</h4>
+                <p>Start tracking your results by adding your first training session.</p>
+            `
+            sessionsListContainer.appendChild(noSessionsNotice);
         }
     } catch (error) {
         console.log('Error while getting data')
@@ -385,6 +409,17 @@ async function getRounds(){
             list.forEach(listItem => {
                 if (listItem.uid === currentSelectedSession) {
                     let roundsList = listItem.rounds;
+
+                    if (roundsList.length < 1) {
+                        const noRoundsNotice = document.createElement("div");
+                        noRoundsNotice.className = 'screenNotice'
+                        noRoundsNotice.innerHTML = `
+                            <h4>Looks Empty</h4>
+                            <p>Start saving shooting results by creating and populating new round on each end.</p>
+                        `
+                        roundsListContainer.appendChild(noRoundsNotice);
+                    }
+
                     roundsList.forEach(round => {
                         let totalResult = 0;
                         round.arrows.forEach(function (number) {
