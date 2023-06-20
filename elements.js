@@ -7,7 +7,6 @@ let currentSelectedSession;
 // since logic of show-hide screen function relies on it so hard.
 
 
-
 // Entry Screen
 const entryScreen = document.querySelector('#entryScreen');
 // ---- Login Form
@@ -25,12 +24,10 @@ const signUpButton = document.querySelector('#mainSignupBtn');
 const toLogInForm = document.querySelector('#toLoginBtn');
 
 
-
 // Sessions List Screen
 const sessionsListScreen = document.querySelector('#sessionsListScreen');
 const sessionsListContainer = document.querySelector('#sessionsListContainer');
 const createSessionButton = document.querySelector('#createSessionBtn');
-
 
 
 // Create Session Screen
@@ -41,13 +38,11 @@ const saveNewSessionButton = document.querySelector('#saveNewSessionBtn');
 const cancelNewSessionButton = document.querySelector('#cancelNewSessionBtn');
 
 
-
 // Open Session Screen
 const SessionScreen = document.querySelector('#SessionScreen');
 const backToSessionListButton = document.querySelector('#backToSessionListBtn');
 const createRoundButton = document.querySelector('#createRoundBtn');
 const roundsListContainer = document.querySelector('#roundsListContainer');
-
 
 
 // Create Round Screen

@@ -27,7 +27,7 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 // Showing and Hiding Screens Functionality
-function showScreen(screen) {
+function showScreen(screen){
     allScreens.forEach(element => {
         if (element.id === screen) {
             element.classList.remove('hidden');
@@ -41,9 +41,9 @@ function showScreen(screen) {
 
             element.classList.add('fadeOut');
             element.classList.add('hidden');
-        }
+        };
     });
-}
+};
 
 // Generating UUIDs
 function generateUID() {
@@ -51,7 +51,7 @@ function generateUID() {
     const random = Math.floor(Math.random() * 100000);
     const uid = `${timestamp}-${random}`;
     return uid;
-}
+};
 
 
 
@@ -94,16 +94,15 @@ signOutButton.addEventListener('click', async function(){
 });
 
 // Log In - Sign Up Switching
-function entryFormsHandler() {
+function entryFormsHandler(){
     if (logInForm.classList.contains('visible')) {
         signUpForm.classList.remove('visible');
         signUpForm.classList.add('hidden');
-    
     } else {
         signUpForm.classList.remove('hidden');
         signUpForm.classList.add('visible');
     }
-}
+};
 toSignUpForm.addEventListener('click', function(){
     logInForm.classList.remove('visible');
     logInForm.classList.add('hidden');
@@ -155,8 +154,6 @@ cancelNewRoundButton.addEventListener('click', function(){
     showScreen('SessionScreen');
     setTimeout(getRounds, 500);
 });
-
-
 
 
 
@@ -327,8 +324,6 @@ addArrowButton.addEventListener('click', function(){
 
 
 
-
-
 // Read and Render Sessions From Database
 async function getSessions(){
     // Refference to specific document in DB
@@ -440,7 +435,6 @@ async function getRounds(){
                 }
             });
         }
-
     } catch (error) {
         console.log('Error while getting data');
     }

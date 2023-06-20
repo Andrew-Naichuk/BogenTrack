@@ -18,32 +18,31 @@
     --radius-max: 999px;
 }
 
+
+
 /* DEFAULTS RESET */
 html {
-  box-sizing: border-box;
-  font-size: 16px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
-
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 *, *:before, *:after {
-  box-sizing: inherit;
-  font-family: sans-serif;
+    box-sizing: inherit;
+    font-family: sans-serif;
 }
-
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
 }
 
-ol, ul {
-  list-style: none;
-}
 
 
 /* TYPOGRAPHY */
@@ -51,32 +50,26 @@ h1 {
     font-size: 28px;
     font-weight: 600;
 }
-
 h2 {
     font-size: 24px;
     font-weight: 600;
 }
-
 h3 {
     font-size: 20px;
     font-weight: 600;
 }
-
 h4 {
     font-size: 18px;
     font-weight: 600;
 }
-
 h5 {
     font-size: 16px;
     font-weight: 600;
 }
-
 h6 {
     font-size: 14px;
     font-weight: 600;
 }
-
 
 
 
@@ -93,6 +86,8 @@ h6 {
 }
 
 
+
+
 /* KEY ELEMENTS */
 section {
     display: flex;
@@ -105,14 +100,12 @@ section {
     width: 100%;
     max-width: 600px;
 }
-
 header, .arrowsClicker {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
 }
-
 footer {
     position: fixed;
     bottom: 10px;
@@ -124,7 +117,6 @@ footer {
     width: 100%;
     z-index: 10;
 }
-
 form {
     display: flex;
     flex-direction: column;
@@ -138,7 +130,6 @@ form {
     box-shadow: var(--shadow-default);
     border-radius: var(--radius-default);
 }
-
 article {
     display: flex;
     flex-direction: row;
@@ -149,28 +140,23 @@ article {
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-max);
 }
-
 input, label, textarea {
     width: 100%;
     font-size: 16px;
     padding: 4px;
 }
-
 textarea {
     max-width: 100%;
     min-width: 100%;
     max-height: 50vh;
     min-height: 120px;
 }
-
 datalist {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
-
-
 .contentContainer {
     display: flex;
     flex-direction: column;
@@ -180,7 +166,6 @@ datalist {
     padding-bottom: 60px;
     gap: 12px;
 }
-
 .screenNotice {
     display: flex;
     flex-direction: column;
@@ -191,17 +176,16 @@ datalist {
     width: 100%;
     text-align: center;
 }
-
 .arrowsClicker{
     background-color: var(--secondary-bg-color);
     border-radius: var(--radius-default);
 }
-
 .arrowsScoreList {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
 
 
 
@@ -218,27 +202,22 @@ input[type="button"], button {
     border-radius: var(--radius-max);
     transition: 0.3s;
 }
-
 input[type="button"].primary, button.primary {
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
 }
-
 input[type="button"].secondary, button.secondary {
     background-color: var(--main-bg-color);
     color: var(--button-bg-color);
 }
-
 input[type="button"]:hover, button:hover {
     cursor: pointer;
     background-color: var(--button-hover-color);
     box-shadow: var(--shadow-default);
 }
-
 input[type="button"].secondary:hover, button.secondary:hover {
     color: var(--button-text-color);
 }
-
 footer>button {
     width: 100%;
     padding: 10px;
@@ -246,21 +225,21 @@ footer>button {
 }
 
 
+
+
 /* ANIMATIONS */
 .fadeIn {
     animation: fadeIn 0.4s;
 }
-
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
-  }
+}
 
 .fadeOut {
     animation: fadeOut 0.4s;
 }
-
 @keyframes fadeOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
-  }
+}
