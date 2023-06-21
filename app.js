@@ -147,6 +147,36 @@ cancelNewSessionButton.addEventListener('click', function(){
 });
 
 
+// Edit Session - Cancel Edit Switching
+editSessionButton.addEventListener('click', function(){
+    showScreen('updateSessionScreen');
+    // Populating edit screen with data of currently selected section
+    (async function(){
+        try {
+            // Get reference to the user document in the btUsers collection
+            const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+            // Retrieve the document from the database
+            const doc = await docRef.get();
+            sessionsSnapshot = doc.data().sessions;
+            // Find currently selected session in DB and populate inputs with its data
+            sessionsSnapshot.forEach(session => {
+                if (session.uid === currentSelectedSession) {
+                    updateSessionDateField.value = session.date;
+                    updateSessionCommentField.value = session.comment;
+                }
+            });
+        } catch (error) {
+            window.alert(error)
+        }
+    })();
+});
+cancelUpdatedSessionButton.addEventListener('click', function(){
+    updateSessionDateField.value = '';
+    updateSessionCommentField.value = '';
+    showScreen('SessionScreen');
+});
+
+
 // Back to Sessions List Functionality
 backToSessionListButton.addEventListener('click', function(){
     sessionsListContainer.innerHTML = '';
@@ -227,8 +257,41 @@ saveNewSessionButton.addEventListener('click', function(){
 });
 
 
+// Update Session Functionality
+saveUpdatedSessionButton.addEventListener('click', function(){
+    // Preparing updated session snapshot with new values from user inputs
+    sessionsSnapshot.forEach(session => {
+        if (session.uid === currentSelectedSession){
+            if (updateSessionDateField.value.length === 10) {
+                session.date = updateSessionDateField.value;
+                session.comment = updateSessionCommentField.value;
+    
+                // Asynchronous function for database operations
+                (async function(){
+                    try {
+                        // Pushing updated session object to the DB by updating the sessions array field
+                        await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                            sessions: sessionsSnapshot,
+                        });
+                    } catch (error) {
+                        window.alert(error);
+                    }
+                })();
+                // Setting fields values back to default
+                updateSessionDateField.value = '';
+                updateSessionCommentField.value = '';
+                // Navigating back to rounds list and updating it
+                showScreen('SessionScreen');
+                setTimeout(getRounds, 500);
+            } else {
+                window.alert('Date is not filled');
+            };
+        };
+    });
+});
+
+
 // Add New Round Functionality
-let sessionsSnapshot;
 saveNewRoundButton.addEventListener('click', function(){
     if (createRoundTimeField.value.length === 5) {
         // Collecting arrows scores
@@ -385,12 +448,20 @@ async function getSessions(){
                 const renderedSession = document.createElement("article");
                 renderedSession.id = listItem.uid;
                 renderedSession.classList.add('hidden');
-                renderedSession.innerHTML = `
+                // Checking if session has rounds to render it as new or filled
+                if (listItem.rounds.length > 0) {
+                    renderedSession.innerHTML = `
                     <h5>${listItem.date}</h5>
                     <p class="fullWidth">${listItem.rounds.length} Rounds</p>
                     <p class="fullWidth">${totalArrows} Arrows</p>
                     <h5 class="fix45">Ø ${displayAverage}</h5>
                 `;
+                } else {
+                    renderedSession.innerHTML = `
+                    <h5>${listItem.date}</h5>
+                    <h5 class="fix45">New</h5>
+                    `
+                }
 
                 // Making sessions clickable to open their details
                 renderedSession.addEventListener('click', function(){
@@ -447,7 +518,7 @@ async function getRounds(){
                         sessionRenderedComment.classList.add('sessionPageComment');
                         sessionRenderedComment.classList.add('fadeIn');
                         sessionRenderedComment.innerHTML = `
-                            <h5>Session Notes:</h5>
+                            <h4>Session Notes:</h4>
                             <p>${listItem.comment}</p>
                         `;
                         roundsListContainer.appendChild(sessionRenderedComment);
