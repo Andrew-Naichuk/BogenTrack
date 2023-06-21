@@ -219,7 +219,11 @@ saveNewRoundButton.addEventListener('click', function(){
         let arrowsScores = [];
         let arrowsScoreInputs = arrowsScoreList.querySelectorAll('input');
         arrowsScoreInputs.forEach(input => {
-            arrowsScores.push(input.value)
+            if (input.value === "11") {
+                arrowsScores.push("10");
+            } else {
+                arrowsScores.push(input.value);
+            }
         });
     
         // Creating model round object
@@ -333,6 +337,7 @@ async function getSessions(){
         // Trying to fetch data
         const doc = await docRef.get();
         if (doc.exists) {
+
             // Rendering session cards
             let list = doc.data().sessions.reverse();
             list.forEach(listItem => {
@@ -349,6 +354,7 @@ async function getSessions(){
                 let displayAverage = averageResult.toString().slice(0, 3);
                 const renderedSession = document.createElement("article");
                 renderedSession.id = listItem.uid
+                renderedSession.classList.add('fadeIn');
                 renderedSession.innerHTML = `
                 <h5>${listItem.date}</h5>
                 <p>${listItem.rounds.length} Rounds</p>
@@ -403,6 +409,19 @@ async function getRounds(){
             // Going through all sessions in search of currently selected one
             list.forEach(listItem => {
                 if (listItem.uid === currentSelectedSession) {
+
+                    // Rendering session comment if any
+                    if (listItem.comment.length > 0) {
+                        const sessionRenderedComment = document.createElement("div");
+                        sessionRenderedComment.classList.add('sessionPageComment');
+                        sessionRenderedComment.classList.add('fadeIn');
+                        sessionRenderedComment.innerHTML = `
+                            <h5>Session Notes:</h5>
+                            <p>${listItem.comment}</p>
+                            `;
+                        roundsListContainer.appendChild(sessionRenderedComment);
+                    }
+
                     let roundsList = listItem.rounds;
 
                     if (roundsList.length < 1) {
@@ -424,6 +443,7 @@ async function getRounds(){
                         let displayAverage = averageResult.toString().slice(0, 3);
                         const renderedRound = document.createElement("article");
                         renderedRound.id = round.uid
+                        renderedRound.classList.add('fadeIn');
                         renderedRound.innerHTML = `
                         <h5>${round.time}</h5>
                         <p>${round.arrows.length} Arrows</p>
