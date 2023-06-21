@@ -4,6 +4,7 @@
     --main-text-color: #202020;
     --secondary-text-color: #5a5a5a;
     --main-accent-color: #e98409;
+    --borders-color: #dddfe9;
 
     --button-bg-color: #1771a2;
     --button-hover-color: #1193d8;
@@ -88,6 +89,12 @@ p {
 .faded {
     opacity: 0.5;
 }
+.fullWidth {
+    width: auto;
+}
+.fix45 {
+    width: 45px;
+}
 
 
 
@@ -99,7 +106,7 @@ section {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    gap: 20px;
+    gap: 28px;
     min-height: 100vh;
     width: 100%;
     max-width: 600px;
@@ -129,7 +136,7 @@ form {
     height: fit-content;
     max-width: 340px;
     padding: 20px;
-    gap: 12px;
+    gap: 18px;
     background-color: var(--main-bg-color);
     box-shadow: var(--shadow-default);
     border-radius: var(--radius-default);
@@ -144,21 +151,34 @@ article {
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-max);
 }
-input, label, textarea {
+input, textarea {
     width: 100%;
     font-size: 16px;
-    padding: 4px;
+    padding: 8px 12px;
+}
+label {
+    width: 100%;
+}
+input, textarea {
+    border: var(--borders-color) 1px solid;
+    border-radius: var(--radius-default);
 }
 textarea {
     max-width: 100%;
     min-width: 100%;
     max-height: 50vh;
-    min-height: 120px;
+    min-height: 100px;
 }
 datalist {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
+}
+.inputElement {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     width: 100%;
 }
 .contentContainer {
@@ -168,7 +188,7 @@ datalist {
     width: 100%;
     min-height: 90vh;
     padding-bottom: 110px;
-    gap: 12px;
+    gap: 16px;
 }
 .screenNotice {
     display: flex;
@@ -202,7 +222,7 @@ datalist {
 /* BUTTONS */
 input[type="button"], button {
     background-color: var(--main-bg-color);
-    padding: 6px 12px;
+    padding: 8px 12px;
     min-width: 36px;
     max-width: 300px;
     font-size: 16px;
@@ -239,7 +259,7 @@ footer>button {
 
 /* ANIMATIONS */
 .fadeIn {
-    animation: fadeIn 0.4s;
+    animation: fadeIn 0.6s;
 }
 @keyframes fadeIn {
     0% { opacity: 0; }
@@ -247,7 +267,7 @@ footer>button {
 }
 
 .fadeOut {
-    animation: fadeOut 0.4s;
+    animation: fadeOut 0.6s;
 }
 @keyframes fadeOut {
     0% { opacity: 1; }

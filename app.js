@@ -135,13 +135,15 @@ cancelNewSessionButton.addEventListener('click', function(){
 
 // Back to Sessions List Functionality
 backToSessionListButton.addEventListener('click', function(){
+    sessionsListContainer.innerHTML = '';
     showScreen('sessionsListScreen');
-    setTimeout(getSessions, 500);
+    setTimeout(getSessions, 100);
 });
 
 
 // Add Round - Cancel Add Switching
 createRoundButton.addEventListener('click', function(){
+    roundsListContainer.innerHTML = '';
     showScreen('createRoundScreen');
     renderArrowSelectors();
 });
@@ -152,7 +154,7 @@ cancelNewRoundButton.addEventListener('click', function(){
 
     // Getting rounds and rendering
     showScreen('SessionScreen');
-    setTimeout(getRounds, 500);
+    setTimeout(getRounds, 100);
 });
 
 
@@ -354,12 +356,12 @@ async function getSessions(){
                 let displayAverage = averageResult.toString().slice(0, 3);
                 const renderedSession = document.createElement("article");
                 renderedSession.id = listItem.uid
-                renderedSession.classList.add('fadeIn');
+                renderedSession.classList.add('hidden');
                 renderedSession.innerHTML = `
                 <h5>${listItem.date}</h5>
-                <p>${listItem.rounds.length} Rounds</p>
-                <p>${totalArrows} Arrows</p>
-                <h5>Ø ${displayAverage}</h5>
+                <p class="fullWidth">${listItem.rounds.length} Rounds</p>
+                <p class="fullWidth">${totalArrows} Arrows</p>
+                <h5 class="fix45">Ø ${displayAverage}</h5>
                 `
 
                 // Making sessions clickable to open their details
@@ -378,6 +380,8 @@ async function getSessions(){
                 });
 
                 sessionsListContainer.appendChild(renderedSession);
+                renderedSession.classList.remove('hidden');
+                renderedSession.classList.add('fadeIn');
             });
         } else {
             const noSessionsNotice = document.createElement("div");
@@ -446,9 +450,9 @@ async function getRounds(){
                         renderedRound.classList.add('fadeIn');
                         renderedRound.innerHTML = `
                         <h5>${round.time}</h5>
-                        <p>${round.arrows.length} Arrows</p>
-                        <p>Total ${totalResult}</p>
-                        <h5>Ø ${displayAverage}</h5>
+                        <p class="fullWidth">${round.arrows.length} Arrows</p>
+                        <p class="fullWidth">Total ${totalResult}</p>
+                        <h5 class="fix45">Ø ${displayAverage}</h5>
                         `
                         roundsListContainer.appendChild(renderedRound);
                     });
