@@ -2,6 +2,7 @@
 const allScreens = document.querySelectorAll('section');
 const signOutButton = document.querySelector('#signOutBtn');
 let currentSelectedSession;
+let sessionsSnapshot;
 
 // It's important for screen variable name and its id in html to be the same 
 // since logic of show-hide screen function relies on it so hard.
@@ -38,11 +39,20 @@ const saveNewSessionButton = document.querySelector('#saveNewSessionBtn');
 const cancelNewSessionButton = document.querySelector('#cancelNewSessionBtn');
 
 
+// Update Session Screen
+const updateSessionScreen = document.querySelector('#updateSessionScreen');
+const updateSessionDateField = document.querySelector('#updateSessionDate');
+const updateSessionCommentField = document.querySelector('#updateSessionComment');
+const saveUpdatedSessionButton = document.querySelector('#saveUpdatedSessionBtn');
+const cancelUpdatedSessionButton = document.querySelector('#cancelUpdatedSessionBtn');
+
+
 // Open Session Screen
 const SessionScreen = document.querySelector('#SessionScreen');
 const backToSessionListButton = document.querySelector('#backToSessionListBtn');
 const createRoundButton = document.querySelector('#createRoundBtn');
 const roundsListContainer = document.querySelector('#roundsListContainer');
+const editSessionButton = document.querySelector('#editSessionBtn');
 
 
 // Create Round Screen
