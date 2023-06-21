@@ -9,6 +9,7 @@ const firebaseConfig = {
     measurementId: "G-QR4TSG9K78"
 };
 
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
@@ -26,80 +27,99 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
+
 // Showing and Hiding Screens Functionality
 function showScreen(screen){
     allScreens.forEach(element => {
+        // Check if the current element's id matches the specified screen
         if (element.id === screen) {
+            // If the element matches the specified screen, remove 'hidden' and 'fadeOut' classes
             element.classList.remove('hidden');
             element.classList.remove('fadeOut');
 
+            // Add 'fadeIn' and 'visible' classes to make the element visible with a fade-in effect
             element.classList.add('fadeIn');
             element.classList.add('visible');
         } else {
+            // If the element doesn't match the specified screen, remove 'fadeIn' and 'visible' classes
             element.classList.remove('fadeIn');
             element.classList.remove('visible');
 
+            // Add 'fadeOut' and 'hidden' classes to hide the element with a fade-out effect
             element.classList.add('fadeOut');
             element.classList.add('hidden');
         };
     });
 };
 
+
 // Generating UUIDs
 function generateUID() {
+    // Get the current timestamp in milliseconds
     const timestamp = Date.now();
+
+    // Generate a random number between 0 and 99999
     const random = Math.floor(Math.random() * 100000);
+
+    // Combine the timestamp and random number to create a unique identifier (UID)
     const uid = `${timestamp}-${random}`;
+
+    // Return the generated UID
     return uid;
 };
 
 
-
-
-
-
-
-
 // Log In Form Functionality
 logInButton.addEventListener('click', async function(){
+    // Attempting to sign in using email and password inputs values
     try {
-        await firebase.auth().signInWithEmailAndPassword(logInEmailField.value, logInPasswordField.value)
+        await firebase.auth().signInWithEmailAndPassword(logInEmailField.value, logInPasswordField.value);
     } catch (error) {
+        window.alert(error);
     }
 });
+
 logInGoogleButton.addEventListener('click', async function(){
+    // Attempting to sign in using Google auth popup
     try {
         await auth.signInWithPopup(provider);
     } catch (error) {
-        console.log('Error while loging in');
+        window.alert(error);
     }
 });
+
 
 // Sign Up Form Functionality
 signUpButton.addEventListener('click', async function(){
     try {
+        // Attempting to sign up using new account email and password inputs values
         await firebase.auth().createUserWithEmailAndPassword(signUpemailField.value, signUppasswordField.value)
     } catch (error) {
-        console.log('Error while signing up');
+        window.alert(error);
     }
 });
+
 
 // Sign Out Functionality
 signOutButton.addEventListener('click', async function(){
     try {
+        // Attempting to sign out using auth method
         firebase.auth().signOut();
     } catch (error) {
-        console.log('Error while signing out');
+        window.alert(error);
     }
 });
+
 
 // Log In - Sign Up Switching
 function entryFormsHandler(){
     if (logInForm.classList.contains('visible')) {
-        signUpForm.classList.remove('visible');
+        // If login form is currently visible, switch to signup form
+        signUpForm.classList.remove('visible'); // Hide signup form
         signUpForm.classList.add('hidden');
     } else {
-        signUpForm.classList.remove('hidden');
+        // If login form is not currently visible, switch to login form
+        signUpForm.classList.remove('hidden'); // Show signup form
         signUpForm.classList.add('visible');
     }
 };
@@ -115,11 +135,6 @@ toLogInForm.addEventListener('click', function(){
 });
 
 
-
-
-
-
-
 // Add Session - Cancel Add Switching
 createSessionButton.addEventListener('click', function(){
     showScreen('createSessionScreen');
@@ -130,7 +145,6 @@ cancelNewSessionButton.addEventListener('click', function(){
     createSessionCommentField.value = '';
     showScreen('sessionsListScreen');
 });
-
 
 
 // Back to Sessions List Functionality
@@ -158,9 +172,6 @@ cancelNewRoundButton.addEventListener('click', function(){
 });
 
 
-
-
-
 // Add New Session Functionality
 saveNewSessionButton.addEventListener('click', function(){
     // Checking date field has full value
@@ -172,49 +183,52 @@ saveNewSessionButton.addEventListener('click', function(){
             "comment": createSessionCommentField.value,
             "rounds": [],
         };
+        
+        // Asynchronous function for database operations
         (async function(){
+            // Get reference to the user document in the btUsers collection
             const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+            // Retrieve the document from the database
             const doc = await docRef.get();
+            
+            // Check if the document exists
             if (doc.exists) {
                 try {
-                // Pushing populated session object to the DB
-                await db.collection("btUsers").doc(auth.currentUser.uid).update({
-                    sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
-                });
-            } catch (error) {
-                console.log(error);
-            }
+                    // Pushing populated session object to the DB by updating the sessions array field
+                    await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                        sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
+                    });
+                } catch (error) {
+                    window.alert(error);
+                }
             } else {
                 try {
+                    // Create a new document with sessions array field containing the new session object
                     await db.collection("btUsers").doc(auth.currentUser.uid).set({
                         sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
                     });
                 } catch (error) {
-                    console.log(error);
+                    window.alert(error);
                 }
             }
         })();
+        
         // Setting fields values back to default
         createSessionDateField.value = '';
         createSessionCommentField.value = '';
+        
         // Navigating back to sessions list and updating it
         showScreen('sessionsListScreen');
         setTimeout(getSessions, 500);
 
     } else {
-        console.log('Date is not filled');
+        window.alert('Date is not filled');
     };
 });
 
 
-
-
-
-
 // Add New Round Functionality
-
 let sessionsSnapshot;
-
 saveNewRoundButton.addEventListener('click', function(){
     if (createRoundTimeField.value.length === 5) {
         // Collecting arrows scores
@@ -236,6 +250,7 @@ saveNewRoundButton.addEventListener('click', function(){
             "arrows": arrowsScores,
         };
 
+        // Asynchronous function for database operations
         (async function(){
             try {
                 // Making a snapshot of all sessions of current user
@@ -246,69 +261,80 @@ saveNewRoundButton.addEventListener('click', function(){
                     // Updating currently selected session in snapshot with new round
                     sessionsSnapshot.forEach(session => {
                         if (session.uid === currentSelectedSession) {
-                            session.rounds.push(newRound)
+                            session.rounds.push(newRound);
                         }
                     });
-                };
+                }
                 // Pushing updated snapshot with new round to the DB
                 await db.collection("btUsers").doc(auth.currentUser.uid).update({
                     sessions: sessionsSnapshot,
                 });
             } catch (error) {
-                console.log(error);
+                window.alert(error);
             }
         })();
 
         // Setting fields values back to default
         createRoundTimeField.value = '';
         createRoundCommentField.value = '';
+        
         // Navigating back to session screen and updating it
         showScreen('SessionScreen');
         setTimeout(getRounds, 500);
 
     } else {
-        console.log('Time is not filled');
+        window.alert('Time is not filled');
     };
 });
 
 
-
-
-
-
-
 // Arrows Number Clicker Functionality
 function renderArrowSelectors(){
+    // Clear the arrowsScoreList
     arrowsScoreList.innerHTML = '';
+
+    // Get the number of arrows from the arrowsCounter
     arrowsNumber = Number(arrowsCounter.innerText);
+
+    // Initialize arrowId to 1
     let arrowId = 1;
+
+    // Loop to create arrow score selectors based on the arrowsNumber
     for (let i = 0; i < arrowsNumber; i++) {
+        // Create a new arrowScoreSelector element
         const arrowScoreSelector = document.createElement("div");
+        // Set the id of the arrowScoreSelector
         arrowScoreSelector.id = 'arrowSelector' + arrowId;
+        // Set the innerHTML of the arrowScoreSelector
         arrowScoreSelector.innerHTML = `
-        <h5>Arrow ${arrowId} Score</h5>
-        <input type="range" id="arrowScore${arrowId}" name="arrowScore${arrowId}" min="0" max="11" value="6" step="1" list="values">
-        <datalist id="values">
-        <option value="0" label="M"></option>
-        <option value="1" label="1"></option>
-        <option value="2" label="2"></option>
-        <option value="3" label="3"></option>
-        <option value="4" label="4"></option>
-        <option value="5" label="5"></option>
-        <option value="6" label="6"></option>
-        <option value="7" label="7"></option>
-        <option value="8" label="8"></option>
-        <option value="9" label="9"></option>
-        <option value="10" label="10"></option>
-        <option value="11" label="X"></option>
-        </datalist>
-        `
+            <h5>Arrow ${arrowId} Score</h5>
+            <input type="range" id="arrowScore${arrowId}" name="arrowScore${arrowId}" min="0" max="11" value="6" step="1" list="values">
+            <datalist id="values">
+                <option value="0" label="M"></option>
+                <option value="1" label="1"></option>
+                <option value="2" label="2"></option>
+                <option value="3" label="3"></option>
+                <option value="4" label="4"></option>
+                <option value="5" label="5"></option>
+                <option value="6" label="6"></option>
+                <option value="7" label="7"></option>
+                <option value="8" label="8"></option>
+                <option value="9" label="9"></option>
+                <option value="10" label="10"></option>
+                <option value="11" label="X"></option>
+            </datalist>
+        `;
+        // Append the arrowScoreSelector to the arrowsScoreList
         arrowsScoreList.appendChild(arrowScoreSelector);
-        arrowId = arrowId + 1
+        // Increment the arrowId by 1
+        arrowId = arrowId + 1;
     }
-    arrowsNumber = arrowsNumber - 1
+    // Decrease the arrowsNumber by 1
+    arrowsNumber = arrowsNumber - 1;
 };
+
 let arrowsNumber = 6;
+
 removeArrowButton.addEventListener('click', function(){
     if (Number(arrowsCounter.innerText) > 1) {
         arrowsCounter.innerText = Number(arrowsCounter.innerText) - 1;
@@ -326,17 +352,13 @@ addArrowButton.addEventListener('click', function(){
 });
 
 
-
-
-
-
 // Read and Render Sessions From Database
 async function getSessions(){
-    // Refference to specific document in DB
+    // Reference to specific document in the database
     const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
     sessionsListContainer.innerHTML = '';
     try {
-        // Trying to fetch data
+        // Trying to fetch data from the document
         const doc = await docRef.get();
         if (doc.exists) {
 
@@ -346,23 +368,29 @@ async function getSessions(){
                 let totalResult = 0;
                 let totalArrows = 0;
                 let roundsList = listItem.rounds;
-                roundsList.forEach(round =>{
+
+                // Calculating total result and total arrows for each session
+                roundsList.forEach(round => {
                     round.arrows.forEach(function (number) {
                         totalResult += Number(number);
                         totalArrows = totalArrows + 1;
                     });
                 });
+
+                // Calculating average result per arrow
                 let averageResult = totalResult / totalArrows;
                 let displayAverage = averageResult.toString().slice(0, 3);
+
+                // Creating and configuring the rendered session card element
                 const renderedSession = document.createElement("article");
-                renderedSession.id = listItem.uid
+                renderedSession.id = listItem.uid;
                 renderedSession.classList.add('hidden');
                 renderedSession.innerHTML = `
-                <h5>${listItem.date}</h5>
-                <p class="fullWidth">${listItem.rounds.length} Rounds</p>
-                <p class="fullWidth">${totalArrows} Arrows</p>
-                <h5 class="fix45">Ø ${displayAverage}</h5>
-                `
+                    <h5>${listItem.date}</h5>
+                    <p class="fullWidth">${listItem.rounds.length} Rounds</p>
+                    <p class="fullWidth">${totalArrows} Arrows</p>
+                    <h5 class="fix45">Ø ${displayAverage}</h5>
+                `;
 
                 // Making sessions clickable to open their details
                 renderedSession.addEventListener('click', function(){
@@ -375,8 +403,7 @@ async function getSessions(){
                         currentSelectedSession = container.id;
                     }
                     showScreen('SessionScreen');
-                    getRounds();
-                    
+                    getRounds();                   
                 });
 
                 sessionsListContainer.appendChild(renderedSession);
@@ -384,33 +411,33 @@ async function getSessions(){
                 renderedSession.classList.add('fadeIn');
             });
         } else {
+            // Displaying a notice when there are no sessions
             const noSessionsNotice = document.createElement("div");
-            noSessionsNotice.className = 'screenNotice'
+            noSessionsNotice.className = 'screenNotice';
             noSessionsNotice.innerHTML = `
                 <h4>Looks Empty</h4>
                 <p>Start tracking your results by adding your first training session.</p>
-            `
+            `;
             sessionsListContainer.appendChild(noSessionsNotice);
         }
     } catch (error) {
-        console.log('Error while getting data')
+        window.alert(error);
     }
 };
 
 
-
-
 // Read and Render Rounds From Database
 async function getRounds(){
-    // Refference to specific document in DB
+    // Reference to specific document in the database
     const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
     roundsListContainer.innerHTML = '';
     try {
-        // Trying to fetch data
+        // Trying to fetch data from the document
         const doc = await docRef.get();
         if (doc.exists) {
             let list = doc.data().sessions;
-            // Going through all sessions in search of currently selected one
+
+            // Going through all sessions in search of the currently selected one
             list.forEach(listItem => {
                 if (listItem.uid === currentSelectedSession) {
 
@@ -422,19 +449,20 @@ async function getRounds(){
                         sessionRenderedComment.innerHTML = `
                             <h5>Session Notes:</h5>
                             <p>${listItem.comment}</p>
-                            `;
+                        `;
                         roundsListContainer.appendChild(sessionRenderedComment);
                     }
 
                     let roundsList = listItem.rounds;
 
+                    // Handling case when there are no rounds in the session
                     if (roundsList.length < 1) {
                         const noRoundsNotice = document.createElement("div");
-                        noRoundsNotice.className = 'screenNotice'
+                        noRoundsNotice.className = 'screenNotice';
                         noRoundsNotice.innerHTML = `
                             <h4>Looks Empty</h4>
-                            <p>Start saving shooting results by creating and populating new round on each end.</p>
-                        `
+                            <p>Start saving shooting results by creating and populating a new round for each end.</p>
+                        `;
                         roundsListContainer.appendChild(noRoundsNotice);
                     }
 
@@ -443,28 +471,27 @@ async function getRounds(){
                         round.arrows.forEach(function (number) {
                             totalResult += Number(number);
                         });
-                        let averageResult = totalResult / round.arrows.length
+
+                        // Calculating average result per arrow
+                        let averageResult = totalResult / round.arrows.length;
                         let displayAverage = averageResult.toString().slice(0, 3);
+
+                        // Creating and configuring the rendered round element
                         const renderedRound = document.createElement("article");
-                        renderedRound.id = round.uid
+                        renderedRound.id = round.uid;
                         renderedRound.classList.add('fadeIn');
                         renderedRound.innerHTML = `
-                        <h5>${round.time}</h5>
-                        <p class="fullWidth">${round.arrows.length} Arrows</p>
-                        <p class="fullWidth">Total ${totalResult}</p>
-                        <h5 class="fix45">Ø ${displayAverage}</h5>
-                        `
+                            <h5>${round.time}</h5>
+                            <p class="fullWidth">${round.arrows.length} Arrows</p>
+                            <p class="fullWidth">Total ${totalResult}</p>
+                            <h5 class="fix45">Ø ${displayAverage}</h5>
+                        `;
                         roundsListContainer.appendChild(renderedRound);
                     });
                 }
             });
         }
     } catch (error) {
-        console.log('Error while getting data');
+        window.alert(error);
     }
 };
-
-
-
-
-
