@@ -3,6 +3,7 @@ const allScreens = document.querySelectorAll('section');
 const signOutButton = document.querySelector('#signOutBtn');
 let currentSelectedSession;
 let sessionsSnapshot;
+let arrowsNumber = 6;
 
 // It's important for screen variable name and its id in html to be the same 
 // since logic of show-hide screen function relies on it so hard.

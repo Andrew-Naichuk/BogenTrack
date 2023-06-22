@@ -150,6 +150,12 @@ article {
     background-color: var(--main-bg-color);
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-max);
+    transition: ease-in-out 0.2s;
+}
+article:hover {
+    cursor: pointer;
+    box-shadow: var(--shadow-button);
+    transform: scale(1.02);
 }
 input, textarea {
     width: 100%;

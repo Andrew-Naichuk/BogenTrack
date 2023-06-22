@@ -35,11 +35,11 @@
             <h2>Log In</h2>
             <div class="inputElement">
                 <label for="loginEmail">Email</label>
-                <input type="email" name="email" id="loginEmail">
+                <input type="email" name="email" id="loginEmail" maxlength="100">
             </div>
             <div class="inputElement">
                 <label for="loginPassword">Password</label>
-                <input type="password" name="password" id="loginPassword">
+                <input type="password" name="password" id="loginPassword" maxlength="100">
             </div>
             <input type="button" id="mainLoginBtn" class="primary" value="Log In">
             <h6 class="faded">or</h6>
@@ -53,11 +53,11 @@
             <h2>New Account</h2>
             <div class="inputElement">
                 <label for="signupEmail">Your Email</label>
-                <input type="email" name="email" id="signupEmail">
+                <input type="email" name="email" id="signupEmail" maxlength="100">
             </div>
             <div class="inputElement">
                 <label for="signupPassword">Create Password</label>
-                <input type="password" name="password" id="signupPassword">
+                <input type="password" name="password" id="signupPassword" maxlength="100">
                 <h6 class="faded">Password should be min. 6 symbols long.</h6>
             </div>
             <input type="button" id="mainSignupBtn" class="primary" value="Create an Account">
@@ -90,7 +90,7 @@
             </div>
             <div class="inputElement">
                 <label for="newSessionComment">Session Comment</label>
-                <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..."></textarea>
+                <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
             </div>
         </div>
         <footer>
@@ -111,7 +111,7 @@
             </div>
             <div class="inputElement">
                 <label for="updateSessionComment">Session Comment</label>
-                <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..."></textarea>
+                <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
             </div>
         </div>
         <footer>
@@ -155,7 +155,7 @@
             <div class="arrowsScoreList" id="arrowsScoreList"></div>
             <div class="inputElement">
                 <label for="newRoundComment">Set Comment</label>
-                <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..."></textarea>
+                <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
             </div>
         </div>
         <footer>

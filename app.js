@@ -396,7 +396,6 @@ function renderArrowSelectors(){
     arrowsNumber = arrowsNumber - 1;
 };
 
-let arrowsNumber = 6;
 
 removeArrowButton.addEventListener('click', function(){
     if (Number(arrowsCounter.innerText) > 1) {
