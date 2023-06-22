@@ -210,7 +210,7 @@ saveNewSessionButton.addEventListener('click', function(){
         const newSession = {
             "uid": generateUID(),
             "date": createSessionDateField.value,
-            "comment": createSessionCommentField.value,
+            "comment": createSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
             "rounds": [],
         };
         
@@ -264,7 +264,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
         if (session.uid === currentSelectedSession){
             if (updateSessionDateField.value.length === 10) {
                 session.date = updateSessionDateField.value;
-                session.comment = updateSessionCommentField.value;
+                session.comment = updateSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')');
     
                 // Asynchronous function for database operations
                 (async function(){
@@ -309,7 +309,7 @@ saveNewRoundButton.addEventListener('click', function(){
         const newRound = {
             "uid": generateUID(),
             "time": createRoundTimeField.value,
-            "comment": createRoundCommentField.value,
+            "comment": createRoundCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
             "arrows": arrowsScores,
         };
 
@@ -370,7 +370,7 @@ function renderArrowSelectors(){
         arrowScoreSelector.id = 'arrowSelector' + arrowId;
         // Set the innerHTML of the arrowScoreSelector
         arrowScoreSelector.innerHTML = `
-            <h5>Arrow ${arrowId} Score</h5>
+            <h5>Shot ${arrowId} Score</h5>
             <input type="range" id="arrowScore${arrowId}" name="arrowScore${arrowId}" min="0" max="11" value="6" step="1" list="values">
             <datalist id="values">
                 <option value="0" label="M"></option>
@@ -452,8 +452,8 @@ async function getSessions(){
                 if (listItem.rounds.length > 0) {
                     renderedSession.innerHTML = `
                     <h5>${listItem.date}</h5>
-                    <p class="fullWidth">${listItem.rounds.length} Rounds</p>
-                    <p class="fullWidth">${totalArrows} Arrows</p>
+                    <p class="fullWidth">${listItem.rounds.length} Sets</p>
+                    <p class="fullWidth">${totalArrows} Shots</p>
                     <h5 class="fix45">Ø ${displayAverage}</h5>
                 `;
                 } else {
@@ -553,7 +553,7 @@ async function getRounds(){
                         renderedRound.classList.add('fadeIn');
                         renderedRound.innerHTML = `
                             <h5>${round.time}</h5>
-                            <p class="fullWidth">${round.arrows.length} Arrows</p>
+                            <p class="fullWidth">${round.arrows.length} Shots</p>
                             <p class="fullWidth">Total ${totalResult}</p>
                             <h5 class="fix45">Ø ${displayAverage}</h5>
                         `;

@@ -11,6 +11,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./style.css">
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -125,7 +129,7 @@
         </header>
         <div class="contentContainer" id="roundsListContainer"></div>
         <footer>
-            <button id="createRoundBtn" type="button" class="primary">Create Round</button>
+            <button id="createRoundBtn" type="button" class="primary">Create Set</button>
         </footer>
     </section>
 
@@ -141,7 +145,7 @@
                 <input type="time" name="newRoundTime" id="newRoundTime">
             </div>
             <div class="inputElement">
-                <label for="arrowsClicker">Number of Arrows</label>
+                <label for="arrowsClicker">Shots Number</label>
                 <div class="arrowsClicker" id="arrowsClicker">
                     <button id="removeArrowBtn" type="button" class="primary">-</button>
                     <h5 id="arrowsCount">6</h5>
@@ -150,7 +154,7 @@
             </div>
             <div class="arrowsScoreList" id="arrowsScoreList"></div>
             <div class="inputElement">
-                <label for="newRoundComment">Round Comment</label>
+                <label for="newRoundComment">Set Comment</label>
                 <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..."></textarea>
             </div>
         </div>
