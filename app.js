@@ -69,6 +69,47 @@ function generateUID() {
 };
 
 
+// Generating current date
+function getCurrentDate(){
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+
+    let dayString = day.toString();
+    let monthString = month.toString();
+
+    if (dayString.length < 2) {
+        day = '0' + dayString;
+    };
+    if ( monthString.length < 2) {
+        month = '0' + monthString;
+    };
+    let year = date.getFullYear();
+    let currentDate = `${year}-${month}-${day}`;
+    return currentDate;
+};
+
+
+// Generating current time
+function getCurrentTime(){
+    const time = new Date();
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+
+    let hoursString = hours.toString();
+    let minutesString = minutes.toString();
+
+    if (hoursString.length < 2) {
+        hoursString = '0' + hoursString;
+    };
+    if (minutesString.length < 2) {
+        minutesString = '0' + minutesString;
+    };
+    let currentTime = hoursString + ':' + minutesString;
+    return currentTime;
+};
+
+
 // Log In Form Functionality
 logInButton.addEventListener('click', async function(){
     // Attempting to sign in using email and password inputs values
@@ -138,6 +179,7 @@ toLogInForm.addEventListener('click', function(){
 // Add Session - Cancel Add Switching
 createSessionButton.addEventListener('click', function(){
     showScreen('createSessionScreen');
+    createSessionDateField.value = getCurrentDate();
 });
 cancelNewSessionButton.addEventListener('click', function(){
     // Setting fields values back to default and navigating
@@ -189,6 +231,7 @@ backToSessionListButton.addEventListener('click', function(){
 createRoundButton.addEventListener('click', function(){
     roundsListContainer.innerHTML = '';
     showScreen('createRoundScreen');
+    createRoundTimeField.value = getCurrentTime();
     renderArrowSelectors();
 });
 cancelNewRoundButton.addEventListener('click', function(){
@@ -450,10 +493,10 @@ async function getSessions(){
                 // Checking if session has rounds to render it as new or filled
                 if (listItem.rounds.length > 0) {
                     renderedSession.innerHTML = `
-                    <h5>${listItem.date}</h5>
-                    <p class="fullWidth">${listItem.rounds.length} Sets</p>
-                    <p class="fullWidth">${totalArrows} Shots</p>
-                    <h5 class="fix45">Ø ${displayAverage}</h5>
+                    <h5 class="fix90">${listItem.date}</h5>
+                    <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
+                    <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
+                    <h5 class="fix50">Ø ${displayAverage}</h5>
                 `;
                 } else {
                     renderedSession.innerHTML = `
@@ -551,10 +594,10 @@ async function getRounds(){
                         renderedRound.id = round.uid;
                         renderedRound.classList.add('fadeIn');
                         renderedRound.innerHTML = `
-                            <h5>${round.time}</h5>
-                            <p class="fullWidth">${round.arrows.length} Shots</p>
-                            <p class="fullWidth">Total ${totalResult}</p>
-                            <h5 class="fix45">Ø ${displayAverage}</h5>
+                            <h5 class="fix50">${round.time}</h5>
+                            <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>
+                            <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
+                            <h5 class="fix50">Ø ${displayAverage}</h5>
                         `;
                         roundsListContainer.appendChild(renderedRound);
                     });

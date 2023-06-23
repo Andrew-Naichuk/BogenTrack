@@ -90,10 +90,16 @@ p {
     opacity: 0.5;
 }
 .fullWidth {
-    width: auto;
+    display: flex;
+    min-width: 60px;
+    justify-content: center;
+    gap: 4px;
 }
-.fix45 {
-    width: 45px;
+.fix50 {
+    min-width: 50px;
+}
+.fix90 {
+    min-width: 100px;
 }
 
 
