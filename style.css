@@ -1,8 +1,10 @@
 :root {
     --main-bg-color: #ffffff;
     --secondary-bg-color:rgb(237, 243, 247);
+    --highlight-bg-color: rgb(226, 244, 255);
     --main-text-color: #202020;
     --secondary-text-color: #5a5a5a;
+    
     --main-accent-color: #e98409;
     --borders-color: #dddfe9;
 
@@ -88,6 +90,9 @@ p {
 }
 .faded {
     opacity: 0.5;
+}
+.highlighted {
+    background: var(--highlight-bg-color);
 }
 .fullWidth {
     display: flex;

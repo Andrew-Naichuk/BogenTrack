@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="title" content="BogenTrack">
+    <meta name="description" content="Track and analyze your archery training scores with BogenTrack. Improve your accuracy and keep records of your shooting progress.">
+    <meta name="keywords" content="Archery training, Score tracking, Accuracy improvement, Archery progress, Training analytics, Score analysis, Archery performance, Training records, Score history, Tracking app, Target shooting, Archery statistics, Training insights, Competitive archery, Personal bests">
+    <meta name="robots" content="index, follow">
+
     <title>BogenTrack App</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -136,7 +142,7 @@
     <section id="SessionScreen" class="hidden">
         <header>
             <button id="backToSessionListBtn" type="button" class="secondary">Back</button>
-            <h2>Session</h2>
+            <h2 id="SessionName">Session</h2>
             <button id="editSessionBtn" type="button" class="secondary">Edit</button>
         </header>
         <div class="contentContainer" id="roundsListContainer"></div>
@@ -144,7 +150,6 @@
             <button id="createRoundBtn" type="button" class="primary">Create Set</button>
         </footer>
     </section>
-
 
     <!-- Create Round Screen -->
     <section id="createRoundScreen" class="hidden">

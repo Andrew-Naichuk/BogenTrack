@@ -222,6 +222,7 @@ cancelUpdatedSessionButton.addEventListener('click', function(){
 // Back to Sessions List Functionality
 backToSessionListButton.addEventListener('click', function(){
     sessionsListContainer.innerHTML = '';
+    sessionNameIndicator.innerText = 'Session'
     showScreen('sessionsListScreen');
     setTimeout(getSessions, 100);
 });
@@ -492,6 +493,7 @@ async function getSessions(){
                 renderedSession.classList.add('hidden');
                 // Checking if session has rounds to render it as new or filled
                 if (listItem.rounds.length > 0) {
+                    renderedSession.setAttribute("data-display-name", listItem.date)
                     renderedSession.innerHTML = `
                     <h5 class="fix90">${listItem.date}</h5>
                     <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
@@ -499,9 +501,11 @@ async function getSessions(){
                     <h5 class="fix50">Ø ${displayAverage}</h5>
                 `;
                 } else {
+                    renderedSession.classList.add('highlighted')
+                    renderedSession.setAttribute("data-display-name", listItem.date)
                     renderedSession.innerHTML = `
                     <h5>${listItem.date}</h5>
-                    <h5 class="fix45">New</h5>
+                    <h5 class="fix50">New</h5>
                     `
                 }
 
@@ -515,6 +519,7 @@ async function getSessions(){
                     if (clickedElement === container) {
                         currentSelectedSession = container.id;
                     }
+                    sessionNameIndicator.innerText = renderedSession.getAttribute("data-display-name");
                     showScreen('SessionScreen');
                     getRounds();                   
                 });

@@ -59,6 +59,7 @@ const cancelUpdatedSessionButton = document.querySelector('#cancelUpdatedSession
 
 // Open Session Screen
 const SessionScreen = document.querySelector('#SessionScreen');
+const sessionNameIndicator = document.querySelector('#SessionName');
 const backToSessionListButton = document.querySelector('#backToSessionListBtn');
 const createRoundButton = document.querySelector('#createRoundBtn');
 const roundsListContainer = document.querySelector('#roundsListContainer');
