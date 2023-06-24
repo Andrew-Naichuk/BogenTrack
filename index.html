@@ -46,7 +46,7 @@
 <body>
 
     <!-- Initial App Screen -->
-    <section id="entryScreen">
+    <section id="entryScreen" data-identifier="login">
         <img src="./bt-logo-full.png" alt="BogenTrack App Logo">
         <!-- Log In Form -->
         <form id="loginForm" class="visible">
@@ -85,10 +85,10 @@
     </section>
 
     <!-- Sessions List Screen -->
-    <section id="sessionsListScreen" class="hidden">
+    <section id="sessionsListScreen" class="hidden" data-identifier="home">
         <header>
             <h2>Sessions</h2>
-            <button id="signOutBtn" type="button" class="secondary">Sign Out</button>
+            <button id="profileBtn" type="button" class="secondary"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2M7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.5.88 4.93 1.78A7.893 7.893 0 0 1 12 20c-1.86 0-3.57-.64-4.93-1.72m11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33A7.928 7.928 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.5-1.64 4.83M12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6m0 5a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 12 8a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 12 11Z"/></svg> Profile</button>
         </header>
         <div class="contentContainer" id="sessionsListContainer"></div>
         <footer>
@@ -97,7 +97,7 @@
     </section>
 
     <!-- Create Session Screen -->
-    <section id="createSessionScreen" class="hidden">
+    <section id="createSessionScreen" class="hidden" data-identifier="create-session">
         <header>
             <h2>Create Session</h2>
         </header>
@@ -118,7 +118,7 @@
     </section>
 
     <!-- Update Session Screen -->
-    <section id="updateSessionScreen" class="hidden">
+    <section id="updateSessionScreen" class="hidden" data-identifier="update-session">
         <header>
             <h2>Update Session</h2>
         </header>
@@ -139,7 +139,7 @@
     </section>
 
     <!-- Open Session Screen -->
-    <section id="SessionScreen" class="hidden">
+    <section id="SessionScreen" class="hidden" data-identifier="session">
         <header>
             <button id="backToSessionListBtn" type="button" class="secondary">Back</button>
             <h2 id="SessionName">Session</h2>
@@ -152,7 +152,7 @@
     </section>
 
     <!-- Create Round Screen -->
-    <section id="createRoundScreen" class="hidden">
+    <section id="createRoundScreen" class="hidden" data-identifier="create-round">
         <header>
             <h2>Create Round</h2>
         </header>
@@ -179,6 +179,26 @@
             <button id="saveNewRoundBtn" type="button" class="primary">Save</button>
             <button id="cancelNewRoundBtn" type="button" class="secondary">Cancel</button>
         </footer>
+    </section>
+
+    <!-- Profile Screen -->
+    <section id="profileScreen" class="hidden" data-identifier="profile">
+        <header>
+            <button id="backHomeBtn" type="button" class="secondary fix98">Back</button>
+            <h2>Profile</h2>
+            <button id="signOutBtn" type="button" class="secondary fix98">Log Out</button>
+        </header>
+        <div class="contentContainer">
+            <div class="inputElement">
+                <p>Logged in as:</p>
+                <h5 id="currentUserEmail">user@gbogentrack.app</h5>
+            </div>
+            <div class="inputElement">
+                <p>Sessions created:</p>
+                <h5 id="currentNumberOfSessions"></h5>
+            </div>
+        </div>
+
     </section>
 
 </body>

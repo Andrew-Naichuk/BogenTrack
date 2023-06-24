@@ -1,6 +1,5 @@
 // Global Pool
 const allScreens = document.querySelectorAll('section');
-const signOutButton = document.querySelector('#signOutBtn');
 let currentSelectedSession;
 let sessionsSnapshot;
 let arrowsNumber = 6;
@@ -11,6 +10,7 @@ const iconsBundle = {
     arrows: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#ABAEB1" d="m19 16l3 3l-2 1l-1 2l-3-3v-1.94l-4-4l-4 4V19l-3 3l-1-2l-2-1l3-3h1.94l4-4l-5.97-5.97L4 7L2 2l5 2l-.97.97L12 10.94l5.97-5.97L17 4l5-2l-2 5l-.97-.97L13.06 12l4 4H19Z"/></svg>',
     target: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#ABAEB1" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10c0-1.16-.21-2.31-.61-3.39l-1.6 1.6c.14.59.21 1.19.21 1.79a8 8 0 0 1-8 8a8 8 0 0 1-8-8a8 8 0 0 1 8-8c.6 0 1.2.07 1.79.21L15.4 2.6C14.31 2.21 13.16 2 12 2m7 0l-4 4v1.5l-2.55 2.55C12.3 10 12.15 10 12 10a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2c0-.15 0-.3-.05-.45L16.5 9H18l4-4h-3V2m-7 4a6 6 0 0 0-6 6a6 6 0 0 0 6 6a6 6 0 0 0 6-6h-2a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4V6Z"/></svg>',
     repeat: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#ABAEB1" d="m19 8l-4 4h3a6 6 0 0 1-6 6c-1 0-1.97-.25-2.8-.7l-1.46 1.46A7.93 7.93 0 0 0 12 20a8 8 0 0 0 8-8h3M6 12a6 6 0 0 1 6-6c1 0 1.97.25 2.8.7l1.46-1.46A7.93 7.93 0 0 0 12 4a8 8 0 0 0-8 8H1l4 4l4-4"/></svg>',
+    user: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#abaeb1" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2M7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.5.88 4.93 1.78A7.893 7.893 0 0 1 12 20c-1.86 0-3.57-.64-4.93-1.72m11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33A7.928 7.928 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.5-1.64 4.83M12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6m0 5a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 12 8a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 12 11Z"/></svg>',
 
 }
 
@@ -39,6 +39,7 @@ const toLogInForm = document.querySelector('#toLoginBtn');
 const sessionsListScreen = document.querySelector('#sessionsListScreen');
 const sessionsListContainer = document.querySelector('#sessionsListContainer');
 const createSessionButton = document.querySelector('#createSessionBtn');
+const profileButton = document.querySelector('#profileBtn');
 
 
 // Create Session Screen
@@ -76,3 +77,11 @@ const addArrowButton = document.querySelector('#addArrowBtn');
 const arrowsScoreList = document.querySelector('#arrowsScoreList');
 const createRoundTimeField = document.querySelector('#newRoundTime');
 const createRoundCommentField = document.querySelector('#newRoundComment');
+
+
+// Profile Screen
+const profileScreen = document.querySelector('#profileScreen');
+const backHomeButton = document.querySelector('#backHomeBtn');
+const signOutButton = document.querySelector('#signOutBtn');
+const userEmailIndicator = document.querySelector('#currentUserEmail');
+const userSessionsIndicator = document.querySelector('#currentNumberOfSessions');

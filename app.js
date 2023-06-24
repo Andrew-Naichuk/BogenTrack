@@ -176,6 +176,18 @@ toLogInForm.addEventListener('click', function(){
 });
 
 
+// Profile Functionality
+profileButton.addEventListener('click', function(){
+    userEmailIndicator.innerText = auth.currentUser.email;
+    userSessionsIndicator.innerText = sessionsListScreen.querySelectorAll('article').length;
+    showScreen('profileScreen');
+});
+
+backHomeButton.addEventListener('click', function(){
+    showScreen('sessionsListScreen');
+});
+
+
 // Add Session - Cancel Add Switching
 createSessionButton.addEventListener('click', function(){
     showScreen('createSessionScreen');
