@@ -182,7 +182,6 @@ profileButton.addEventListener('click', function(){
     userSessionsIndicator.innerText = sessionsListScreen.querySelectorAll('article').length;
     showScreen('profileScreen');
 });
-
 backHomeButton.addEventListener('click', function(){
     showScreen('sessionsListScreen');
 });
@@ -196,6 +195,7 @@ createSessionButton.addEventListener('click', function(){
 cancelNewSessionButton.addEventListener('click', function(){
     // Setting fields values back to default and navigating
     createSessionDateField.value = '';
+    createSessionDistanceField.value = '';
     createSessionCommentField.value = '';
     showScreen('sessionsListScreen');
 });
@@ -216,6 +216,11 @@ editSessionButton.addEventListener('click', function(){
             sessionsSnapshot.forEach(session => {
                 if (session.uid === currentSelectedSession) {
                     updateSessionDateField.value = session.date;
+                    if (session.distance) {
+                        updateSessionDistanceField.value = session.distance;
+                    } else {
+                        updateSessionDistanceField.value = '';
+                    };
                     updateSessionCommentField.value = session.comment;
                 }
             });
@@ -226,6 +231,7 @@ editSessionButton.addEventListener('click', function(){
 });
 cancelUpdatedSessionButton.addEventListener('click', function(){
     updateSessionDateField.value = '';
+    updateSessionDistanceField.value = '';
     updateSessionCommentField.value = '';
     showScreen('SessionScreen');
 });
@@ -263,9 +269,13 @@ saveNewSessionButton.addEventListener('click', function(){
     // Checking date field has full value
     if (createSessionDateField.value.length === 10) {
         // Creating model session object
+        // All new sessions have 'live' status by default to be rendered in the list
+        // This status is used later to "delete" sessions by excluding them from rendering
         const newSession = {
             "uid": generateUID(),
+            "status": 'live',
             "date": createSessionDateField.value,
+            "distance": createSessionDistanceField.value,
             "comment": createSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
             "rounds": [],
         };
@@ -319,7 +329,9 @@ saveUpdatedSessionButton.addEventListener('click', function(){
     sessionsSnapshot.forEach(session => {
         if (session.uid === currentSelectedSession){
             if (updateSessionDateField.value.length === 10) {
+                session.status = 'live';
                 session.date = updateSessionDateField.value;
+                session.distance = updateSessionDistanceField.value;
                 session.comment = updateSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')');
     
                 // Asynchronous function for database operations
@@ -342,6 +354,53 @@ saveUpdatedSessionButton.addEventListener('click', function(){
             } else {
                 window.alert('Date is not filled');
             };
+        };
+    });
+});
+
+
+// Delete Session Functionality
+// Open confirmation modal functionality
+deleteSessionModalButton.addEventListener('click', function(){
+    confirmDeleteSessionModal.classList.remove("hidden");
+    confirmDeleteSessionModal.classList.add("fadeIn");
+    confirmDeleteSessionModal.classList.add("visible");
+});
+// Close confirmation modal functionality (cancel delete)
+cancelDeleteSessionButton.addEventListener('click', function(){
+    confirmDeleteSessionModal.classList.remove("visible");
+    confirmDeleteSessionModal.classList.remove("fadeIn");
+    confirmDeleteSessionModal.classList.add("hidden");
+});
+// Delete session in DB
+deleteSessionButton.addEventListener('click', function(){
+    // Preparing updated session snapshot with new status of current session
+    sessionsSnapshot.forEach(session => {
+        if (session.uid === currentSelectedSession){
+            session.status = 'deleted';
+
+            // Asynchronous function for database operations
+            (async function(){
+                try {
+                    // Pushing updated session object to the DB by updating the sessions array field
+                    await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                        sessions: sessionsSnapshot,
+                    });
+                } catch (error) {
+                    window.alert(error);
+                }
+            })();
+
+            // Setting fields values back to default
+            updateSessionDateField.value = '';
+            updateSessionDistanceField.value = '';
+            updateSessionCommentField.value = '';
+            // Navigating back to rounds list and updating it
+            confirmDeleteSessionModal.classList.remove("visible");
+            confirmDeleteSessionModal.classList.remove("fadeIn");
+            confirmDeleteSessionModal.classList.add("hidden");
+            showScreen('sessionsListScreen');
+            setTimeout(getSessions, 500);
         };
     });
 });
@@ -479,66 +538,70 @@ async function getSessions(){
         // Trying to fetch data from the document
         const doc = await docRef.get();
         if (doc.exists) {
-
+            // Updating snapshot to the latest state
+            sessionsSnapshot = doc.data().sessions;
             // Rendering session cards
             let list = doc.data().sessions.reverse();
             list.forEach(listItem => {
-                let totalResult = 0;
-                let totalArrows = 0;
-                let roundsList = listItem.rounds;
 
-                // Calculating total result and total arrows for each session
-                roundsList.forEach(round => {
-                    round.arrows.forEach(function (number) {
-                        totalResult += Number(number);
-                        totalArrows = totalArrows + 1;
+                if (!listItem.status || listItem.status === 'live') {
+                    let totalResult = 0;
+                    let totalArrows = 0;
+                    let roundsList = listItem.rounds;
+    
+                    // Calculating total result and total arrows for each session
+                    roundsList.forEach(round => {
+                        round.arrows.forEach(function (number) {
+                            totalResult += Number(number);
+                            totalArrows = totalArrows + 1;
+                        });
                     });
-                });
-
-                // Calculating average result per arrow
-                let averageResult = totalResult / totalArrows;
-                let displayAverage = averageResult.toString().slice(0, 3);
-
-                // Creating and configuring the rendered session card element
-                const renderedSession = document.createElement("article");
-                renderedSession.id = listItem.uid;
-                renderedSession.classList.add('hidden');
-                // Checking if session has rounds to render it as new or filled
-                if (listItem.rounds.length > 0) {
-                    renderedSession.setAttribute("data-display-name", listItem.date)
-                    renderedSession.innerHTML = `
-                    <h5 class="fix90">${listItem.date}</h5>
-                    <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
-                    <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
-                    <h5 class="fix50">Ø ${displayAverage}</h5>
-                `;
-                } else {
-                    renderedSession.classList.add('highlighted')
-                    renderedSession.setAttribute("data-display-name", listItem.date)
-                    renderedSession.innerHTML = `
-                    <h5>${listItem.date}</h5>
-                    <h5 class="fix50">New</h5>
-                    `
-                }
-
-                // Making sessions clickable to open their details
-                renderedSession.addEventListener('click', function(){
-                    let container = renderedSession;
-                    let clickedElement = event.target;
-                    while (clickedElement && clickedElement !== container && clickedElement !== document) {
-                        clickedElement = clickedElement.parentElement;
+    
+                    // Calculating average result per arrow
+                    let averageResult = totalResult / totalArrows;
+                    let displayAverage = averageResult.toString().slice(0, 3);
+    
+                    // Creating and configuring the rendered session card element
+                    const renderedSession = document.createElement("article");
+                    renderedSession.id = listItem.uid;
+                    renderedSession.classList.add('hidden');
+                    // Checking if session has rounds to render it as new or filled
+                    if (listItem.rounds.length > 0) {
+                        renderedSession.setAttribute("data-display-name", listItem.date)
+                        renderedSession.innerHTML = `
+                        <h5 class="fix90">${listItem.date}</h5>
+                        <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
+                        <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
+                        <h5 class="fix50">Ø ${displayAverage}</h5>
+                    `;
+                    } else {
+                        renderedSession.classList.add('highlighted')
+                        renderedSession.setAttribute("data-display-name", listItem.date)
+                        renderedSession.innerHTML = `
+                        <h5>${listItem.date}</h5>
+                        <h5 class="fix50">New</h5>
+                        `
                     }
-                    if (clickedElement === container) {
-                        currentSelectedSession = container.id;
-                    }
-                    sessionNameIndicator.innerText = renderedSession.getAttribute("data-display-name");
-                    showScreen('SessionScreen');
-                    getRounds();                   
-                });
-
-                sessionsListContainer.appendChild(renderedSession);
-                renderedSession.classList.remove('hidden');
-                renderedSession.classList.add('fadeIn');
+    
+                    // Making sessions clickable to open their details
+                    renderedSession.addEventListener('click', function(){
+                        let container = renderedSession;
+                        let clickedElement = event.target;
+                        while (clickedElement && clickedElement !== container && clickedElement !== document) {
+                            clickedElement = clickedElement.parentElement;
+                        }
+                        if (clickedElement === container) {
+                            currentSelectedSession = container.id;
+                        }
+                        sessionNameIndicator.innerText = renderedSession.getAttribute("data-display-name");
+                        showScreen('SessionScreen');
+                        getRounds();                   
+                    });
+    
+                    sessionsListContainer.appendChild(renderedSession);
+                    renderedSession.classList.remove('hidden');
+                    renderedSession.classList.add('fadeIn');
+                };
             });
         } else {
             // Displaying a notice when there are no sessions
@@ -565,11 +628,24 @@ async function getRounds(){
         // Trying to fetch data from the document
         const doc = await docRef.get();
         if (doc.exists) {
+            // Updating snapshot to the latest state
+            sessionsSnapshot = doc.data().sessions;
             let list = doc.data().sessions;
 
             // Going through all sessions in search of the currently selected one
             list.forEach(listItem => {
                 if (listItem.uid === currentSelectedSession) {
+
+                    // Rendering session distance if any
+                    if (listItem.distance && listItem.distance.length > 0) {
+                        const sessionRenderedDistance = document.createElement("div");
+                        sessionRenderedDistance.classList.add('sessionPageDistance');
+                        sessionRenderedDistance.classList.add('fadeIn');
+                        sessionRenderedDistance.innerHTML = `
+                            <h4>Distance — ${listItem.distance} meters</h4>
+                        `
+                        roundsListContainer.appendChild(sessionRenderedDistance);
+                    };
 
                     // Rendering session comment if any
                     if (listItem.comment.length > 0) {
@@ -581,7 +657,7 @@ async function getRounds(){
                             <p>${listItem.comment}</p>
                         `;
                         roundsListContainer.appendChild(sessionRenderedComment);
-                    }
+                    };
 
                     let roundsList = listItem.rounds;
 

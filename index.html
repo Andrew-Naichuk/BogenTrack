@@ -107,6 +107,10 @@
                 <input type="date" name="newSessionDate" id="newSessionDate" autocomplete="on">
             </div>
             <div class="inputElement">
+                <label for="newSessionDistance">Shooting Distance</label>
+                <input type="number" name="newSessionDistance" id="newSessionDistance" placeholder="Distance to target in meters">
+            </div>
+            <div class="inputElement">
                 <label for="newSessionComment">Session Comment</label>
                 <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
             </div>
@@ -120,7 +124,8 @@
     <!-- Update Session Screen -->
     <section id="updateSessionScreen" class="hidden" data-identifier="update-session">
         <header>
-            <h2>Update Session</h2>
+            <h2>Edit Session</h2>
+            <button id="deleteSessionModalBtn" type="button" class="danger">Delete</button>
         </header>
         <div class="contentContainer">
             <div class="inputElement">
@@ -128,10 +133,22 @@
                 <input type="date" name="updateSessionDate" id="updateSessionDate">
             </div>
             <div class="inputElement">
+                <label for="updateSessionDistance">Shooting Distance</label>
+                <input type="number" name="updateSessionDistance" id="updateSessionDistance" placeholder="Distance to target in meters">
+            </div>
+            <div class="inputElement">
                 <label for="updateSessionComment">Session Comment</label>
                 <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
             </div>
         </div>
+
+        <div class="confirmationModal hidden" id="confirmDeleteSessionModal">
+            <h3>Delete Session</h3>
+            <h5>Are you sure you want to delete the session? Currently this action can not be reverted.</h5>
+            <button id="deleteSessionBtn" type="button" class="danger">Delete</button>
+            <button id="cancelDeleteSessionBtn" type="button" class="secondary">Cancel</button>
+        </div>
+
         <footer>
             <button id="saveUpdatedSessionBtn" type="button" class="primary">Update</button>
             <button id="cancelUpdatedSessionBtn" type="button" class="secondary">Cancel</button>

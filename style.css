@@ -2,10 +2,12 @@
     --main-bg-color: #ffffff;
     --secondary-bg-color:rgb(237, 243, 247);
     --highlight-bg-color: rgb(226, 244, 255);
+    --glass-bg-color: #ffffffa0;
     --main-text-color: #202020;
     --secondary-text-color: #5a5a5a;
     
     --main-accent-color: #e98409;
+    --danger-color: #c80d0d;
     --borders-color: #dddfe9;
 
     --button-bg-color: #1771a2;
@@ -76,38 +78,6 @@ h6 {
 }
 p {
     white-space: pre-line;
-}
-
-
-
-
-/* SERVICE CLASSES */
-.hidden {
-    display: none;
-}
-.visible {
-    display: flex;
-}
-.faded {
-    opacity: 0.5;
-}
-.highlighted {
-    background: var(--highlight-bg-color);
-}
-.fullWidth {
-    display: flex;
-    min-width: 60px;
-    justify-content: center;
-    gap: 4px;
-}
-.fix50 {
-    min-width: 50px;
-}
-.fix90 {
-    min-width: 100px;
-}
-.fix98 {
-    min-width: 98px;
 }
 
 
@@ -205,7 +175,7 @@ datalist {
 .contentContainer {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
     width: 100%;
     min-height: 90vh;
     padding-bottom: 110px;
@@ -221,10 +191,34 @@ datalist {
     width: 100%;
     text-align: center;
 }
+.confirmationModal {
+    display: flex;
+    position: fixed;
+    top: 30vh;
+    z-index: 10;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 340px;
+    gap: 16px;
+    border-radius: var(--radius-default);
+    background-color: var(--glass-bg-color);
+    backdrop-filter: blur(6px);
+    box-shadow: var(--shadow-default);
+    border: solid 1px var(--borders-color);
+}
 .sessionPageComment {
     display: flex;
     flex-direction: column;
+    width: 100%;
     padding: 12px;
+    gap: 8px;
+}
+.sessionPageDistance {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 12px;
     gap: 8px;
 }
 .arrowsClicker{
@@ -265,6 +259,10 @@ input[type="button"].secondary, button.secondary {
     background-color: var(--main-bg-color);
     color: var(--button-bg-color);
 }
+button.danger {
+    background-color: var(--main-bg-color);
+    color: var(--danger-color);
+}
 input[type="button"]:hover, button:hover {
     cursor: pointer;
     background-color: var(--button-hover-color);
@@ -272,6 +270,10 @@ input[type="button"]:hover, button:hover {
 }
 input[type="button"].secondary:hover, button.secondary:hover {
     color: var(--button-text-color);
+}
+button.danger:hover {
+    background-color: var(--danger-color);
+    color: var(--main-bg-color);
 }
 footer>button {
     width: 100%;
@@ -297,4 +299,36 @@ footer>button {
 @keyframes fadeOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+
+
+
+/* SERVICE CLASSES */
+.hidden {
+    display: none;
+}
+.visible {
+    display: flex;
+}
+.faded {
+    opacity: 0.5;
+}
+.highlighted {
+    background: var(--highlight-bg-color);
+}
+.fullWidth {
+    display: flex;
+    min-width: 60px;
+    justify-content: center;
+    gap: 4px;
+}
+.fix50 {
+    min-width: 50px;
+}
+.fix90 {
+    min-width: 100px;
+}
+.fix98 {
+    min-width: 98px;
 }
