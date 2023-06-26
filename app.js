@@ -741,7 +741,7 @@ async function getRounds(){
 };
 
 
-// Read and Render Rounds From Database
+// Read and Render Arrows From Database
 async function getArrows(){
     const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
     arrowsListContainer.innerHTML = '';
@@ -770,6 +770,7 @@ async function getArrows(){
                             arrowsListContainer.appendChild(roundRenderedComment);
                         };
 
+                        // Rendering arrows of the selected round
                         let renderedArrowNumber = 1;
                         round.arrows.forEach(arrow => {
                             const renderedArrow = document.createElement("article");
