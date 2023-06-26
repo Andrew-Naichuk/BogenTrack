@@ -6,7 +6,7 @@
     --main-text-color: #202020;
     --secondary-text-color: #5a5a5a;
     
-    --main-accent-color: #e98409;
+    --main-accent-color: #1489c9;
     --danger-color: #c80d0d;
     --borders-color: #dddfe9;
 
@@ -156,6 +156,12 @@ article:hover {
     box-shadow: var(--shadow-button);
     transform: scale(1.02);
 }
+main {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    width: 100%;
+}
 input, textarea {
     width: 100%;
     font-size: 16px;
@@ -221,6 +227,17 @@ datalist {
     backdrop-filter: blur(6px);
     box-shadow: var(--shadow-default);
     border: solid 1px var(--borders-color);
+}
+.indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius-default);
+    background-color: var(--glass-bg-color);
+    box-shadow: var(--shadow-min);
+
 }
 .sessionPageComment {
     display: flex;
@@ -339,6 +356,9 @@ button:hover>svg>path {
 }
 .highlighted {
     background: var(--highlight-bg-color);
+}
+.accented {
+    color: var(--main-accent-color);
 }
 .fullWidth {
     display: flex;

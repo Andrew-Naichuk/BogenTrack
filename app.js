@@ -14,7 +14,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-const provider = new firebase.auth.GoogleAuthProvider();
+const providerGoogle = new firebase.auth.GoogleAuthProvider();
 const analytics = firebase.analytics();
 
 // Auth status observer
@@ -110,6 +110,30 @@ function getCurrentTime(){
 };
 
 
+// Updatind Session Screen Indicators
+function updateSessionIndicators(){
+    let sessionTotal = 0;
+    let sessionAverage = 0;
+    let numberOfRounds;
+
+    const sessionRounds = SessionScreen.querySelectorAll('article');
+    numberOfRounds = sessionRounds.length;
+    sessionRounds.forEach(sessionRound => {
+        let total = sessionRound.getAttribute("data-total");
+        let average = sessionRound.getAttribute("data-average");
+        sessionTotal = sessionTotal + Number(total);
+        sessionAverage = sessionAverage + Number(average);
+    });
+    sessionTotalPointsIndicator.innerText = sessionTotal;
+    let averageResult = sessionAverage / numberOfRounds;
+    if (averageResult) {
+        sessionAverageShotIndicator.innerText = averageResult.toString().slice(0, 4);
+    } else {
+        sessionAverageShotIndicator.innerText = '0'
+    }
+};
+
+
 // Log In Form Functionality
 logInButton.addEventListener('click', async function(){
     // Attempting to sign in using email and password inputs values
@@ -123,7 +147,7 @@ logInButton.addEventListener('click', async function(){
 logInGoogleButton.addEventListener('click', async function(){
     // Attempting to sign in using Google auth popup
     try {
-        await auth.signInWithPopup(provider);
+        await auth.signInWithPopup(providerGoogle);
     } catch (error) {
         window.alert(error);
     }
@@ -248,6 +272,8 @@ cancelUpdatedSessionButton.addEventListener('click', function(){
     updateSessionDistanceField.value = '';
     updateSessionCommentField.value = '';
     showScreen('SessionScreen');
+    // Changing indicators values
+    setTimeout(updateSessionIndicators, 500);
 });
 
 
@@ -265,6 +291,8 @@ backToSessionScreenButton.addEventListener('click', function(){
     arrowsListContainer.innerHTML = '';
     showScreen('SessionScreen');
     setTimeout(getRounds, 100);
+    // Changing indicators values
+    setTimeout(updateSessionIndicators, 500);
 });
 
 
@@ -283,6 +311,8 @@ cancelNewRoundButton.addEventListener('click', function(){
     // Getting rounds and rendering
     showScreen('SessionScreen');
     setTimeout(getRounds, 100);
+    // Changing indicators values
+    setTimeout(updateSessionIndicators, 500);
 });
 
 
@@ -373,6 +403,8 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                 // Navigating back to rounds list and updating it
                 showScreen('SessionScreen');
                 setTimeout(getRounds, 500);
+                // Changing indicators values
+                setTimeout(updateSessionIndicators, 500);
             } else {
                 window.alert('Date is not filled');
             };
@@ -481,6 +513,8 @@ saveNewRoundButton.addEventListener('click', function(){
         // Navigating back to session screen and updating it
         showScreen('SessionScreen');
         setTimeout(getRounds, 500);
+        // Changing indicators values
+        setTimeout(updateSessionIndicators, 1000);
 
     } else {
         window.alert('Time is not filled');
@@ -618,6 +652,8 @@ async function getSessions(){
                         sessionNameIndicator.innerText = renderedSession.getAttribute("data-display-name");
                         showScreen('SessionScreen');
                         getRounds();
+                        // Changing indicators values
+                        setTimeout(updateSessionIndicators, 500);
                     });
     
                     sessionsListContainer.appendChild(renderedSession);
@@ -710,6 +746,8 @@ async function getRounds(){
                         const renderedRound = document.createElement("article");
                         renderedRound.id = round.uid;
                         renderedRound.classList.add('fadeIn');
+                        renderedRound.setAttribute("data-total", totalResult);
+                        renderedRound.setAttribute("data-average", displayAverage);
                         renderedRound.innerHTML = `
                             <h5 class="fix50">${round.time}</h5>
                             <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>

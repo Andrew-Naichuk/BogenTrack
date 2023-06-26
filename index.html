@@ -67,7 +67,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
                 Continue with Google
             </button>
-            <h6 class="faded">New to BogenTrack? Sign up now!</h6>
+            <p class="faded">New to BogenTrack? Sign up now!</p>
             <input type="button" id="toSignUpBtn" class="secondary" value="Create an Account">
         </form>
         
@@ -85,7 +85,7 @@
             </div>
             <p class="faded">By clicking on Create an Account you are accepting Bogentrack Terms and Conditions. <a href="./terms.html" target="_blank">Learn more here.</a></p>
             <input type="button" id="mainSignupBtn" class="primary" value="Create an Account">
-            <h6 class="faded">Already have account? Log in!</h6>
+            <p class="faded">Already have account? Log in!</p>
             <input type="button" id="toLoginBtn" class="secondary" value="Log In">
         </form>
     </section>
@@ -168,6 +168,16 @@
             <h2 id="SessionName">Session</h2>
             <button id="editSessionBtn" type="button" class="secondary">Edit</button>
         </header>
+        <main>
+            <div class="indicator">
+                <h2 id="sessionTotalPointsIndicator" class="accented">0</h2>
+                <h6 class="faded">Total Points</h6>
+            </div>
+            <div class="indicator">
+                <h2 id="sessionAverageShotIndicator" class="accented">0</h2>
+                <h6 class="faded">Average Result</h6>
+            </div>
+        </main>
         <div class="contentContainer" id="roundsListContainer"></div>
         <footer>
             <button id="createRoundBtn" type="button" class="primary">Create Set</button>
