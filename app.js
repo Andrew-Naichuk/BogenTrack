@@ -201,6 +201,20 @@ cancelNewSessionButton.addEventListener('click', function(){
 });
 
 
+// Distance field validation functionality for create and update session
+// It should not be allowed to set negative or zero distance
+createSessionDistanceField.addEventListener('input', function(){
+    if (createSessionDistanceField.value < 1) {
+        createSessionDistanceField.value = 1
+    }
+});
+updateSessionDistanceField.addEventListener('input', function(){
+    if (updateSessionDistanceField.value < 1) {
+        updateSessionDistanceField.value = 1
+    }
+});
+
+
 // Edit Session - Cancel Edit Switching
 editSessionButton.addEventListener('click', function(){
     showScreen('updateSessionScreen');
@@ -243,6 +257,14 @@ backToSessionListButton.addEventListener('click', function(){
     sessionNameIndicator.innerText = 'Session'
     showScreen('sessionsListScreen');
     setTimeout(getSessions, 100);
+});
+
+
+// Back to Session Screen functionality
+backToSessionScreenButton.addEventListener('click', function(){
+    arrowsListContainer.innerHTML = '';
+    showScreen('SessionScreen');
+    setTimeout(getRounds, 100);
 });
 
 
@@ -595,7 +617,7 @@ async function getSessions(){
                         }
                         sessionNameIndicator.innerText = renderedSession.getAttribute("data-display-name");
                         showScreen('SessionScreen');
-                        getRounds();                   
+                        getRounds();
                     });
     
                     sessionsListContainer.appendChild(renderedSession);
@@ -692,6 +714,22 @@ async function getRounds(){
                             <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
                             <h5 class="fix50">Ø ${displayAverage}</h5>
                         `;
+
+                        // Making rounds clickable for round details reveal
+                        renderedRound.addEventListener('click', function(){
+                            let container = renderedRound;
+                            let clickedElement = event.target;
+                            while (clickedElement && clickedElement !== container && clickedElement !== document) {
+                                clickedElement = clickedElement.parentElement;
+                            }
+                            if (clickedElement === container) {
+                                currentSelectedRound = container.id;
+                            }
+                            roundNameIndicator.innerText = round.time;
+                            showScreen('RoundScreen');
+                            getArrows();
+                        });
+
                         roundsListContainer.appendChild(renderedRound);
                     });
                 }
@@ -699,5 +737,53 @@ async function getRounds(){
         }
     } catch (error) {
         window.alert(error);
+    }
+};
+
+
+// Read and Render Rounds From Database
+async function getArrows(){
+    const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+    arrowsListContainer.innerHTML = '';
+    // Trying to fetch data from the document
+    const doc = await docRef.get();
+    if (doc.exists) {
+        sessionsSnapshot = doc.data().sessions;
+        let list = doc.data().sessions;
+        // Going through all sessions in search of the currently selected one
+        list.forEach(listItem => {
+            if (listItem.uid === currentSelectedSession) {
+                // Going through all rounds in search of the currently selected one
+                let roundsList = listItem.rounds;
+                roundsList.forEach(round => {
+                    if (round.uid === currentSelectedRound) {
+
+                        // Rendering round comment if any
+                        if (round.comment.length > 0) {
+                            const roundRenderedComment = document.createElement("div");
+                            roundRenderedComment.classList.add('sessionPageComment');
+                            roundRenderedComment.classList.add('fadeIn');
+                            roundRenderedComment.innerHTML = `
+                                <h4>Round Notes:</h4>
+                                <p>${round.comment}</p>
+                            `;
+                            arrowsListContainer.appendChild(roundRenderedComment);
+                        };
+
+                        let renderedArrowNumber = 1;
+                        round.arrows.forEach(arrow => {
+                            const renderedArrow = document.createElement("article");
+                            renderedArrow.classList.add('fadeIn');
+                            renderedArrow.innerHTML = `
+                            <h5>Arrow ${renderedArrowNumber}</h5>
+                            <h5 class="fix50">${iconsBundle.target} ${arrow}</h5>
+                            `;
+                            arrowsListContainer.appendChild(renderedArrow);
+                            renderedArrowNumber = renderedArrowNumber + 1
+                        })
+                    };
+                });
+            }
+        });
     }
 };

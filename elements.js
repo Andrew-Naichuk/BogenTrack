@@ -1,6 +1,7 @@
 // Global Pool
 const allScreens = document.querySelectorAll('section');
 let currentSelectedSession;
+let currentSelectedRound;
 let sessionsSnapshot;
 let arrowsNumber = 6;
 
@@ -83,6 +84,13 @@ const addArrowButton = document.querySelector('#addArrowBtn');
 const arrowsScoreList = document.querySelector('#arrowsScoreList');
 const createRoundTimeField = document.querySelector('#newRoundTime');
 const createRoundCommentField = document.querySelector('#newRoundComment');
+
+
+// Open Round Screen
+const RoundScreen = document.querySelector('#RoundScreen');
+const roundNameIndicator = document.querySelector('#RoundName');
+const backToSessionScreenButton = document.querySelector('#backToSessionScreenBtn');
+const arrowsListContainer = document.querySelector('#arrowsListContainer');
 
 
 // Profile Screen
