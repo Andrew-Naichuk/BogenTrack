@@ -13,6 +13,7 @@
     --button-bg-color: #1771a2;
     --button-hover-color: #1193d8;
     --button-text-color: #ffffff;
+    --icon-default-color: #abaeb1;
 
     --shadow-min: rgba(0, 0, 0, 0.05) 0px 2px 20px;
     --shadow-default: rgba(0, 0, 0, 0.07) 0px 5px 30px;
@@ -78,6 +79,15 @@ h6 {
 }
 p {
     white-space: pre-line;
+}
+a {
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--button-bg-color);
+    transition: 0.3s;
+}
+a:hover {
+    color: var(--button-hover-color);
 }
 article>h5 {
     display: flex;
@@ -245,7 +255,7 @@ input[type="button"], button {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     background-color: var(--main-bg-color);
     padding: 8px 12px;
     min-width: 36px;
@@ -285,6 +295,13 @@ footer>button {
     width: 100%;
     padding: 10px;
     box-shadow: var(--shadow-button);
+}
+button>svg>path {
+    fill: var(--button-bg-color);
+    transition: 0.3s;
+}
+button:hover>svg>path {
+    fill: var(--main-bg-color);
 }
 
 

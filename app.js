@@ -630,6 +630,7 @@ async function getSessions(){
             const noSessionsNotice = document.createElement("div");
             noSessionsNotice.className = 'screenNotice';
             noSessionsNotice.innerHTML = `
+                <div class="faded">${iconsBundle.bow}</div>
                 <h4>Looks Empty</h4>
                 <p>Start tracking your results by adding your first training session.</p>
             `;
@@ -688,8 +689,9 @@ async function getRounds(){
                         const noRoundsNotice = document.createElement("div");
                         noRoundsNotice.className = 'screenNotice';
                         noRoundsNotice.innerHTML = `
+                            <div class="faded">${iconsBundle.bow}</div>
                             <h4>Looks Empty</h4>
-                            <p>Start saving shooting results by creating and populating a new round for each end.</p>
+                            <p>Start saving shooting results by creating and populating a new set for each round.</p>
                         `;
                         roundsListContainer.appendChild(noRoundsNotice);
                     }
