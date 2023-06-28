@@ -404,7 +404,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                 showScreen('SessionScreen');
                 setTimeout(getRounds, 500);
                 // Changing indicators values
-                setTimeout(updateSessionIndicators, 500);
+                setTimeout(updateSessionIndicators, 1000);
             } else {
                 window.alert('Date is not filled');
             };
@@ -625,17 +625,21 @@ async function getSessions(){
                     if (listItem.rounds.length > 0) {
                         renderedSession.setAttribute("data-display-name", listItem.date)
                         renderedSession.innerHTML = `
-                        <h5 class="fix90">${listItem.date}</h5>
-                        <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
-                        <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
-                        <h5 class="fix50">Ø ${displayAverage}</h5>
+                        <div class="articleRow">
+                            <h5 class="fix90">${listItem.date}</h5>
+                            <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
+                            <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
+                            <h5 class="fix50">Ø ${displayAverage}</h5>
+                        </div>
                     `;
                     } else {
                         renderedSession.classList.add('highlighted')
                         renderedSession.setAttribute("data-display-name", listItem.date)
                         renderedSession.innerHTML = `
-                        <h5>${listItem.date}</h5>
-                        <h5 class="fix50">New</h5>
+                        <div class="articleRow">
+                            <h5>${listItem.date}</h5>
+                            <h5 class="fix50">New</h5>
+                        </div>
                         `
                     }
     
@@ -742,6 +746,12 @@ async function getRounds(){
                         let averageResult = totalResult / round.arrows.length;
                         let displayAverage = averageResult.toString().slice(0, 3);
 
+                        // Creating and configuring round arrows results for render
+                        let renderedArrowsResult = '';
+                        round.arrows.forEach(arrow =>{
+                            renderedArrowsResult = renderedArrowsResult + '<h5 class="accented">' + arrow + '</h5>';
+                        });
+
                         // Creating and configuring the rendered round element
                         const renderedRound = document.createElement("article");
                         renderedRound.id = round.uid;
@@ -749,10 +759,16 @@ async function getRounds(){
                         renderedRound.setAttribute("data-total", totalResult);
                         renderedRound.setAttribute("data-average", displayAverage);
                         renderedRound.innerHTML = `
+                        <div class="articleRow">
                             <h5 class="fix50">${round.time}</h5>
                             <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>
                             <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
                             <h5 class="fix50">Ø ${displayAverage}</h5>
+                        </div>
+                        <hr>
+                        <div class="articleScores">
+                            ${renderedArrowsResult}
+                        </div>
                         `;
 
                         // Making rounds clickable for round details reveal
@@ -816,8 +832,10 @@ async function getArrows(){
                             const renderedArrow = document.createElement("article");
                             renderedArrow.classList.add('fadeIn');
                             renderedArrow.innerHTML = `
-                            <h5>Arrow ${renderedArrowNumber}</h5>
-                            <h5 class="fix50">${iconsBundle.target} ${arrow}</h5>
+                            <div class="articleRow">
+                                <h5>Arrow ${renderedArrowNumber}</h5>
+                                <h5 class="fix50">${iconsBundle.target} ${arrow}</h5>
+                            </div>
                             `;
                             arrowsListContainer.appendChild(renderedArrow);
                             renderedArrowNumber = renderedArrowNumber + 1

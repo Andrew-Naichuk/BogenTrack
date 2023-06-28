@@ -89,7 +89,7 @@ a {
 a:hover {
     color: var(--button-hover-color);
 }
-article>h5 {
+.articleRow>h5 {
     display: flex;
     gap: 6px;
 }
@@ -141,14 +141,13 @@ form {
 }
 article {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 6px;
     width: 100%;
     padding: 16px 16px;
     background-color: var(--main-bg-color);
     box-shadow: var(--shadow-min);
-    border-radius: var(--radius-max);
+    border-radius: var(--radius-default);
     transition: ease-in-out 0.2s;
 }
 article:hover {
@@ -186,6 +185,25 @@ datalist {
     justify-content: space-between;
     width: 100%;
     padding: 0px 12px;
+}
+hr {
+    width: 100%;
+    opacity: 0.1;
+}
+
+.articleRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.articleScores {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
 .inputElement {
     display: flex;
