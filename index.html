@@ -40,7 +40,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
 
     <script src="./elements.js" defer></script>
     <script src="./app.js" defer></script>
@@ -239,6 +239,10 @@
             <div class="inputElement">
                 <p>Sessions created:</p>
                 <h5 id="currentNumberOfSessions"></h5>
+            </div>
+            <div class="width-100">
+                <h5>Sessions average over time:</h5>
+                <div id="sessionsChart" class="chart"></div>
             </div>
         </div>
         <footer>

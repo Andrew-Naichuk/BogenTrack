@@ -180,6 +180,11 @@ input, textarea {
     font-size: 16px;
     padding: 8px 12px;
 }
+input[type=checkbox]{
+    width: fit-content;
+    min-width: 20px;
+    min-height: 20px;
+}
 label {
     width: 100%;
 }
@@ -297,6 +302,16 @@ hr {
     width: 100%;
     gap: 20px;
 }
+.chart {
+    width: 100%;
+    min-height: 300px;
+    margin: -20px 0;
+}
+.chartHeading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
 
 
@@ -396,6 +411,9 @@ button:hover>svg>path {
 }
 .accented {
     color: var(--main-accent-color);
+}
+.width-100 {
+    width: 100%;
 }
 .fullWidth {
     display: flex;

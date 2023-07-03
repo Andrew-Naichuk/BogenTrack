@@ -205,10 +205,12 @@ profileButton.addEventListener('click', function(){
     userEmailIndicator.innerText = auth.currentUser.email;
     userSessionsIndicator.innerText = sessionsListScreen.querySelectorAll('article').length;
     showScreen('profileScreen');
+    updateSessionsChart();
 });
 backHomeButton.addEventListener('click', function(){
     showScreen('sessionsListScreen');
 });
+
 
 
 // Add Session - Cancel Add Switching
@@ -368,7 +370,6 @@ saveNewSessionButton.addEventListener('click', function(){
         // Navigating back to sessions list and updating it
         showScreen('sessionsListScreen');
         setTimeout(getSessions, 500);
-
     } else {
         window.alert('Date is not filled');
     };
@@ -845,4 +846,55 @@ async function getArrows(){
             }
         });
     }
+};
+
+
+// Sessions stats chart functionality
+function updateSessionsChart () {
+    // Preparing arrays for chart visualization
+    let sessionsNames = [];
+    let sessionsScores = [];
+    sessionsSnapshot.forEach (session => {
+        // Filtering only displayed sessions with some scores
+        if (session.status === 'live' && session.rounds.length > 0) {
+            // Populating x-axis array with date
+            sessionsNames.push(session.date);
+            // Calculating average result of session
+            let sessionTotalScore = 0;
+            let sessionArrowsNumber = 0;
+            session.rounds.forEach(round => {
+                sessionArrowsNumber = sessionArrowsNumber + round.arrows.length;
+                round.arrows.forEach(arrow => {
+                    sessionTotalScore = sessionTotalScore + Number(arrow);
+                })
+            });
+            // Populating y-axis array with session average result
+            sessionsScores.push(sessionTotalScore / sessionArrowsNumber);
+        };
+    });
+    
+    const chart = echarts.init(document.getElementById('sessionsChart'));
+    window.addEventListener('resize', function() {
+        chart.resize();
+    });
+    let option = {
+        color: [
+            '#1489c9'
+        ],
+        xAxis: {
+          type: 'category',
+          data: sessionsNames
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: sessionsScores,
+            type: 'line',
+            smooth: true
+          }
+        ]
+      };
+    chart.setOption(option);
 };
