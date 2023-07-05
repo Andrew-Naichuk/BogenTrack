@@ -16,6 +16,12 @@
     --button-text-color: #ffffff;
     --icon-default-color: #abaeb1;
 
+    --white-arrow: #b8b9be;
+    --black-arrow: #18181a;
+    --blue-arrow: #125ce7;
+    --red-arrow: #de1212;
+    --gold-arrow: #e8d311;
+
     --shadow-min: rgba(0, 0, 0, 0.05) 0px 2px 20px;
     --shadow-default: rgba(0, 0, 0, 0.07) 0px 5px 30px;
     --shadow-button: rgba(0, 0, 0, 0.1) 0px 0px 25px;
@@ -24,6 +30,7 @@
     --radius-default: 8px;
     --radius-max: 999px;
 }
+
 
 
 
@@ -223,7 +230,7 @@ hr {
 .articleScores {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    gap: 16px;
     align-items: center;
     width: 100%;
 }
@@ -359,6 +366,9 @@ input[type="button"]:hover, button:hover {
 input[type="button"].secondary:hover, button.secondary:hover {
     color: var(--button-text-color);
 }
+header>input[type="button"].secondary:hover, header>button.secondary:hover {
+    color: var(--button-hover-color);
+}
 button.danger:hover {
     background-color: var(--danger-color);
     color: var(--main-bg-color);
@@ -374,6 +384,9 @@ button>svg>path {
 }
 button:hover>svg>path {
     fill: var(--main-bg-color);
+}
+header>button:hover>svg>path {
+    fill: var(--button-hover-color);
 }
 
 
@@ -396,6 +409,24 @@ button:hover>svg>path {
     100% { opacity: 0; }
 }
 
+
+
+/* ARROWS COLORS */
+.white {
+    color: var(--white-arrow);
+}
+.black {
+    color: var(--black-arrow);
+}
+.blue {
+    color: var(--blue-arrow);
+}
+.red {
+    color: var(--red-arrow);
+}
+.gold {
+    color: var(--gold-arrow);
+}
 
 
 

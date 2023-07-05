@@ -616,6 +616,22 @@ async function getSessions(){
     
                     // Calculating average result per arrow
                     let averageResult = totalResult / totalArrows;
+                    let averageColor;
+                    if (averageResult < 3) {
+                        arrowColor = 'white'
+                    }
+                    if (averageResult >= 3) {
+                        arrowColor = 'black'
+                    }
+                    if (averageResult >= 5) {
+                        arrowColor = 'blue'
+                    }
+                    if (averageResult >= 7) {
+                        arrowColor = 'red'
+                    }
+                    if (averageResult >= 9) {
+                        arrowColor = 'gold'
+                    }
                     let displayAverage = averageResult.toString().slice(0, 3);
     
                     // Creating and configuring the rendered session card element
@@ -630,7 +646,7 @@ async function getSessions(){
                             <h5 class="fix90">${listItem.date}</h5>
                             <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
                             <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
-                            <h5 class="fix50">Ø ${displayAverage}</h5>
+                            <h5 class="fix50">Ø <span class="${averageColor}">${displayAverage}</span></h5>
                         </div>
                     `;
                     } else {
@@ -750,7 +766,20 @@ async function getRounds(){
                         // Creating and configuring round arrows results for render
                         let renderedArrowsResult = '';
                         round.arrows.forEach(arrow =>{
-                            renderedArrowsResult = renderedArrowsResult + '<h5 class="accented">' + arrow + '</h5>';
+                            let arrowColor = 'white';
+                            if (Number(arrow) === 3 || Number(arrow) === 4) {
+                                arrowColor = 'black'
+                            }
+                            if (Number(arrow) === 5 || Number(arrow) === 6) {
+                                arrowColor = 'blue'
+                            }
+                            if (Number(arrow) === 7 || Number(arrow) === 8) {
+                                arrowColor = 'red'
+                            }
+                            if (Number(arrow) === 9 || Number(arrow) === 10) {
+                                arrowColor = 'gold'
+                            }
+                            renderedArrowsResult = renderedArrowsResult + `<h5 class="${arrowColor}">` + arrow + '</h5>';
                         });
 
                         // Creating and configuring the rendered round element
@@ -830,12 +859,25 @@ async function getArrows(){
                         // Rendering arrows of the selected round
                         let renderedArrowNumber = 1;
                         round.arrows.forEach(arrow => {
+                            let arrowColor = 'white';
+                            if (Number(arrow) === 3 || Number(arrow) === 4) {
+                                arrowColor = 'black'
+                            }
+                            if (Number(arrow) === 5 || Number(arrow) === 6) {
+                                arrowColor = 'blue'
+                            }
+                            if (Number(arrow) === 7 || Number(arrow) === 8) {
+                                arrowColor = 'red'
+                            }
+                            if (Number(arrow) === 9 || Number(arrow) === 10) {
+                                arrowColor = 'gold'
+                            }
                             const renderedArrow = document.createElement("article");
                             renderedArrow.classList.add('fadeIn');
                             renderedArrow.innerHTML = `
                             <div class="articleRow">
                                 <h5>Arrow ${renderedArrowNumber}</h5>
-                                <h5 class="fix50">${iconsBundle.target} ${arrow}</h5>
+                                <h5 class="fix50 ${arrowColor}">${iconsBundle.target} ${arrow}</h5>
                             </div>
                             `;
                             arrowsListContainer.appendChild(renderedArrow);
