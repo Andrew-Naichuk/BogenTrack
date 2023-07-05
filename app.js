@@ -878,9 +878,6 @@ function updateSessionsChart () {
         chart.resize();
     });
     let option = {
-        color: [
-            '#1489c9'
-        ],
         xAxis: {
           type: 'category',
           data: sessionsNames
@@ -892,7 +889,23 @@ function updateSessionsChart () {
           {
             data: sessionsScores,
             type: 'line',
-            smooth: true
+            smooth: true,
+            sampling: 'lttb',
+        itemStyle: {
+            color: '#0D99FF'
+        },
+        areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+                offset: 0,
+                color: '#7AC7FF'
+            },
+            {
+                offset: 1,
+                color: 'rgba(122, 199, 255, 0.3)'
+            }
+            ])
+        }
           }
         ]
       };

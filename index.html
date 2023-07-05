@@ -35,6 +35,15 @@
         })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
 
+    <!-- Clarity Tracking -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "hugey3cl10");
+    </script>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -67,6 +76,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
                 Continue with Google
             </button>
+            <p class="faded centered-text">By proceeding with login you are accepting Bogentrack Terms and Conditions. <a href="./terms.html" target="_blank">Learn more here.</a></p>
             <p class="faded">New to BogenTrack? Sign up now!</p>
             <input type="button" id="toSignUpBtn" class="secondary" value="Create an Account">
         </form>
@@ -246,7 +256,7 @@
             </div>
         </div>
         <footer>
-            <a href="mailto:andrew.naychuk@gmail.com"><button id="reportIssueBtn" type="button" class="secondary">Report Issue</button></a>
+            <a href="mailto:andrew.naychuk@gmail.com"><button id="reportIssueBtn" type="button" class="danger">Report Issue</button></a>
         </footer>
     </section>
 

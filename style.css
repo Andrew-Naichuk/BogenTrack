@@ -210,6 +210,9 @@ hr {
     opacity: 0.1;
 }
 
+.web-section{
+    padding: 40px 20px;
+}
 .articleRow {
     display: flex;
     flex-direction: row;
@@ -338,8 +341,11 @@ input[type="button"].primary, button.primary {
     color: var(--button-text-color);
 }
 input[type="button"].secondary, button.secondary {
-    background-color: var(--glass-bg-color);
+    background-color: var(--main-bg-color);
     color: var(--button-bg-color);
+}
+header>input[type="button"].secondary, header>button.secondary {
+    background-color: var(--glass-bg-color);
 }
 button.danger {
     background-color: var(--main-bg-color);
@@ -412,6 +418,7 @@ button:hover>svg>path {
 .accented {
     color: var(--main-accent-color);
 }
+
 .width-100 {
     width: 100%;
 }
@@ -429,4 +436,8 @@ button:hover>svg>path {
 }
 .fix98 {
     min-width: 98px;
+}
+
+.centered-text {
+    text-align: center;
 }
