@@ -618,19 +618,19 @@ async function getSessions(){
                     let averageResult = totalResult / totalArrows;
                     let averageColor;
                     if (averageResult < 3) {
-                        arrowColor = 'white'
+                        averageColor = 'white'
                     }
                     if (averageResult >= 3) {
-                        arrowColor = 'black'
+                        averageColor = 'black'
                     }
                     if (averageResult >= 5) {
-                        arrowColor = 'blue'
+                        averageColor = 'blue'
                     }
                     if (averageResult >= 7) {
-                        arrowColor = 'red'
+                        averageColor = 'red'
                     }
                     if (averageResult >= 9) {
-                        arrowColor = 'gold'
+                        averageColor = 'gold'
                     }
                     let displayAverage = averageResult.toString().slice(0, 3);
     
@@ -646,7 +646,7 @@ async function getSessions(){
                             <h5 class="fix90">${listItem.date}</h5>
                             <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
                             <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
-                            <h5 class="fix50">Ø <span class="${averageColor}">${displayAverage}</span></h5>
+                            <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
                         </div>
                     `;
                     } else {
@@ -761,6 +761,24 @@ async function getRounds(){
 
                         // Calculating average result per arrow
                         let averageResult = totalResult / round.arrows.length;
+
+                        let averageColor;
+                        if (averageResult < 3) {
+                            averageColor = 'white'
+                        }
+                        if (averageResult >= 3) {
+                            averageColor = 'black'
+                        }
+                        if (averageResult >= 5) {
+                            averageColor = 'blue'
+                        }
+                        if (averageResult >= 7) {
+                            averageColor = 'red'
+                        }
+                        if (averageResult >= 9) {
+                            averageColor = 'gold'
+                        }
+
                         let displayAverage = averageResult.toString().slice(0, 3);
 
                         // Creating and configuring round arrows results for render
@@ -793,7 +811,7 @@ async function getRounds(){
                             <h5 class="fix50">${round.time}</h5>
                             <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>
                             <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
-                            <h5 class="fix50">Ø ${displayAverage}</h5>
+                            <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
                         </div>
                         <hr>
                         <div class="articleScores">
@@ -953,3 +971,30 @@ function updateSessionsChart () {
       };
     chart.setOption(option);
 };
+
+
+
+
+
+
+
+
+
+
+// TEST Create New Round
+testCreateRoundButton.addEventListener('click', function(){
+    roundsListContainer.innerHTML = '';
+    showScreen('testCreateRoundScreen');
+    // createRoundTimeField.value = getCurrentTime();
+});
+testCancelNewRoundButton.addEventListener('click', function(){
+    // Setting fields values back to default and navigating
+    // createRoundTimeField.value = '';
+    // createRoundCommentField.value = '';
+
+    // Getting rounds and rendering
+    showScreen('SessionScreen');
+    setTimeout(getRounds, 100);
+    // Changing indicators values
+    setTimeout(updateSessionIndicators, 500);
+});

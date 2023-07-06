@@ -191,8 +191,69 @@
         <div class="contentContainer" id="roundsListContainer"></div>
         <footer>
             <button id="createRoundBtn" type="button" class="primary">Create Set</button>
+            <button id="testCreateRoundBtn" type="button" class="primary">Test Create Set</button>
         </footer>
     </section>
+
+
+
+
+
+    <!-- TEST ROUND CREATION -->
+    <section id="testCreateRoundScreen" class="hidden" data-identifier="create-round">
+        <header>
+            <h2>Create Set</h2>
+        </header>
+
+        <div class="contentContainer">
+            <div class="inputElement">
+                <label for="testNewRoundTime">Finish Time (required)</label>
+                <input type="time" name="testNewRoundTime" id="testNewRoundTime">
+            </div>
+
+            <div class="inputElement">
+                <label for="testNewRoundComment">Set Comment</label>
+                <textarea name="testNewRoundComment" id="testNewRoundComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+            </div>
+
+            <div class="controls">
+                <style>
+                    .controls {
+                        display: flex;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                        gap: 12px;
+                    }
+                    button.scoreSelectButton {
+                        min-width: 20%;
+                        min-height: 60px;
+                        background-color: var(--white-arrow);
+                        border-radius: var(--radius-min);
+                    }
+                </style>
+                <button class="scoreSelectButton" id="M">M</button>
+                <button class="scoreSelectButton" id="1">1</button>
+                <button class="scoreSelectButton" id="2">2</button>
+                <button class="scoreSelectButton" id="3">3</button>
+                <button class="scoreSelectButton" id="4">4</button>
+                <button class="scoreSelectButton" id="5">5</button>
+                <button class="scoreSelectButton" id="6">6</button>
+                <button class="scoreSelectButton" id="7">7</button>
+                <button class="scoreSelectButton" id="8">8</button>
+                <button class="scoreSelectButton" id="9">9</button>
+                <button class="scoreSelectButton" id="10">10</button>
+                <button class="scoreSelectButton" id="X">X</button>
+            </div>
+        </div>
+
+        <footer>
+            <button id="testSaveNewRoundBtn" type="button" class="primary">Save</button>
+            <button id="testancelNewRoundBtn" type="button" class="secondary">Cancel</button>
+        </footer>
+    </section>
+
+
+
 
     <!-- Create Round Screen -->
     <section id="createRoundScreen" class="hidden" data-identifier="create-round">
