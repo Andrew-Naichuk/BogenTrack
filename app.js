@@ -461,6 +461,53 @@ deleteSessionButton.addEventListener('click', function(){
 });
 
 
+// Delete Round Functionality
+// Open confirmation modal functionality
+deleteRoundModalButton.addEventListener('click', function(){
+    confirmDeleteRoundModal.classList.remove("hidden");
+    confirmDeleteRoundModal.classList.add("fadeIn");
+    confirmDeleteRoundModal.classList.add("visible");
+});
+// Close confirmation modal functionality (cancel delete)
+cancelDeleteRoundButton.addEventListener('click', function(){
+    confirmDeleteRoundModal.classList.remove("visible");
+    confirmDeleteRoundModal.classList.remove("fadeIn");
+    confirmDeleteRoundModal.classList.add("hidden");
+});
+// Delete round in DB
+deleteRoundButton.addEventListener('click', function(){
+    // Preparing updated session snapshot with new status of current round
+    sessionsSnapshot.forEach(session => {
+        if (session.uid === currentSelectedSession){
+            session.rounds.forEach(round => {
+                if (round.uid === currentSelectedRound) {
+                    round.status = 'deleted';
+                    // Asynchronous function for database operations
+                    (async function(){
+                        try {
+                            // Pushing updated session object to the DB by updating the sessions array field
+                            await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                                sessions: sessionsSnapshot,
+                            });
+                        } catch (error) {
+                            window.alert(error);
+                        }
+                    })();
+                    // Navigating back to rounds list and updating it
+                    confirmDeleteRoundModal.classList.remove("visible");
+                    confirmDeleteRoundModal.classList.remove("fadeIn");
+                    confirmDeleteRoundModal.classList.add("hidden");
+                    showScreen('SessionScreen');
+                    setTimeout(getRounds, 500);
+                    // Changing indicators values
+                    setTimeout(updateSessionIndicators, 1000);
+                };
+            });
+        };
+    });
+});
+
+
 // Add New Round Functionality
 saveNewRoundButton.addEventListener('click', function(){
     if (createRoundTimeField.value.length === 5) {
@@ -481,6 +528,7 @@ saveNewRoundButton.addEventListener('click', function(){
             "time": createRoundTimeField.value,
             "comment": createRoundCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
             "arrows": arrowsScores,
+            "status": 'live',
         };
 
         // Asynchronous function for database operations
@@ -608,14 +656,17 @@ async function getSessions(){
     
                     // Calculating total result and total arrows for each session
                     roundsList.forEach(round => {
-                        round.arrows.forEach(function (number) {
-                            totalResult += Number(number);
-                            totalArrows = totalArrows + 1;
-                        });
+                        if (!round.status || round.status === 'live') {
+                            round.arrows.forEach(function (number) {
+                                totalResult += Number(number);
+                                totalArrows = totalArrows + 1;
+                            });
+                        };
                     });
     
                     // Calculating average result per arrow
                     let averageResult = totalResult / totalArrows;
+                    // Assigning color to the rendered item based on value
                     let averageColor;
                     if (averageResult < 3) {
                         averageColor = 'white'
@@ -639,12 +690,18 @@ async function getSessions(){
                     renderedSession.id = listItem.uid;
                     renderedSession.classList.add('hidden');
                     // Checking if session has rounds to render it as new or filled
-                    if (listItem.rounds.length > 0) {
+                    let sessionLiveRounds = 0;
+                    listItem.rounds.forEach (round => {
+                        if (!round.status || round.status === 'live') {
+                            sessionLiveRounds = sessionLiveRounds + 1;
+                        }
+                    });
+                    if (sessionLiveRounds > 0) {
                         renderedSession.setAttribute("data-display-name", listItem.date)
                         renderedSession.innerHTML = `
                         <div class="articleRow">
                             <h5 class="fix90">${listItem.date}</h5>
-                            <p class="fullWidth">${iconsBundle.repeat} ${listItem.rounds.length}</p>
+                            <p class="fullWidth">${iconsBundle.repeat} ${sessionLiveRounds}</p>
                             <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
                             <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
                         </div>
@@ -739,10 +796,17 @@ async function getRounds(){
                         roundsListContainer.appendChild(sessionRenderedComment);
                     };
 
+                    let liveRoundsNumber = 0;
                     let roundsList = listItem.rounds;
+                    // Checking for live rounds amount
+                    roundsList.forEach(round => {
+                        if (!round.status || round.status === 'live') {
+                            liveRoundsNumber = liveRoundsNumber + 1;
+                        }
+                    });
 
                     // Handling case when there are no rounds in the session
-                    if (roundsList.length < 1) {
+                    if (liveRoundsNumber < 1) {
                         const noRoundsNotice = document.createElement("div");
                         noRoundsNotice.className = 'screenNotice';
                         noRoundsNotice.innerHTML = `
@@ -754,87 +818,91 @@ async function getRounds(){
                     }
 
                     roundsList.forEach(round => {
-                        let totalResult = 0;
-                        round.arrows.forEach(function (number) {
-                            totalResult += Number(number);
-                        });
+                        if (!round.status || round.status === 'live') {
 
-                        // Calculating average result per arrow
-                        let averageResult = totalResult / round.arrows.length;
+                            let totalResult = 0;
+                            round.arrows.forEach(function (number) {
+                                totalResult += Number(number);
+                            });
 
-                        let averageColor;
-                        if (averageResult < 3) {
-                            averageColor = 'white'
+                            // Calculating average result per arrow
+                            let averageResult = totalResult / round.arrows.length;
+                            // Assigning color to the rendered item based on value
+                            let averageColor;
+                            if (averageResult < 3) {
+                                averageColor = 'white'
+                            }
+                            if (averageResult >= 3) {
+                                averageColor = 'black'
+                            }
+                            if (averageResult >= 5) {
+                                averageColor = 'blue'
+                            }
+                            if (averageResult >= 7) {
+                                averageColor = 'red'
+                            }
+                            if (averageResult >= 9) {
+                                averageColor = 'gold'
+                            }
+
+                            let displayAverage = averageResult.toString().slice(0, 3);
+
+                            // Creating and configuring round arrows results for render
+                            let renderedArrowsResult = '';
+                            round.arrows.forEach(arrow =>{
+                                let arrowColor = 'white';
+                                if (Number(arrow) === 3 || Number(arrow) === 4) {
+                                    arrowColor = 'black'
+                                }
+                                if (Number(arrow) === 5 || Number(arrow) === 6) {
+                                    arrowColor = 'blue'
+                                }
+                                if (Number(arrow) === 7 || Number(arrow) === 8) {
+                                    arrowColor = 'red'
+                                }
+                                if (Number(arrow) === 9 || Number(arrow) === 10) {
+                                    arrowColor = 'gold'
+                                }
+                                renderedArrowsResult = renderedArrowsResult + `<h5 class="${arrowColor}">` + arrow + '</h5>';
+                            });
+
+                            // Creating and configuring the rendered round element
+                            const renderedRound = document.createElement("article");
+                            renderedRound.id = round.uid;
+                            renderedRound.classList.add('fadeIn');
+                            renderedRound.setAttribute("data-total", totalResult);
+                            renderedRound.setAttribute("data-average", displayAverage);
+                            renderedRound.innerHTML = `
+                            <div class="articleRow">
+                                <h5 class="fix50">${round.time}</h5>
+                                <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>
+                                <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
+                                <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
+                            </div>
+                            <hr>
+                            <div class="articleScores">
+                                ${renderedArrowsResult}
+                            </div>
+                            `;
+
+                            // Making rounds clickable for round details reveal
+                            renderedRound.addEventListener('click', function(){
+                                let container = renderedRound;
+                                let clickedElement = event.target;
+                                while (clickedElement && clickedElement !== container && clickedElement !== document) {
+                                    clickedElement = clickedElement.parentElement;
+                                }
+                                if (clickedElement === container) {
+                                    currentSelectedRound = container.id;
+                                }
+                                roundNameIndicator.innerText = round.time;
+                                showScreen('RoundScreen');
+                                getArrows();
+                            });
+
+                            roundsListContainer.appendChild(renderedRound);
+                            
                         }
-                        if (averageResult >= 3) {
-                            averageColor = 'black'
-                        }
-                        if (averageResult >= 5) {
-                            averageColor = 'blue'
-                        }
-                        if (averageResult >= 7) {
-                            averageColor = 'red'
-                        }
-                        if (averageResult >= 9) {
-                            averageColor = 'gold'
-                        }
-
-                        let displayAverage = averageResult.toString().slice(0, 3);
-
-                        // Creating and configuring round arrows results for render
-                        let renderedArrowsResult = '';
-                        round.arrows.forEach(arrow =>{
-                            let arrowColor = 'white';
-                            if (Number(arrow) === 3 || Number(arrow) === 4) {
-                                arrowColor = 'black'
-                            }
-                            if (Number(arrow) === 5 || Number(arrow) === 6) {
-                                arrowColor = 'blue'
-                            }
-                            if (Number(arrow) === 7 || Number(arrow) === 8) {
-                                arrowColor = 'red'
-                            }
-                            if (Number(arrow) === 9 || Number(arrow) === 10) {
-                                arrowColor = 'gold'
-                            }
-                            renderedArrowsResult = renderedArrowsResult + `<h5 class="${arrowColor}">` + arrow + '</h5>';
-                        });
-
-                        // Creating and configuring the rendered round element
-                        const renderedRound = document.createElement("article");
-                        renderedRound.id = round.uid;
-                        renderedRound.classList.add('fadeIn');
-                        renderedRound.setAttribute("data-total", totalResult);
-                        renderedRound.setAttribute("data-average", displayAverage);
-                        renderedRound.innerHTML = `
-                        <div class="articleRow">
-                            <h5 class="fix50">${round.time}</h5>
-                            <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>
-                            <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
-                            <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
-                        </div>
-                        <hr>
-                        <div class="articleScores">
-                            ${renderedArrowsResult}
-                        </div>
-                        `;
-
-                        // Making rounds clickable for round details reveal
-                        renderedRound.addEventListener('click', function(){
-                            let container = renderedRound;
-                            let clickedElement = event.target;
-                            while (clickedElement && clickedElement !== container && clickedElement !== document) {
-                                clickedElement = clickedElement.parentElement;
-                            }
-                            if (clickedElement === container) {
-                                currentSelectedRound = container.id;
-                            }
-                            roundNameIndicator.innerText = round.time;
-                            showScreen('RoundScreen');
-                            getArrows();
-                        });
-
-                        roundsListContainer.appendChild(renderedRound);
                     });
                 }
             });
@@ -877,6 +945,7 @@ async function getArrows(){
                         // Rendering arrows of the selected round
                         let renderedArrowNumber = 1;
                         round.arrows.forEach(arrow => {
+                            // Assigning color to the rendered item based on value
                             let arrowColor = 'white';
                             if (Number(arrow) === 3 || Number(arrow) === 4) {
                                 arrowColor = 'black'
@@ -915,7 +984,7 @@ function updateSessionsChart () {
     let sessionsNames = [];
     let sessionsScores = [];
     sessionsSnapshot.forEach (session => {
-        // Filtering only displayed sessions with some scores
+        // Filtering only live sessions with some scores
         if (session.status === 'live' && session.rounds.length > 0) {
             // Populating x-axis array with date
             sessionsNames.push(session.date);
@@ -923,10 +992,13 @@ function updateSessionsChart () {
             let sessionTotalScore = 0;
             let sessionArrowsNumber = 0;
             session.rounds.forEach(round => {
-                sessionArrowsNumber = sessionArrowsNumber + round.arrows.length;
-                round.arrows.forEach(arrow => {
+                // Filtering only live rounds within session
+                if (!round.status || round.status === 'live') {
+                    sessionArrowsNumber = sessionArrowsNumber + round.arrows.length;
+                    round.arrows.forEach(arrow => {
                     sessionTotalScore = sessionTotalScore + Number(arrow);
-                })
+                });
+                };
             });
             // Populating y-axis array with session average result
             sessionsScores.push(sessionTotalScore / sessionArrowsNumber);
@@ -971,30 +1043,3 @@ function updateSessionsChart () {
       };
     chart.setOption(option);
 };
-
-
-
-
-
-
-
-
-
-
-// TEST Create New Round
-testCreateRoundButton.addEventListener('click', function(){
-    roundsListContainer.innerHTML = '';
-    showScreen('testCreateRoundScreen');
-    // createRoundTimeField.value = getCurrentTime();
-});
-testCancelNewRoundButton.addEventListener('click', function(){
-    // Setting fields values back to default and navigating
-    // createRoundTimeField.value = '';
-    // createRoundCommentField.value = '';
-
-    // Getting rounds and rendering
-    showScreen('SessionScreen');
-    setTimeout(getRounds, 100);
-    // Changing indicators values
-    setTimeout(updateSessionIndicators, 500);
-});

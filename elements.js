@@ -73,19 +73,10 @@ const SessionScreen = document.querySelector('#SessionScreen');
 const sessionNameIndicator = document.querySelector('#SessionName');
 const backToSessionListButton = document.querySelector('#backToSessionListBtn');
 const createRoundButton = document.querySelector('#createRoundBtn');
-// ! TEST !
-const testCreateRoundButton = document.querySelector('#testCreateRoundBtn');
-// ! TEST !
 const roundsListContainer = document.querySelector('#roundsListContainer');
 const editSessionButton = document.querySelector('#editSessionBtn');
 const sessionTotalPointsIndicator = document.querySelector('#sessionTotalPointsIndicator');
 const sessionAverageShotIndicator = document.querySelector('#sessionAverageShotIndicator');
-
-
-// TEST Create Round Screen
-const testCreateRoundScreen = document.querySelector('#testCreateRoundScreen');
-const testSaveNewRoundButton = document.querySelector('#testSaveNewRoundBtn');
-const testCancelNewRoundButton = document.querySelector('#testCancelNewRoundBtn');
 
 
 // Create Round Screen
@@ -104,6 +95,10 @@ const createRoundCommentField = document.querySelector('#newRoundComment');
 const RoundScreen = document.querySelector('#RoundScreen');
 const roundNameIndicator = document.querySelector('#RoundName');
 const backToSessionScreenButton = document.querySelector('#backToSessionScreenBtn');
+const deleteRoundModalButton = document.querySelector('#deleteRoundModalBtn');
+const confirmDeleteRoundModal = document.querySelector('#confirmDeleteRoundModal');
+const deleteRoundButton = document.querySelector('#deleteRoundBtn');
+const cancelDeleteRoundButton = document.querySelector('#cancelDeleteRoundBtn');
 const arrowsListContainer = document.querySelector('#arrowsListContainer');
 
 
