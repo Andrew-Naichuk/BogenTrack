@@ -263,7 +263,25 @@
             </div>
         </div>
         <footer>
-            <a href="mailto:andrew.naychuk@gmail.com"><button id="reportIssueBtn" type="button" class="danger">Report Issue</button></a>
+            <button id="reportIssueBtn" type="button" class="danger">Send Report</button>
+        </footer>
+    </section>
+
+
+    <!-- Report Screen -->
+    <section id="reportScreen" class="hidden">
+        <header>
+            <h2>Send Report</h2>
+        </header>
+        <div class="contentContainer">
+            <div class="inputElement" id="reportsList"></div>
+            <div class="inputElement">
+                <textarea name="reportText" id="reportText" rows="10" placeholder="Tell us about the issue or idea you have around BogenTrack!" maxlength="700"></textarea>
+            </div>
+        </div>
+        <footer>
+            <button id="submitReportBtn" type="button" class="primary">Send Report</button>
+            <button id="cancelReportBtn" type="button" class="secondary">Cancel</button>
         </footer>
     </section>
 
