@@ -44,6 +44,7 @@ const sessionsListScreen = document.querySelector('#sessionsListScreen');
 const sessionsListContainer = document.querySelector('#sessionsListContainer');
 const createSessionButton = document.querySelector('#createSessionBtn');
 const profileButton = document.querySelector('#profileBtn');
+const sessionsStatsButton = document.querySelector('#sessionsStatsBtn');
 
 
 // Create Session Screen
@@ -109,6 +110,11 @@ const signOutButton = document.querySelector('#signOutBtn');
 const userEmailIndicator = document.querySelector('#currentUserEmail');
 const userSessionsIndicator = document.querySelector('#currentNumberOfSessions');
 const reportIssueButton = document.querySelector('#reportIssueBtn');
+
+
+// Sessions Stats Screen
+const sessionsStatsScreen = document.querySelector('#sessionsStatsScreen');
+const closeSessionsStatsButton = document.querySelector('#closeSessionsStatsBtn');
 
 
 // Report Screen

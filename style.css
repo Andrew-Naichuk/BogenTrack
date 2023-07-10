@@ -333,7 +333,7 @@ input[type="button"], button {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     background-color: var(--main-bg-color);
     padding: 8px 12px;
     min-width: 36px;

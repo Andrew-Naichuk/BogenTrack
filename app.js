@@ -205,9 +205,19 @@ profileButton.addEventListener('click', function(){
     userEmailIndicator.innerText = auth.currentUser.email;
     userSessionsIndicator.innerText = sessionsListScreen.querySelectorAll('article').length;
     showScreen('profileScreen');
-    updateSessionsChart();
 });
 backHomeButton.addEventListener('click', function(){
+    showScreen('sessionsListScreen');
+});
+
+
+// Sessions Stats Functionality
+sessionsStatsButton.addEventListener('click', function(){
+    showScreen('sessionsStatsScreen');
+    updateSessionsChart();
+    updateShotsChart();
+});
+closeSessionsStatsButton.addEventListener('click', function(){
     showScreen('sessionsListScreen');
 });
 
@@ -265,6 +275,7 @@ submitReportButton.addEventListener('click', function(){
     }
 });
 
+// Read and Render Reports Functionality
 async function getReports(){
     reportsList.innerHTML = '';
     const docRef = db.collection("btIssues").doc(auth.currentUser.uid);
@@ -1103,6 +1114,7 @@ function updateSessionsChart () {
         };
     });
     
+    // E-Charts Rendering
     const chart = echarts.init(document.getElementById('sessionsChart'));
     window.addEventListener('resize', function() {
         chart.resize();
@@ -1136,6 +1148,95 @@ function updateSessionsChart () {
             }
             ])
         }
+          }
+        ]
+      };
+    chart.setOption(option);
+};
+
+
+// Shots Scores Distribution Chart Functionality
+function updateShotsChart () {
+    // Preparing object of arrows scores
+    let scoresDistribution = {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0,
+        "10": 0,
+    };
+    sessionsSnapshot.forEach (session => {
+        // Filtering only live sessions with some scores
+        if (session.status === 'live' && session.rounds.length > 0) {
+            session.rounds.forEach(round => {
+                // Filtering only live rounds within session
+                if (!round.status || round.status === 'live') {
+                    // Counting the amount of arrows of each score
+                    round.arrows.forEach(arrow => {
+                        if (Number(arrow) === 0) {
+                            scoresDistribution[0] = ++scoresDistribution[0];
+                        };
+                        if (Number(arrow) === 1) {
+                            scoresDistribution[1] = ++scoresDistribution[1];
+                        };
+                        if (Number(arrow) === 2) {
+                            scoresDistribution[2] = ++scoresDistribution[2];
+                        };
+                        if (Number(arrow) === 3) {
+                            scoresDistribution[3] = ++scoresDistribution[3];
+                        };
+                        if (Number(arrow) === 4) {
+                            scoresDistribution[4] = ++scoresDistribution[4];
+                        };
+                        if (Number(arrow) === 5) {
+                            scoresDistribution[5] = ++scoresDistribution[5];
+                        };
+                        if (Number(arrow) === 6) {
+                            scoresDistribution[6] = ++scoresDistribution[6];
+                        };
+                        if (Number(arrow) === 7) {
+                            scoresDistribution[7] = ++scoresDistribution[7];
+                        };
+                        if (Number(arrow) === 8) {
+                            scoresDistribution[8] = ++scoresDistribution[8];
+                        };
+                        if (Number(arrow) === 9) {
+                            scoresDistribution[9] = ++scoresDistribution[9];
+                        };
+                        if (Number(arrow) === 10) {
+                            scoresDistribution[10] = ++scoresDistribution[10];
+                        };
+                    })
+                }
+            })
+        }
+    });
+    // E-Charts Rendering
+    const chart = echarts.init(document.getElementById('shotsChart'));
+    window.addEventListener('resize', function() {
+        chart.resize();
+    });
+    let option = {
+        xAxis: {
+          type: 'category',
+          data: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [scoresDistribution[0], scoresDistribution[1], scoresDistribution[2], scoresDistribution[3], scoresDistribution[4], scoresDistribution[5], scoresDistribution[6], scoresDistribution[7], scoresDistribution[8], scoresDistribution[9], scoresDistribution[10]],
+            type: 'bar',
+        itemStyle: {
+            color: '#61B0FF'
+        },
           }
         ]
       };
