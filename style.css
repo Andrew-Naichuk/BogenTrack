@@ -3,6 +3,8 @@
     --secondary-bg-color:rgb(237, 243, 247);
     --highlight-bg-color: rgb(226, 244, 255);
     --glass-bg-color: #ffffffa0;
+    --green-glass-bg-color: #d0fddda0;
+    --red-glass-bg-color: #fdd0d0a0;
     --main-text-color: #202020;
     --secondary-text-color: #5a5a5a;
     
@@ -433,6 +435,36 @@ header>button:hover>svg>path {
 
 
 /* SERVICE CLASSES */
+.toastContainer {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 600px;
+    min-height: 1px;
+    position: fixed;
+    top: 80px;
+    z-index: 9999;
+}
+.toastMessage {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+    border: var(--borders-glass-color) solid 1px;
+    background-color: var(--glass-bg-color);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-min);
+    border-radius: var(--radius-default);
+}
+.success {
+    background-color: var(--green-glass-bg-color);
+}
+.fail {
+    background-color: var(--red-glass-bg-color);
+}
+
 .hidden {
     display: none;
 }

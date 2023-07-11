@@ -110,6 +110,31 @@ function getCurrentTime(){
 };
 
 
+// Generating toast message
+function createToastMessage (type, message) {
+    const newToast = document.createElement('div');
+    newToast.classList.add('toastMessage');
+    newToast.classList.add('fadeIn');
+    if (type === 'success') {
+        newToast.classList.add('success');
+    }
+    if (type === 'fail') {
+        newToast.classList.add('fail');
+    }
+    newToast.innerHTML = `
+    <h5>${message}</h5>
+    `;
+    toastContainer.appendChild(newToast);
+    setTimeout(function(){
+        newToast.classList.remove('fadeIn');
+        newToast.classList.add('fadeOut');
+        setTimeout(function(){
+            toastContainer.removeChild(newToast);
+        }, 400)
+    }, 2000);
+};
+
+
 // Updatind Session Screen Indicators
 function updateSessionIndicators(){
     let sessionTotal = 0;
@@ -271,6 +296,7 @@ submitReportButton.addEventListener('click', function(){
         })();
         // Setting field value back to default
         reportTextField.value = '';
+        createToastMessage('success', 'Report sent!')
         setTimeout(getReports, 1000);
     }
 });
@@ -478,6 +504,7 @@ saveNewSessionButton.addEventListener('click', function(){
         
         // Navigating back to sessions list and updating it
         showScreen('sessionsListScreen');
+        createToastMessage('success', 'New session created!')
         setTimeout(getSessions, 500);
     } else {
         window.alert('Date is not filled');
@@ -512,6 +539,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                 updateSessionCommentField.value = '';
                 // Navigating back to rounds list and updating it
                 showScreen('SessionScreen');
+                createToastMessage('success', 'Session updated!')
                 setTimeout(getRounds, 500);
                 // Changing indicators values
                 setTimeout(updateSessionIndicators, 1000);
@@ -564,6 +592,7 @@ deleteSessionButton.addEventListener('click', function(){
             confirmDeleteSessionModal.classList.remove("fadeIn");
             confirmDeleteSessionModal.classList.add("hidden");
             showScreen('sessionsListScreen');
+            createToastMessage('success', 'Session deleted!')
             setTimeout(getSessions, 500);
         };
     });
@@ -607,6 +636,7 @@ deleteRoundButton.addEventListener('click', function(){
                     confirmDeleteRoundModal.classList.remove("fadeIn");
                     confirmDeleteRoundModal.classList.add("hidden");
                     showScreen('SessionScreen');
+                    createToastMessage('success', 'Set deleted!')
                     setTimeout(getRounds, 500);
                     // Changing indicators values
                     setTimeout(updateSessionIndicators, 1000);
@@ -670,6 +700,7 @@ saveNewRoundButton.addEventListener('click', function(){
         
         // Navigating back to session screen and updating it
         showScreen('SessionScreen');
+        createToastMessage('success', 'New set created!')
         setTimeout(getRounds, 500);
         // Changing indicators values
         setTimeout(updateSessionIndicators, 1000);

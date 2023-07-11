@@ -1,5 +1,7 @@
 // Global Pool
 const allScreens = document.querySelectorAll('section');
+const toastContainer = document.querySelector('#toastContainer');
+let userPreferences;
 let currentSelectedSession;
 let currentSelectedRound;
 let sessionsSnapshot;
