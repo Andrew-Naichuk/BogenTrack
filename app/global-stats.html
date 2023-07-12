@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <meta name="title" content="BogenTrack App">
+        <meta name="description" content="Track and analyze your archery training scores with BogenTrack. Improve your accuracy and keep records of your shooting progress.">
+        <meta name="keywords" content="Archery training, Score tracking, Accuracy improvement, Archery progress, Training analytics, Score analysis, Archery performance, Training records, Score history, Tracking app, Target shooting, Archery statistics, Training insights, Competitive archery, Personal bests">
+    
+        <title>BogenTrack App</title>
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+        <link rel="manifest" href="../site.webmanifest">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="../style.css">
+    
+        <!-- Clarity Tracking -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "hugey3cl10");
+        </script>
+    
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    
+        <script src="../global-elements.js" defer></script>
+        <script src="./global-stats-elements.js" defer></script>
+        <script src="./global-stats.js" defer></script>
+    </head>
+
+    <body>
+
+        <section id="sessionsStatsScreen" class="visible">
+            <header>
+                <a href="./home.html"><button id="closeSessionsStatsBtn" type="button" class="secondary fix50">Back</button></a>
+                <h2>Global Stats</h2>
+                <button id="" type="button" class="secondary fix50 transparent"></button>
+            </header>
+            <div class="contentContainer">
+                <div class="width-100">
+                    <h5>Sessions average over time:</h5>
+                    <div id="sessionsChart" class="chart"></div>
+                </div>
+                <div class="width-100">
+                    <h5>Amount of shots by score:</h5>
+                    <div id="shotsChart" class="chart"></div>
+                </div>
+            </div>
+    
+        </section>
+
+    </body>
+
+</html>
