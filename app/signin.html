@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <meta name="title" content="Login to BogenTrack">
+        <meta name="description" content="Track and analyze your archery training scores with BogenTrack. Improve your accuracy and keep records of your shooting progress.">
+        <meta name="keywords" content="Archery training, Score tracking, Accuracy improvement, Archery progress, Training analytics, Score analysis, Archery performance, Training records, Score history, Tracking app, Target shooting, Archery statistics, Training insights, Competitive archery, Personal bests">
+    
+        <title>Login to BogenTrack App</title>
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+        <link rel="manifest" href="../site.webmanifest">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="../style.css">
+    
+        <!-- Clarity Tracking -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "hugey3cl10");
+        </script>
+    
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    
+        <script src="../global-elements.js" defer></script>
+        <script src="./signin-elements.js" defer></script>
+        <script src="./signin.js" defer></script>
+    </head>
+
+    <body>
+
+        <section id="entryScreen" data-identifier="login">
+            <img src="../bt-logo-full.png" alt="BogenTrack App Logo">
+            <!-- Log In Form -->
+            <form id="loginForm" class="visible">
+                <h2>Log In</h2>
+                <div class="inputElement">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" name="email" id="loginEmail" maxlength="100">
+                </div>
+                <div class="inputElement">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" name="password" id="loginPassword" maxlength="100">
+                </div>
+                <input type="button" id="mainLoginBtn" class="primary" value="Log In">
+                <h6 class="faded">or</h6>
+                <button id="googleLoginBtn" type="button" class="secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
+                    Continue with Google
+                </button>
+                <p class="faded centered-text">By proceeding with login you are accepting Bogentrack Terms and Conditions. <a href="../terms.html" target="_blank">Learn more here.</a></p>
+                <p class="faded">New to BogenTrack? Sign up now!</p>
+                <a href="./signup.html"><input type="button" id="toSignUpBtn" class="secondary" value="Create an Account"></a>
+            </form>
+        </section>
+
+    </body>
+
+</html>

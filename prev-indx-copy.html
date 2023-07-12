@@ -1,0 +1,105 @@
+    <!-- Create Session Screen -->
+    <section id="createSessionScreen" class="hidden" data-identifier="create-session">
+        <header>
+            <h2>Create Session</h2>
+        </header>
+        <div class="contentContainer">
+            <div class="inputElement">
+                <label for="newSessionDate">Session Date (required)</label>
+                <input type="date" name="newSessionDate" id="newSessionDate" autocomplete="on">
+            </div>
+            <div class="inputElement">
+                <label for="newSessionDistance">Shooting Distance</label>
+                <input type="number" name="newSessionDistance" id="newSessionDistance" placeholder="Distance to target in meters">
+            </div>
+            <div class="inputElement">
+                <label for="newSessionComment">Session Comment</label>
+                <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+            </div>
+        </div>
+        <footer>
+            <button id="saveNewSessionBtn" type="button" class="primary">Save</button>
+            <button id="cancelNewSessionBtn" type="button" class="secondary">Cancel</button>
+        </footer>
+    </section>
+
+    <!-- Update Session Screen -->
+    <section id="updateSessionScreen" class="hidden" data-identifier="update-session">
+        <header>
+            <h2>Edit Session</h2>
+            <button id="deleteSessionModalBtn" type="button" class="danger">Delete</button>
+        </header>
+        <div class="contentContainer">
+            <div class="inputElement">
+                <label for="updateSessionDate">Session Date (required)</label>
+                <input type="date" name="updateSessionDate" id="updateSessionDate">
+            </div>
+            <div class="inputElement">
+                <label for="updateSessionDistance">Shooting Distance</label>
+                <input type="number" name="updateSessionDistance" id="updateSessionDistance" placeholder="Distance to target in meters">
+            </div>
+            <div class="inputElement">
+                <label for="updateSessionComment">Session Comment</label>
+                <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+            </div>
+        </div>
+
+        <div class="confirmationModal hidden" id="confirmDeleteSessionModal">
+            <h3>Delete Session</h3>
+            <h5>Are you sure you want to delete the session? Currently this action can not be reverted.</h5>
+            <button id="deleteSessionBtn" type="button" class="danger">Delete</button>
+            <button id="cancelDeleteSessionBtn" type="button" class="secondary">Cancel</button>
+        </div>
+
+        <footer>
+            <button id="saveUpdatedSessionBtn" type="button" class="primary">Update</button>
+            <button id="cancelUpdatedSessionBtn" type="button" class="secondary">Cancel</button>
+        </footer>
+    </section>
+
+
+    <!-- Create Round Screen -->
+    <section id="createRoundScreen" class="hidden" data-identifier="create-round">
+        <header>
+            <h2>Create Set</h2>
+        </header>
+        <div class="contentContainer">
+            <div class="inputElement">
+                <label for="newRoundTime">Finish Time (required)</label>
+                <input type="time" name="newRoundTime" id="newRoundTime">
+            </div>
+            <div class="inputElement">
+                <label for="arrowsClicker">Shots Number</label>
+                <div class="arrowsClicker" id="arrowsClicker">
+                    <button id="removeArrowBtn" type="button" class="primary">-</button>
+                    <h5 id="arrowsCount">6</h5>
+                    <button id="addArrowBtn" type="button" class="primary">+</button>
+                </div>
+            </div>
+            <div class="arrowsScoreList" id="arrowsScoreList"></div>
+            <div class="inputElement">
+                <label for="newRoundComment">Set Comment</label>
+                <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+            </div>
+        </div>
+        <footer>
+            <button id="saveNewRoundBtn" type="button" class="primary">Save</button>
+            <button id="cancelNewRoundBtn" type="button" class="secondary">Cancel</button>
+        </footer>
+    </section>
+
+    <!-- Open Round Screen -->
+    <section id="RoundScreen" class="hidden">
+        <header>
+            <button id="backToSessionScreenBtn" type="button" class="secondary">Back</button>
+            <h2 id="RoundName">Round</h2>
+            <button id="deleteRoundModalBtn" type="button" class="danger">Delete</button>
+        </header>
+        <div class="contentContainer" id="arrowsListContainer"></div>
+        <div class="confirmationModal hidden" id="confirmDeleteRoundModal">
+            <h3>Delete Set</h3>
+            <h5>Are you sure you want to delete the round? Currently this action can not be reverted.</h5>
+            <button id="deleteRoundBtn" type="button" class="danger">Delete</button>
+            <button id="cancelDeleteRoundBtn" type="button" class="secondary">Cancel</button>
+        </div>
+    </section>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <meta name="title" content="BogenTrack App">
+        <meta name="description" content="Track and analyze your archery training scores with BogenTrack. Improve your accuracy and keep records of your shooting progress.">
+        <meta name="keywords" content="Archery training, Score tracking, Accuracy improvement, Archery progress, Training analytics, Score analysis, Archery performance, Training records, Score history, Tracking app, Target shooting, Archery statistics, Training insights, Competitive archery, Personal bests">
+    
+        <title>BogenTrack App</title>
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+        <link rel="manifest" href="../site.webmanifest">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+        <link rel="stylesheet" href="../style.css">
+    
+        <!-- Clarity Tracking -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "hugey3cl10");
+        </script>
+    
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    
+        <script src="../global-elements.js" defer></script>
+        <script src="./reports-elements.js" defer></script>
+        <script src="./reports.js" defer></script>
+    </head>
+
+    <body>
+
+        <!-- Global Toast Messages Container -->
+        <div class="toastContainer" id="toastContainer">
+        </div>
+
+        <section id="reportScreen" class="visible">
+            <header>
+                <h2>Send Report</h2>
+            </header>
+            <div class="contentContainer">
+                <div class="inputElement" id="reportsList"></div>
+                <div class="inputElement">
+                    <textarea name="reportText" id="reportText" rows="10" placeholder="Tell us about the issue or idea you have around BogenTrack!" maxlength="700"></textarea>
+                </div>
+            </div>
+            <footer>
+                <button id="submitReportBtn" type="button" class="primary">Send Report</button>
+                <a href="./profile.html"><button id="cancelReportBtn" type="button" class="secondary">Cancel</button></a>
+            </footer>
+        </section>
+
+    </body>
+
+</html>

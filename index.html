@@ -1,311 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="title" content="BogenTrack">
-    <meta name="description" content="Track and analyze your archery training scores with BogenTrack. Improve your accuracy and keep records of your shooting progress.">
-    <meta name="keywords" content="Archery training, Score tracking, Accuracy improvement, Archery progress, Training analytics, Score analysis, Archery performance, Training records, Score history, Tracking app, Target shooting, Archery statistics, Training insights, Competitive archery, Personal bests">
-    <meta name="robots" content="index, follow">
+        <meta name="title" content="BogenTrack">
+        <meta name="description" content="Track and analyze your archery training scores with BogenTrack. Improve your accuracy and keep records of your shooting progress.">
+        <meta name="keywords" content="Archery training, Score tracking, Accuracy improvement, Archery progress, Training analytics, Score analysis, Archery performance, Training records, Score history, Tracking app, Target shooting, Archery statistics, Training insights, Competitive archery, Personal bests">
+        <meta name="robots" content="index, follow">
 
-    <title>BogenTrack App</title>
+        <title>BogenTrack App</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+        <link rel="manifest" href="./site.webmanifest">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./style.css">
 
-    <!-- Hotjar Tracking -->
-    <script>
-    (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:3546402,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
+        <!-- Clarity Tracking -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "hugey3cl10");
+        </script>
 
-    <!-- Clarity Tracking -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "hugey3cl10");
-    </script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+        <script src="./global-elements.js" defer></script>
+        <script src="./index.js" defer></script>
+    </head>
 
-    <script src="./elements.js" defer></script>
-    <script src="./app.js" defer></script>
-</head>
-<body>
+    <body>
 
-    <!-- Global Toast Messages Container -->
-    <div class="toastContainer" id="toastContainer">
-    </div>
+    </body>
 
-    <!-- Initial App Screen -->
-    <section id="entryScreen" data-identifier="login">
-        <img src="./bt-logo-full.png" alt="BogenTrack App Logo">
-        <!-- Log In Form -->
-        <form id="loginForm" class="visible">
-            <h2>Log In</h2>
-            <div class="inputElement">
-                <label for="loginEmail">Email</label>
-                <input type="email" name="email" id="loginEmail" maxlength="100">
-            </div>
-            <div class="inputElement">
-                <label for="loginPassword">Password</label>
-                <input type="password" name="password" id="loginPassword" maxlength="100">
-            </div>
-            <input type="button" id="mainLoginBtn" class="primary" value="Log In">
-            <h6 class="faded">or</h6>
-            <button id="googleLoginBtn" type="button" class="secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
-                Continue with Google
-            </button>
-            <p class="faded centered-text">By proceeding with login you are accepting Bogentrack Terms and Conditions. <a href="./terms.html" target="_blank">Learn more here.</a></p>
-            <p class="faded">New to BogenTrack? Sign up now!</p>
-            <input type="button" id="toSignUpBtn" class="secondary" value="Create an Account">
-        </form>
-        
-        <!-- Sign Up Form -->
-        <form id="signupForm" class="hidden">
-            <h2>New Account</h2>
-            <div class="inputElement">
-                <label for="signupEmail">Your Email</label>
-                <input type="email" name="email" id="signupEmail" maxlength="100">
-            </div>
-            <div class="inputElement">
-                <label for="signupPassword">Create Password</label>
-                <input type="password" name="password" id="signupPassword" maxlength="100">
-                <h6 class="faded">Password should be min. 6 symbols long.</h6>
-            </div>
-            <p class="faded">By clicking on Create an Account you are accepting Bogentrack Terms and Conditions. <a href="./terms.html" target="_blank">Learn more here.</a></p>
-            <input type="button" id="mainSignupBtn" class="primary" value="Create an Account">
-            <p class="faded">Already have account? Log in!</p>
-            <input type="button" id="toLoginBtn" class="secondary" value="Log In">
-        </form>
-    </section>
-
-    <!-- Sessions List Screen -->
-    <section id="sessionsListScreen" class="hidden" data-identifier="home">
-        <header>
-            <button id="sessionsStatsBtn" type="button" class="secondary"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M9 17H7v-7h2v7m4 0h-2V7h2v10m4 0h-2v-4h2v4m2 2H5V5h14v14.1M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Z"/></svg> Stats</button>
-            <h2>Sessions</h2>
-            <button id="profileBtn" type="button" class="secondary"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2M7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.5.88 4.93 1.78A7.893 7.893 0 0 1 12 20c-1.86 0-3.57-.64-4.93-1.72m11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33A7.928 7.928 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.5-1.64 4.83M12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6m0 5a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 12 8a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 12 11Z"/></svg> Profile</button>
-        </header>
-        <div class="contentContainer" id="sessionsListContainer"></div>
-        <footer>
-            <button id="createSessionBtn" type="button" class="primary">Create Session</button>
-        </footer>
-    </section>
-
-    <!-- Create Session Screen -->
-    <section id="createSessionScreen" class="hidden" data-identifier="create-session">
-        <header>
-            <h2>Create Session</h2>
-        </header>
-        <div class="contentContainer">
-            <div class="inputElement">
-                <label for="newSessionDate">Session Date (required)</label>
-                <input type="date" name="newSessionDate" id="newSessionDate" autocomplete="on">
-            </div>
-            <div class="inputElement">
-                <label for="newSessionDistance">Shooting Distance</label>
-                <input type="number" name="newSessionDistance" id="newSessionDistance" placeholder="Distance to target in meters">
-            </div>
-            <div class="inputElement">
-                <label for="newSessionComment">Session Comment</label>
-                <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
-            </div>
-        </div>
-        <footer>
-            <button id="saveNewSessionBtn" type="button" class="primary">Save</button>
-            <button id="cancelNewSessionBtn" type="button" class="secondary">Cancel</button>
-        </footer>
-    </section>
-
-    <!-- Update Session Screen -->
-    <section id="updateSessionScreen" class="hidden" data-identifier="update-session">
-        <header>
-            <h2>Edit Session</h2>
-            <button id="deleteSessionModalBtn" type="button" class="danger">Delete</button>
-        </header>
-        <div class="contentContainer">
-            <div class="inputElement">
-                <label for="updateSessionDate">Session Date (required)</label>
-                <input type="date" name="updateSessionDate" id="updateSessionDate">
-            </div>
-            <div class="inputElement">
-                <label for="updateSessionDistance">Shooting Distance</label>
-                <input type="number" name="updateSessionDistance" id="updateSessionDistance" placeholder="Distance to target in meters">
-            </div>
-            <div class="inputElement">
-                <label for="updateSessionComment">Session Comment</label>
-                <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
-            </div>
-        </div>
-
-        <div class="confirmationModal hidden" id="confirmDeleteSessionModal">
-            <h3>Delete Session</h3>
-            <h5>Are you sure you want to delete the session? Currently this action can not be reverted.</h5>
-            <button id="deleteSessionBtn" type="button" class="danger">Delete</button>
-            <button id="cancelDeleteSessionBtn" type="button" class="secondary">Cancel</button>
-        </div>
-
-        <footer>
-            <button id="saveUpdatedSessionBtn" type="button" class="primary">Update</button>
-            <button id="cancelUpdatedSessionBtn" type="button" class="secondary">Cancel</button>
-        </footer>
-    </section>
-
-    <!-- Open Session Screen -->
-    <section id="SessionScreen" class="hidden" data-identifier="session">
-        <header>
-            <button id="backToSessionListBtn" type="button" class="secondary">Back</button>
-            <h2 id="SessionName">Session</h2>
-            <button id="editSessionBtn" type="button" class="secondary">Edit</button>
-        </header>
-        <main>
-            <div class="indicator">
-                <h2 id="sessionTotalPointsIndicator" class="accented">0</h2>
-                <h6 class="faded">Total Points</h6>
-            </div>
-            <div class="indicator">
-                <h2 id="sessionAverageShotIndicator" class="accented">0</h2>
-                <h6 class="faded">Average Result</h6>
-            </div>
-        </main>
-        <div class="contentContainer" id="roundsListContainer"></div>
-        <footer>
-            <button id="createRoundBtn" type="button" class="primary">Create Set</button>
-        </footer>
-    </section>
-
-
-    <!-- Create Round Screen -->
-    <section id="createRoundScreen" class="hidden" data-identifier="create-round">
-        <header>
-            <h2>Create Set</h2>
-        </header>
-        <div class="contentContainer">
-            <div class="inputElement">
-                <label for="newRoundTime">Finish Time (required)</label>
-                <input type="time" name="newRoundTime" id="newRoundTime">
-            </div>
-            <div class="inputElement">
-                <label for="arrowsClicker">Shots Number</label>
-                <div class="arrowsClicker" id="arrowsClicker">
-                    <button id="removeArrowBtn" type="button" class="primary">-</button>
-                    <h5 id="arrowsCount">6</h5>
-                    <button id="addArrowBtn" type="button" class="primary">+</button>
-                </div>
-            </div>
-            <div class="arrowsScoreList" id="arrowsScoreList"></div>
-            <div class="inputElement">
-                <label for="newRoundComment">Set Comment</label>
-                <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
-            </div>
-        </div>
-        <footer>
-            <button id="saveNewRoundBtn" type="button" class="primary">Save</button>
-            <button id="cancelNewRoundBtn" type="button" class="secondary">Cancel</button>
-        </footer>
-    </section>
-
-    <!-- Open Round Screen -->
-    <section id="RoundScreen" class="hidden">
-        <header>
-            <button id="backToSessionScreenBtn" type="button" class="secondary">Back</button>
-            <h2 id="RoundName">Round</h2>
-            <button id="deleteRoundModalBtn" type="button" class="danger">Delete</button>
-        </header>
-        <div class="contentContainer" id="arrowsListContainer"></div>
-        <div class="confirmationModal hidden" id="confirmDeleteRoundModal">
-            <h3>Delete Set</h3>
-            <h5>Are you sure you want to delete the round? Currently this action can not be reverted.</h5>
-            <button id="deleteRoundBtn" type="button" class="danger">Delete</button>
-            <button id="cancelDeleteRoundBtn" type="button" class="secondary">Cancel</button>
-        </div>
-    </section>
-
-    <!-- Profile Screen -->
-    <section id="profileScreen" class="hidden" data-identifier="profile">
-        <header>
-            <button id="backHomeBtn" type="button" class="secondary fix98">Back</button>
-            <h2>Profile</h2>
-            <button id="signOutBtn" type="button" class="secondary fix98">Log Out</button>
-        </header>
-        <div class="contentContainer">
-            <div class="inputElement">
-                <p>Logged in as:</p>
-                <h5 id="currentUserEmail">user@gbogentrack.app</h5>
-            </div>
-            <div class="inputElement">
-                <p>Sessions created:</p>
-                <h5 id="currentNumberOfSessions"></h5>
-            </div>
-        </div>
-        <footer>
-            <button id="reportIssueBtn" type="button" class="danger">Send Report</button>
-        </footer>
-    </section>
-
-
-    <!-- Sessions List Stats Screen -->
-    <section id="sessionsStatsScreen" class="hidden">
-        <header>
-            <button id="closeSessionsStatsBtn" type="button" class="secondary fix50">Back</button>
-            <h2>Global Stats</h2>
-            <button id="" type="button" class="secondary fix50 transparent"></button>
-        </header>
-        <div class="contentContainer">
-            <div class="width-100">
-                <h5>Sessions average over time:</h5>
-                <div id="sessionsChart" class="chart"></div>
-            </div>
-            <div class="width-100">
-                <h5>Amount of shots by score:</h5>
-                <div id="shotsChart" class="chart"></div>
-            </div>
-        </div>
-
-    </section>
-
-
-    <!-- Report Screen -->
-    <section id="reportScreen" class="hidden">
-        <header>
-            <h2>Send Report</h2>
-        </header>
-        <div class="contentContainer">
-            <div class="inputElement" id="reportsList"></div>
-            <div class="inputElement">
-                <textarea name="reportText" id="reportText" rows="10" placeholder="Tell us about the issue or idea you have around BogenTrack!" maxlength="700"></textarea>
-            </div>
-        </div>
-        <footer>
-            <button id="submitReportBtn" type="button" class="primary">Send Report</button>
-            <button id="cancelReportBtn" type="button" class="secondary">Cancel</button>
-        </footer>
-    </section>
-
-</body>
 </html>
