@@ -39,8 +39,8 @@
         <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
     
         <script src="../global-elements.js" defer></script>
-        <script src="./home-elements.js" defer></script>
-        <script src="./home.js" defer></script>
+        <script src="./update-session-elements.js" defer></script>
+        <script src="./update-session.js" defer></script>
     </head>
 
     <body>
@@ -49,16 +49,37 @@
         <div class="toastContainer" id="toastContainer">
         </div>
 
-        <!-- Sessions List -->
-        <section id="sessionsListScreen" class="visible" data-identifier="home">
+        <!-- Update Session -->
+        <section id="updateSessionScreen" class="visible" data-identifier="update-session">
             <header>
-                <a href="./global-stats.html"><button id="sessionsStatsBtn" type="button" class="secondary"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M9 17H7v-7h2v7m4 0h-2V7h2v10m4 0h-2v-4h2v4m2 2H5V5h14v14.1M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Z"/></svg> Stats</button></a>
-                <h2>Sessions</h2>
-                <a href="./profile.html"><button id="profileBtn" type="button" class="secondary"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2M7.07 18.28c.43-.9 3.05-1.78 4.93-1.78s4.5.88 4.93 1.78A7.893 7.893 0 0 1 12 20c-1.86 0-3.57-.64-4.93-1.72m11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36 2.33A7.928 7.928 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 1.82-.62 3.5-1.64 4.83M12 6c-1.94 0-3.5 1.56-3.5 3.5S10.06 13 12 13s3.5-1.56 3.5-3.5S13.94 6 12 6m0 5a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 12 8a1.5 1.5 0 0 1 1.5 1.5A1.5 1.5 0 0 1 12 11Z"/></svg> Profile</button></a>
+                <h2>Edit Session</h2>
+                <button id="deleteSessionModalBtn" type="button" class="danger">Delete</button>
             </header>
-            <div class="contentContainer" id="sessionsListContainer"></div>
+            <div class="contentContainer">
+                <div class="inputElement">
+                    <label for="updateSessionDate">Session Date (required)</label>
+                    <input type="date" name="updateSessionDate" id="updateSessionDate">
+                </div>
+                <div class="inputElement">
+                    <label for="updateSessionDistance">Shooting Distance</label>
+                    <input type="number" name="updateSessionDistance" id="updateSessionDistance" placeholder="Distance to target in meters">
+                </div>
+                <div class="inputElement">
+                    <label for="updateSessionComment">Session Comment</label>
+                    <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+                </div>
+            </div>
+
+            <div class="confirmationModal hidden" id="confirmDeleteSessionModal">
+                <h3>Delete Session</h3>
+                <h5>Are you sure you want to delete the session? Currently this action can not be reverted.</h5>
+                <button id="deleteSessionBtn" type="button" class="danger">Delete</button>
+                <button id="cancelDeleteSessionBtn" type="button" class="secondary">Cancel</button>
+            </div>
+
             <footer>
-                <a href="./create-session.html"><button id="createSessionBtn" type="button" class="primary">Create Session</button></a>
+                <button id="saveUpdatedSessionBtn" type="button" class="primary">Update</button>
+                <button id="cancelUpdatedSessionBtn" type="button" class="secondary">Cancel</button>
             </footer>
         </section>
 

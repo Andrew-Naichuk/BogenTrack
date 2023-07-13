@@ -25,6 +25,19 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
+// Edit Session Switching
+editSessionButton.addEventListener('click', function(){
+    let redirectLocation = loadedLocation + '/app/update-session.html?' + window.location.search.replace('?','');
+    window.location.href = redirectLocation;
+});
+
+
+// Add New Round Switching
+createRoundButton.addEventListener('click', function(){
+    let redirectLocation = loadedLocation + '/app/create-set.html?' + window.location.search.replace('?','');
+    window.location.href = redirectLocation;
+});
+
 
 // Updatind Session Screen Indicators
 function updateSessionIndicators(){
@@ -32,7 +45,7 @@ function updateSessionIndicators(){
     let sessionAverage = 0;
     let numberOfRounds;
 
-    const sessionRounds = SessionScreen.querySelectorAll('article');
+    const sessionRounds = document.querySelectorAll('article');
     numberOfRounds = sessionRounds.length;
     sessionRounds.forEach(sessionRound => {
         let total = sessionRound.getAttribute("data-total");
@@ -187,11 +200,9 @@ async function getRounds(){
                                     clickedElement = clickedElement.parentElement;
                                 }
                                 if (clickedElement === container) {
-                                    currentSelectedRound = container.id;
+                                    let redirectLocation = loadedLocation + '/app/set.html?' + `${container.id}`;
+                                    window.location.href = redirectLocation;
                                 }
-                                roundNameIndicator.innerText = round.time;
-                                showScreen('RoundScreen');
-                                getArrows();
                             });
 
                             roundsListContainer.appendChild(renderedRound);

@@ -31,11 +31,6 @@ const firebaseConfig = {
 };
 
 
-
-
-
-
-
 // Global functions
 
 // Getting Sessions Snapshot From Database
@@ -54,6 +49,7 @@ async function getSessionsSnapshot(){
     }
 };
 
+
 // Generating UUIDs
 function generateUID() {
     // Get the current timestamp in milliseconds
@@ -68,6 +64,7 @@ function generateUID() {
     // Return the generated UID
     return uid;
 };
+
 
 // Generating toast message
 function createToastMessage (type, message) {
@@ -91,4 +88,45 @@ function createToastMessage (type, message) {
             toastContainer.removeChild(newToast);
         }, 400)
     }, 2000);
+};
+
+
+// Generating current date
+function getCurrentDate(){
+    const date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+
+    let dayString = day.toString();
+    let monthString = month.toString();
+
+    if (dayString.length < 2) {
+        day = '0' + dayString;
+    };
+    if ( monthString.length < 2) {
+        month = '0' + monthString;
+    };
+    let year = date.getFullYear();
+    let currentDate = `${year}-${month}-${day}`;
+    return currentDate;
+};
+
+
+// Generating current time
+function getCurrentTime(){
+    const time = new Date();
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+
+    let hoursString = hours.toString();
+    let minutesString = minutes.toString();
+
+    if (hoursString.length < 2) {
+        hoursString = '0' + hoursString;
+    };
+    if (minutesString.length < 2) {
+        minutesString = '0' + minutesString;
+    };
+    let currentTime = hoursString + ':' + minutesString;
+    return currentTime;
 };
