@@ -1,6 +1,8 @@
 # BogenTrack
-Mobile-oriented web app for archery trainings results tracking.
+Mobile-first web app for archery trainings results tracking and note keeping.
 Aimed, first of all, on casual archers, providing minimalistic and clean experience to the point.
+
+![App-Img](https://github.com/Andrew-Naichuk/BogenTrack/assets/90984131/9d210993-977a-4942-ac82-8d12e22c7811)
 
 ## **Key capabilities of initial release include:**
 - Signing up and logging in via email and password combination
