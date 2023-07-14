@@ -1,4 +1,5 @@
 // Page elements:
+const toastContainer = document.querySelector('#toastContainer');
 const signUpForm = document.querySelector('#signupForm');
 const signUpemailField = document.querySelector('#signupEmail');
 const signUppasswordField = document.querySelector('#signupPassword');

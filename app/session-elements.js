@@ -1,4 +1,5 @@
 // Page elements:
+const toastContainer = document.querySelector('#toastContainer');
 const sessionNameIndicator = document.querySelector('#SessionName');
 const createRoundButton = document.querySelector('#createRoundBtn');
 const roundsListContainer = document.querySelector('#roundsListContainer');

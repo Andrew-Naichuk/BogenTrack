@@ -19,7 +19,8 @@ logInButton.addEventListener('click', async function(){
     try {
         await firebase.auth().signInWithEmailAndPassword(logInEmailField.value, logInPasswordField.value);
     } catch (error) {
-        window.alert(error);
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 });
 
@@ -28,6 +29,7 @@ logInGoogleButton.addEventListener('click', async function(){
     try {
         await auth.signInWithPopup(providerGoogle);
     } catch (error) {
-        window.alert(error);
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 });

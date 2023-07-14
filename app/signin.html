@@ -11,10 +11,10 @@
     
         <title>Login to BogenTrack App</title>
     
-        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-        <link rel="manifest" href="../site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="../rsc/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../rsc/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../rsc/favicon-16x16.png">
+        <link rel="manifest" href="../rsc/site.webmanifest">
     
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,17 +36,19 @@
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
     
-        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
-    
         <script src="../global-elements.js" defer></script>
         <script src="./signin-elements.js" defer></script>
         <script src="./signin.js" defer></script>
     </head>
 
     <body>
+        
+        <!-- Global Toast Messages Container -->
+        <div class="toastContainer" id="toastContainer">
+        </div>
 
         <section id="entryScreen" data-identifier="login">
-            <img src="../bt-logo-full.png" alt="BogenTrack App Logo">
+            <img src="../rsc/bt-logo-full.png" alt="BogenTrack App Logo">
             <!-- Log In Form -->
             <form id="loginForm" class="visible">
                 <h2>Log In</h2>

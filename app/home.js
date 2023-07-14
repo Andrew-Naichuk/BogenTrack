@@ -16,6 +16,13 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 
+// Add new session button functionality
+createSessionButton.addEventListener('click', function(){
+    let redirectLocation = loadedLocation + '/app/create-session.html'
+    window.location.href = redirectLocation;
+});
+
+
 // Read and Render Sessions From Database
 async function getSessions(){
     // Reference to specific document in the database
@@ -129,6 +136,7 @@ async function getSessions(){
             sessionsListContainer.appendChild(noSessionsNotice);
         }
     } catch (error) {
-        window.alert(error);
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 };

@@ -19,6 +19,7 @@ signUpButton.addEventListener('click', async function(){
         // Attempting to sign up using new account email and password inputs values
         await firebase.auth().createUserWithEmailAndPassword(signUpemailField.value, signUppasswordField.value)
     } catch (error) {
-        window.alert(error);
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 });

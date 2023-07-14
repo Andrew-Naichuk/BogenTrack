@@ -110,6 +110,7 @@ async function getReports(){
             reportsList.appendChild(reportsNotice);
         }
     } catch (error) {
-        window.alert(error)
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 };

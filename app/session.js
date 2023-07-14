@@ -213,6 +213,7 @@ async function getRounds(){
             });
         }
     } catch (error) {
-        window.alert(error);
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 };

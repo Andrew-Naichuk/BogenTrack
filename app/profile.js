@@ -31,6 +31,7 @@ signOutButton.addEventListener('click', async function(){
         // Attempting to sign out using auth method
         firebase.auth().signOut();
     } catch (error) {
-        window.alert(error);
+        createToastMessage('fail', error.message);
+        console.log(error.message);
     }
 });

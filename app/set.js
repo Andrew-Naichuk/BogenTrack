@@ -130,7 +130,8 @@ deleteRoundButton.addEventListener('click', function(){
                             sessions: sessionsSnapshot,
                         });
                     } catch (error) {
-                        window.alert(error);
+                        createToastMessage('fail', error.message);
+                        console.log(error.message);
                     }
                 })();
                 // Navigating back and updating it

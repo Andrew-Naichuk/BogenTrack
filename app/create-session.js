@@ -68,7 +68,8 @@ saveNewSessionButton.addEventListener('click', function(){
                         sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
                     });
                 } catch (error) {
-                    window.alert(error);
+                    createToastMessage('fail', error.message);
+                    console.log(error.message);
                 }
             } else {
                 try {
@@ -77,7 +78,8 @@ saveNewSessionButton.addEventListener('click', function(){
                         sessions: firebase.firestore.FieldValue.arrayUnion(newSession),
                     });
                 } catch (error) {
-                    window.alert(error);
+                    createToastMessage('fail', error.message);
+                    console.log(error.message);
                 }
             }
         })();
