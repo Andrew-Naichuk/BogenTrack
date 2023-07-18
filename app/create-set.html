@@ -55,19 +55,34 @@
                 <button id="" type="button" class="secondary fix50 transparent"></button>
             </header>
             <div class="contentContainer">
+
+                <div class="inputElement">
+                    <h4 class="centered-text">Scores:</h4>
+                    <div class="scoresRow" id="roundScoresList"></div>
+                </div>
+
+                <div class="inputElement">
+                    <div class="scoreKeyboard" id="roundScoreKeyboard">
+                        <button id="M" class="keyboardKey white">M</button>
+                        <button id="1" class="keyboardKey white">1</button>
+                        <button id="2" class="keyboardKey white">2</button>
+                        <button id="3" class="keyboardKey black">3</button>
+                        <button id="4" class="keyboardKey black">4</button>
+                        <button id="5" class="keyboardKey blue">5</button>
+                        <button id="6" class="keyboardKey blue">6</button>
+                        <button id="7" class="keyboardKey red">7</button>
+                        <button id="8" class="keyboardKey red">8</button>
+                        <button id="9" class="keyboardKey gold">9</button>
+                        <button id="10" class="keyboardKey gold">10</button>
+                        <button id="X" class="keyboardKey gold">X</button>
+                    </div>
+                </div>
+
                 <div class="inputElement">
                     <label for="newRoundTime">Finish Time (required)</label>
                     <input type="time" name="newRoundTime" id="newRoundTime">
                 </div>
-                <div class="inputElement">
-                    <label for="arrowsClicker">Shots Number</label>
-                    <div class="arrowsClicker" id="arrowsClicker">
-                        <button id="removeArrowBtn" type="button" class="primary">-</button>
-                        <h5 id="arrowsCount">6</h5>
-                        <button id="addArrowBtn" type="button" class="primary">+</button>
-                    </div>
-                </div>
-                <div class="arrowsScoreList" id="arrowsScoreList"></div>
+
                 <div class="inputElement">
                     <label for="newRoundComment">Set Comment</label>
                     <textarea name="newRoundComment" id="newRoundComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>

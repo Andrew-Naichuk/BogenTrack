@@ -306,15 +306,21 @@ hr {
     padding: 0px 12px;
     gap: 8px;
 }
-.arrowsClicker{
-    background-color: var(--secondary-bg-color);
-    border-radius: var(--radius-default);
-}
-.arrowsScoreList {
+.scoresRow {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 0;
+    min-height: 68px;
+}
+.scoreKeyboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 }
 .chart {
     width: 100%;
@@ -362,6 +368,14 @@ button.danger {
     background-color: var(--main-bg-color);
     color: var(--danger-color);
 }
+button.keyboardKey {
+    min-height: 40px;
+    border-radius: var(--radius-min);
+    background-color: var(--glass-bg-color);
+    border: 1px solid var(--borders-glass-color);
+}
+
+
 input[type="button"]:hover, button:hover {
     cursor: pointer;
     background-color: var(--button-hover-color);
@@ -375,6 +389,10 @@ header>input[type="button"].secondary:hover, header>button.secondary:hover {
 }
 button.danger:hover {
     background-color: var(--danger-color);
+    color: var(--main-bg-color);
+}
+button.keyboardKey:hover {
+    background-color: var(--button-hover-color);
     color: var(--main-bg-color);
 }
 footer>button {

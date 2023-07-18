@@ -9,11 +9,11 @@ const analytics = firebase.analytics();
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         createRoundTimeField.value = getCurrentTime();
-        renderArrowSelectors();
+        checkScoreList();
     } else {
-        let redirectLocation = loadedLocation + '/app/signin.html'
+        let redirectLocation = loadedLocation + '/app/signin.html';
         window.location.replace(redirectLocation);
-    }
+    };
 });
 
 
@@ -27,66 +27,54 @@ cancelNewRoundButton.addEventListener('click', function(){
 });
 
 
-// Arrows Number Clicker Functionality
-function renderArrowSelectors(){
-    // Clear the arrowsScoreList
-    arrowsScoreList.innerHTML = '';
-
-    // Get the number of arrows from the arrowsCounter
-    arrowsNumber = Number(arrowsCounter.innerText);
-
-    // Initialize arrowId to 1
-    let arrowId = 1;
-
-    // Loop to create arrow score selectors based on the arrowsNumber
-    for (let i = 0; i < arrowsNumber; i++) {
-        // Create a new arrowScoreSelector element
-        const arrowScoreSelector = document.createElement("div");
-        // Set the id of the arrowScoreSelector
-        arrowScoreSelector.id = 'arrowSelector' + arrowId;
-        // Set the innerHTML of the arrowScoreSelector
-        arrowScoreSelector.innerHTML = `
-            <h5>Shot ${arrowId} Score</h5>
-            <input type="range" id="arrowScore${arrowId}" name="arrowScore${arrowId}" min="0" max="11" value="6" step="1" list="values">
-            <datalist id="values">
-                <option value="0" label="M"></option>
-                <option value="1" label="1"></option>
-                <option value="2" label="2"></option>
-                <option value="3" label="3"></option>
-                <option value="4" label="4"></option>
-                <option value="5" label="5"></option>
-                <option value="6" label="6"></option>
-                <option value="7" label="7"></option>
-                <option value="8" label="8"></option>
-                <option value="9" label="9"></option>
-                <option value="10" label="10"></option>
-                <option value="11" label="X"></option>
-            </datalist>
-        `;
-        // Append the arrowScoreSelector to the arrowsScoreList
-        arrowsScoreList.appendChild(arrowScoreSelector);
-        // Increment the arrowId by 1
-        arrowId = arrowId + 1;
-    }
-    // Decrease the arrowsNumber by 1
-    arrowsNumber = arrowsNumber - 1;
+// Empty score list handling
+function checkScoreList(){
+    // Checking for scores in the container
+    if (roundScoresList.innerHTML === ''){
+        // Creating notice for empty container
+        const scoreNotice = document.createElement('h6');
+        scoreNotice.id = 'scoreNotice';
+        scoreNotice.classList.add('centered-text');
+        scoreNotice.classList.add('faded');
+        scoreNotice.innerText = 'Add arrows scores by clicking respective buttons below';
+        roundScoresList.appendChild(scoreNotice);
+    } else {
+        // Removing notice from filled container
+        const notice = roundScoresList.querySelector('#scoreNotice');
+        if (notice){
+            roundScoresList.removeChild(notice);
+        };
+    };
 };
 
-removeArrowButton.addEventListener('click', function(){
-    if (Number(arrowsCounter.innerText) > 1) {
-        arrowsCounter.innerText = Number(arrowsCounter.innerText) - 1;
-        arrowsNumber = arrowsCounter.innerText;
-        renderArrowSelectors()
-    };
-});
 
-addArrowButton.addEventListener('click', function(){
-    if (Number(arrowsCounter.innerText) < 10) {
-        arrowsCounter.innerText = Number(arrowsCounter.innerText) + 1;
-        arrowsNumber = arrowsCounter.innerText;
-        renderArrowSelectors()
-    };
-
+// Add arrow score keyboard functionality
+const keyboardButtons = roundScoreKeyboard.querySelectorAll('button');
+keyboardButtons.forEach(button => {
+    button.addEventListener('click', function(){
+        // Adding score by button click
+        const newScore = document.createElement('h5');
+        newScore.classList.add('fix50');
+        newScore.classList.add('centered-text');
+        newScore.innerText = button.id;
+        roundScoresList.appendChild(newScore);
+        // Highlighting delete option while hovering score
+        newScore.addEventListener('mouseenter', function(){
+            newScore.innerText = '⨉';
+            newScore.classList.add('red');
+        });
+        newScore.addEventListener('mouseleave', function(){
+            newScore.innerText = button.id;
+            newScore.classList.remove('red');
+        });
+        // Delete score from list by click
+        newScore.addEventListener('click', function(){
+            roundScoresList.removeChild(newScore);
+            checkScoreList();
+        });
+        // Checking for notice status
+        checkScoreList();
+    });
 });
 
 
@@ -95,61 +83,69 @@ saveNewRoundButton.addEventListener('click', function(){
     if (createRoundTimeField.value.length === 5) {
         // Collecting arrows scores
         let arrowsScores = [];
-        let arrowsScoreInputs = arrowsScoreList.querySelectorAll('input');
+        let arrowsScoreInputs = roundScoresList.querySelectorAll('h5');
         arrowsScoreInputs.forEach(input => {
-            if (input.value === "11") {
-                arrowsScores.push("10");
-            } else {
-                arrowsScores.push(input.value);
+            if (input.innerText === 'M'){
+                arrowsScores.push('0')
+            }
+            if (input.innerText === 'X'){
+                arrowsScores.push('10')
+            }
+            if (input.innerText != 'M' && input.innerText != 'X'){
+                arrowsScores.push(input.innerText)
             }
         });
-    
-        // Creating model round object
-        const newRound = {
-            "uid": generateUID(),
-            "time": createRoundTimeField.value,
-            "comment": createRoundCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
-            "arrows": arrowsScores,
-            "status": 'live',
-        };
 
-        // Asynchronous function for database operations
-        (async function(){
-            try {
-                // Making a snapshot of all sessions of current user
-                const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
-                const doc = await docRef.get();
-                if (doc.exists) {
-                    sessionsSnapshot = doc.data().sessions;
-                    // Updating currently selected session in snapshot with new round
-                    sessionsSnapshot.forEach(session => {
-                        if (session.uid === window.location.search.replace('?','')) {
-                            session.rounds.push(newRound);
-                        }
+        // Checking for some scores entered
+        if (arrowsScores.length > 0) {
+            // Creating model round object
+            const newRound = {
+                "uid": generateUID(),
+                "time": createRoundTimeField.value,
+                "comment": createRoundCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
+                "arrows": arrowsScores,
+                "status": 'live',
+            };
+
+            // Asynchronous function for database operations
+            (async function(){
+                try {
+                    // Making a snapshot of all sessions of current user
+                    const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+                    const doc = await docRef.get();
+                    if (doc.exists) {
+                        sessionsSnapshot = doc.data().sessions;
+                        // Updating currently selected session in snapshot with new round
+                        sessionsSnapshot.forEach(session => {
+                            if (session.uid === window.location.search.replace('?','')) {
+                                session.rounds.push(newRound);
+                            }
+                        });
+                    }
+                    // Pushing updated snapshot with new round to the DB
+                    await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                        sessions: sessionsSnapshot,
                     });
+                } catch (error) {
+                    createToastMessage('fail', error.message);
+                    console.log(error.message);
                 }
-                // Pushing updated snapshot with new round to the DB
-                await db.collection("btUsers").doc(auth.currentUser.uid).update({
-                    sessions: sessionsSnapshot,
-                });
-            } catch (error) {
-                createToastMessage('fail', error.message);
-                console.log(error.message);
-            }
-        })();
+            })();
 
-        // Setting fields values back to default
-        createRoundTimeField.value = '';
-        createRoundCommentField.value = '';
-        
-        // Navigating back and updating it
-        createToastMessage('success', 'New set created!')
-        setTimeout(function(){
-            let redirectLocation = loadedLocation + '/app/session.html?' + window.location.search.replace('?','');
-            window.location.replace(redirectLocation);
-        }, 1000);
-
+            // Setting fields values back to default
+            createRoundTimeField.value = '';
+            createRoundCommentField.value = '';
+            
+            // Navigating back and updating it
+            createToastMessage('success', 'New set created!')
+            setTimeout(function(){
+                let redirectLocation = loadedLocation + '/app/session.html?' + window.location.search.replace('?','');
+                window.location.replace(redirectLocation);
+            }, 1000);
+        } else {
+            createToastMessage('fail', 'No scores were added');
+        };
     } else {
-        window.alert('Time is not filled');
+        createToastMessage('fail', 'Time is not filled');
     };
 });
