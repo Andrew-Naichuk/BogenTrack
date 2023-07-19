@@ -24,22 +24,22 @@
     --red-arrow: #de1212;
     --gold-arrow: #e8d311;
 
-    --shadow-min: rgba(0, 0, 0, 0.05) 0px 2px 20px;
-    --shadow-default: rgba(0, 0, 0, 0.07) 0px 5px 30px;
-    --shadow-button: rgba(0, 0, 0, 0.1) 0px 0px 25px;
+    --shadow-min: rgba(0, 0, 0, 0.05) 0rem 0.2rem 2rem;
+    --shadow-default: rgba(0, 0, 0, 0.07) 0rem 0.5rem 3rem;
+    --shadow-button: rgba(0, 0, 0, 0.1) 0rem 0rem 2.5rem;
 
-    --radius-min: 4px;
-    --radius-default: 8px;
-    --radius-max: 999px;
+    --radius-min: 0.4rem;
+    --radius-default: 0.8rem;
+    --radius-max: 999rem;
 }
 
 
 
-
+/* Font size initial set made 62.5% to ensure 1rem=10px for ease of use */
 /* DEFAULTS RESET */
 html {
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 62.5%;
 }
 body {
     display: flex;
@@ -65,30 +65,31 @@ ol, ul {
 
 /* TYPOGRAPHY */
 h1 {
-    font-size: 28px;
+    font-size: 2.8rem;
     font-weight: 600;
 }
 h2 {
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 600;
 }
 h3 {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 600;
 }
 h4 {
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 600;
 }
 h5 {
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 600;
 }
 h6 {
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
 }
 p {
+    font-size: 1.6rem;
     white-space: pre-line;
 }
 a {
@@ -102,9 +103,8 @@ a:hover {
 }
 .articleRow>h5 {
     display: flex;
-    gap: 6px;
+    gap: 0.6rem;
 }
-
 
 
 
@@ -114,10 +114,10 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 28px;
+    gap: 2.8rem;
     min-height: 100vh;
     width: 100%;
-    max-width: 600px;
+    max-width: 60rem;
 }
 header, .arrowsClicker {
     display: flex;
@@ -126,23 +126,23 @@ header, .arrowsClicker {
     align-items: center;
 }
 header {
-    padding: 12px 20px;
+    padding: 1.2rem 2rem;
     position: sticky;
-    top: 0px;
-    border: var(--borders-glass-color) solid 1px;
+    top: 0rem;
+    border: var(--borders-glass-color) solid 0.1rem;
     background-color: var(--glass-bg-color);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(1rem);
     box-shadow: var(--shadow-min);
     z-index: 999;
 }
 footer {
     position: fixed;
-    bottom: 10px;
+    bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 12px 0px;
+    gap: 0.8rem;
+    padding: 1.2rem 0rem;
     width: 100%;
     z-index: 10;
 }
@@ -152,9 +152,9 @@ form {
     align-items: center;
     width: 100%;
     height: fit-content;
-    max-width: 340px;
-    padding: 20px;
-    gap: 18px;
+    max-width: 34rem;
+    padding: 2rem;
+    gap: 1.8rem;
     background-color: var(--main-bg-color);
     box-shadow: var(--shadow-default);
     border-radius: var(--radius-default);
@@ -162,9 +162,9 @@ form {
 article {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.6rem;
     width: 100%;
-    padding: 16px 16px;
+    padding: 1.6rem;
     background-color: var(--main-bg-color);
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-default);
@@ -177,43 +177,44 @@ article:hover {
 }
 main {
     position: sticky;
-    top: 74px;
+    top: 7.4rem;
     display: flex;
     justify-content: space-around;
-    padding: 0px 20px;
-    gap: 12px;
+    padding: 0rem 2rem;
+    gap: 1.2rem;
     width: 100%;
     z-index: 999;
 }
 input, textarea {
     width: 100%;
-    font-size: 16px;
-    padding: 8px 12px;
+    font-size: 1.6rem;
+    padding: 0.8rem 1.2rem;
 }
 input[type=checkbox]{
     width: fit-content;
-    min-width: 20px;
-    min-height: 20px;
+    min-width: 2rem;
+    min-height: 2rem;
 }
 label {
+    font-size: 1.6rem;
     width: 100%;
 }
 input, textarea {
-    border: var(--borders-color) 1px solid;
+    border: var(--borders-color) 0.1rem solid;
     border-radius: var(--radius-default);
 }
 textarea {
     max-width: 100%;
     min-width: 100%;
     max-height: 50vh;
-    min-height: 100px;
+    min-height: 10rem;
 }
 datalist {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding: 0px 12px;
+    padding: 0rem 1.2rem;
 }
 hr {
     width: 100%;
@@ -221,7 +222,7 @@ hr {
 }
 
 .web-section{
-    padding: 40px 20px;
+    padding: 4rem 2rem;
 }
 .articleRow {
     display: flex;
@@ -233,7 +234,7 @@ hr {
 .articleScores {
     display: flex;
     flex-direction: row;
-    gap: 16px;
+    gap: 1.6rem;
     align-items: center;
     justify-content: space-around;
     width: 100%;
@@ -241,7 +242,7 @@ hr {
 .inputElement {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.6rem;
     width: 100%;
 }
 .contentContainer {
@@ -250,17 +251,17 @@ hr {
     align-items: center;
     width: 100%;
     min-height: 90vh;
-    padding: 0px 20px;
-    padding-bottom: 110px;
-    gap: 12px;
+    padding: 0rem 2rem;
+    padding-bottom: 11rem;
+    gap: 1.2rem;
 }
 .screenNotice {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 32px;
-    gap: 12px;
+    padding: 3.2rem;
+    gap: 1.2rem;
     width: 100%;
     text-align: center;
 }
@@ -271,68 +272,67 @@ hr {
     z-index: 10;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    width: 340px;
-    gap: 16px;
+    padding: 2rem;
+    width: 34rem;
+    gap: 1.6rem;
     border-radius: var(--radius-default);
     background-color: var(--glass-bg-color);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(0.6rem);
     box-shadow: var(--shadow-default);
-    border: solid 1px var(--borders-color);
+    border: solid 0.1rem var(--borders-color);
 }
 .indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 12px;
-    border: var(--borders-glass-color) solid 1px;
+    padding: 1.2rem;
+    border: var(--borders-glass-color) solid 0.1rem;
     border-radius: var(--radius-default);
     background-color: var(--glass-bg-color);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(1rem);
     box-shadow: var(--shadow-min);
 }
 .sessionPageComment {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 12px;
-    gap: 8px;
+    padding: 1.2rem;
+    gap: 0.8rem;
 }
 .sessionPageDistance {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 0px 12px;
-    gap: 8px;
+    padding: 0rem 1.2rem;
+    gap: 0.8rem;
 }
 .scoresRow {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px 0;
-    min-height: 68px;
+    gap: 1.2rem;
+    padding: 1.2rem 0rem;
+    min-height: 6.8rem;
 }
 .scoreKeyboard {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
 }
 .chart {
     width: 100%;
-    min-height: 300px;
-    margin: -20px 0;
+    min-height: 30rem;
+    margin: -2rem 0;
 }
 .chartHeading {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
 }
-
 
 
 
@@ -341,12 +341,12 @@ input[type="button"], button {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 0.4rem;
     background-color: var(--main-bg-color);
-    padding: 8px 12px;
-    min-width: 36px;
-    max-width: 300px;
-    font-size: 16px;
+    padding: 0.8rem 1.2rem;
+    min-width: 3.6rem;
+    max-width: 30rem;
+    font-size: 1.6rem;
     font-weight: 600;
     border: none;
     box-shadow: none;
@@ -369,12 +369,13 @@ button.danger {
     color: var(--danger-color);
 }
 button.keyboardKey {
-    min-height: 40px;
+    min-height: 4rem;
     border-radius: var(--radius-min);
     background-color: var(--glass-bg-color);
-    border: 1px solid var(--borders-glass-color);
+    border: 0.1rem solid var(--borders-glass-color);
     box-shadow: var(--shadow-min);
 }
+
 
 
 input[type="button"]:hover, button:hover {
@@ -398,7 +399,7 @@ button.keyboardKey:hover {
 }
 footer>button {
     width: 100%;
-    padding: 10px;
+    padding: 1rem;
     box-shadow: var(--shadow-button);
 }
 button>svg>path {
@@ -411,7 +412,6 @@ button:hover>svg>path {
 header>button:hover>svg>path {
     fill: var(--button-hover-color);
 }
-
 
 
 
@@ -456,24 +456,24 @@ header>button:hover>svg>path {
 /* SERVICE CLASSES */
 .toastContainer {
     display: flex;
-    gap: 8px;
+    gap: 0.8rem;
     flex-direction: column;
     width: 90vw;
-    max-width: 600px;
-    min-height: 1px;
+    max-width: 60rem;
+    min-height: 0.1rem;
     position: fixed;
-    top: 80px;
+    top: 8rem;
     z-index: 9999;
 }
 .toastMessage {
     display: flex;
-    gap: 12px;
+    gap: 1.2rem;
     align-items: center;
     width: 100%;
-    padding: 16px;
-    border: var(--borders-glass-color) solid 1px;
+    padding: 1.6rem;
+    border: var(--borders-glass-color) solid 0.1rem;
     background-color: var(--glass-bg-color);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(1rem);
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-default);
 }
@@ -483,7 +483,6 @@ header>button:hover>svg>path {
 .fail {
     background-color: var(--red-glass-bg-color);
 }
-
 .hidden {
     display: none;
 }
@@ -502,26 +501,24 @@ header>button:hover>svg>path {
 .accented {
     color: var(--main-accent-color);
 }
-
 .width-100 {
     width: 100%;
 }
 .fullWidth {
     display: flex;
-    min-width: 60px;
+    min-width: 6rem;
     justify-content: center;
-    gap: 4px;
+    gap: 0.4rem;
 }
 .fix50 {
-    min-width: 50px;
+    min-width: 5rem;
 }
 .fix90 {
-    min-width: 100px;
+    min-width: 10rem;
 }
 .fix98 {
-    min-width: 98px;
+    min-width: 9.8rem;
 }
-
 .centered-text {
     text-align: center;
 }
