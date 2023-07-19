@@ -50,11 +50,17 @@ async function getArrows(){
     if (doc.exists) {
         sessionsSnapshot = doc.data().sessions;
         let list = doc.data().sessions;
+
+        let roundExists = false;
+
         // Going through all sessions in search of the currently selected one
         list.forEach(session => {
 
             session.rounds.forEach(round => {
                 if (round.uid === window.location.search.replace('?','')) {
+
+                    roundExists = true;
+
                     // Rendering round comment if any
                     if (round.comment.length > 0) {
                         const roundRenderedComment = document.createElement("div");
@@ -98,6 +104,13 @@ async function getArrows(){
                 };
             });
         });
+
+
+        // Check if needed round was found for redirect to 404 if not
+        if (roundExists === false) {
+            let redirectLocation = loadedLocation + '/404.html'
+            window.location.replace(redirectLocation);
+        };
     };
 };
 

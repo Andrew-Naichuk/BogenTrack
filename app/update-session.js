@@ -16,9 +16,15 @@ firebase.auth().onAuthStateChanged((user) => {
                 // Retrieve the document from the database
                 const doc = await docRef.get();
                 sessionsSnapshot = doc.data().sessions;
+
+                let sessionExists = false;
+
                 // Find currently selected session in DB and populate inputs with its data
                 sessionsSnapshot.forEach(session => {
                     if (session.uid === window.location.search.replace('?','')) {
+
+                        sessionExists = true;
+
                         updateSessionDateField.value = session.date;
                         if (session.distance) {
                             updateSessionDistanceField.value = session.distance;
@@ -28,6 +34,12 @@ firebase.auth().onAuthStateChanged((user) => {
                         updateSessionCommentField.value = session.comment;
                     }
                 });
+                
+                // Check if needed session was found for redirect to 404 if not
+                if (sessionExists === false) {
+                    let redirectLocation = loadedLocation + '/404.html';
+                    window.location.replace(redirectLocation);
+                };
             } catch (error) {
                 window.alert(error)
             }

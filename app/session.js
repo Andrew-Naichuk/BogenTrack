@@ -76,9 +76,13 @@ async function getRounds(){
             sessionsSnapshot = doc.data().sessions;
             let list = doc.data().sessions;
 
+            let sessionExists = false;
+
             // Going through all sessions in search of the currently selected one
             list.forEach(listItem => {
                 if (listItem.uid === window.location.search.replace('?','')) {
+
+                    sessionExists = true;
 
                     // Rendering session distance if any
                     if (listItem.distance && listItem.distance.length > 0) {
@@ -209,8 +213,14 @@ async function getRounds(){
                             
                         }
                     });
-                }
+                } 
             });
+
+            // Check if needed session was found for redirect to 404 if not
+            if (sessionExists === false) {
+                let redirectLocation = loadedLocation + '/404.html';
+                window.location.replace(redirectLocation);
+            };
         }
     } catch (error) {
         createToastMessage('fail', error.message);

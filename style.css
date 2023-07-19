@@ -525,3 +525,6 @@ header>button:hover>svg>path {
 .centered-text {
     text-align: center;
 }
+.centered-container {
+    justify-content: center;
+}
