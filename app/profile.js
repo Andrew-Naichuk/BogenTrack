@@ -35,3 +35,26 @@ signOutButton.addEventListener('click', async function(){
         console.log(error.message);
     }
 });
+
+// Download data functionality
+downloadDataButton.addEventListener('click', () => {
+    getSessionsSnapshot();
+    setTimeout(()=>{
+        // Convert the variable to a JSON string
+        const jsonString = JSON.stringify(sessionsSnapshot, null, 2);
+
+        // Create a Blob from the JSON string
+        const blob = new Blob([jsonString], { type: 'application/json' });
+
+        // Create a download link
+        const downloadLink = document.createElement('a');
+        downloadLink.download = 'data.json'; // Set the file name
+        downloadLink.href = URL.createObjectURL(blob);
+
+        // Trigger a click event on the download link
+        downloadLink.click();
+
+        // Clean up the URL object
+        URL.revokeObjectURL(downloadLink.href);
+    }, 700)
+});
