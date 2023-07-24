@@ -36,39 +36,32 @@
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
     
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    
         <script src="../global-elements.js" defer></script>
-        <script src="./session-elements.js" defer></script>
-        <script src="./session.js" defer></script>
+        <script src="./session-stats-elements.js" defer></script>
+        <script src="./session-stats.js" defer></script>
     </head>
 
     <body>
 
-        <!-- Global Toast Messages Container -->
-        <div class="toastContainer" id="toastContainer">
-        </div>
-
-        <!-- Session Content -->
-        <section id="SessionScreen" class="visible" data-identifier="session">
+        <section id="sessionStatsScreen" class="visible">
             <header>
-                <a href="./home.html"><button id="backToSessionListBtn" type="button" class="secondary">Back</button></a>
-                <h2 id="SessionName">Session</h2>
-                <button id="editSessionBtn" type="button" class="secondary">Edit</button>
+                <button id="closeSessionStatsBtn" type="button" class="secondary fix50">Back</button>
+                <h2>Session Stats</h2>
+                <button id="" type="button" class="secondary fix50 transparent"></button>
             </header>
-            <main>
-                <div class="indicator">
-                    <h2 id="sessionTotalPointsIndicator" class="accented">0</h2>
-                    <h6 class="faded">Total Points</h6>
+            <div class="contentContainer">
+                <div class="width-100">
+                    <h5>Rounds average over time:</h5>
+                    <div id="roundsChart" class="chart"></div>
                 </div>
-                <div class="indicator">
-                    <h2 id="sessionAverageShotIndicator" class="accented">0</h2>
-                    <h6 class="faded">Average Result</h6>
+                <div class="width-100">
+                    <h5>Amount of shots by score:</h5>
+                    <div id="shotsChart" class="chart"></div>
                 </div>
-            </main>
-            <button class="secondary width-100 shadow" id="sessionStatsButton"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M9 17H7v-7h2v7m4 0h-2V7h2v10m4 0h-2v-4h2v4m2 2H5V5h14v14.1M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Z"/></svg> Session Statistics</button>
-            <div class="contentContainer" id="roundsListContainer"></div>
-            <footer>
-                <button id="createRoundBtn" type="button" class="primary">Create Set</button>
-            </footer>
+            </div>
+    
         </section>
 
     </body>

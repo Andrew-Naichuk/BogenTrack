@@ -118,10 +118,11 @@ async function getSessions(){
                             window.location.href = redirectLocation;
                         }
                     });
-    
+                
                     sessionsListContainer.appendChild(renderedSession);
                     renderedSession.classList.remove('hidden');
                     renderedSession.classList.add('fadeIn');
+                
                 };
             });
         } else {

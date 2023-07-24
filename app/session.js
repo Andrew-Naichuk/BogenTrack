@@ -31,6 +31,12 @@ editSessionButton.addEventListener('click', function(){
     window.location.href = redirectLocation;
 });
 
+// Session Stats Page Navigation
+sessionStatsButton.addEventListener('click', function(){
+    let redirectLocation = loadedLocation + '/app/session-stats.html?' + window.location.search.replace('?','');
+    window.location.href = redirectLocation;
+});
+
 
 // Add New Round Switching
 createRoundButton.addEventListener('click', function(){
