@@ -516,6 +516,9 @@ header>button:hover>svg>path {
 .fix50 {
     min-width: 5rem;
 }
+.fix70 {
+    min-width: 7rem;
+}
 .fix90 {
     min-width: 10rem;
 }

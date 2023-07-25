@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged((user) => {
             userSessionsIndicator.innerText = liveSessionsNumber;
         }, 400);
     } else {
-        let redirectLocation = loadedLocation + '/app/signin.html'
+        let redirectLocation = loadedLocation + '/app/signin.html';
         window.location.replace(redirectLocation);
     }
 });
@@ -34,6 +34,13 @@ signOutButton.addEventListener('click', async function(){
         createToastMessage('fail', error.message);
         console.log(error.message);
     }
+});
+
+
+// Add new equipment config functionality
+createNewEquipmentConfigButton.addEventListener('click', () => {
+    let redirectLocation = loadedLocation + '/app/create-equip-config.html';
+    window.location.href = redirectLocation;
 });
 
 // Download data functionality
