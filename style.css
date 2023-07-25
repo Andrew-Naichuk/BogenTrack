@@ -507,6 +507,9 @@ header>button:hover>svg>path {
 .width-100 {
     width: 100%;
 }
+.increased-gap {
+    gap: 2rem;
+}
 .fullWidth {
     display: flex;
     min-width: 6rem;
