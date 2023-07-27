@@ -56,47 +56,78 @@
             </header>
             <div class="contentContainer increased-gap">
                 <div class="inputElement">
+                    <label for="newConfigName">Configuration Name (required)</label>
+                    <input type="text" name="newConfigName" id="newConfigName" placeholder="e.g. Hoyt barebow setup">
+                </div>
+
+                <hr>
+
+                <div class="inputElement">
                     <label for="newConfigRiser">Riser</label>
-                    <input type="text" name="newConfigRiser" id="newConfigRiser" placeholder="Bow riser brand">
+                    <input type="text" name="newConfigRiser" id="newConfigRiser" placeholder="Bow riser details">
                 </div>
 
                 <div class="inputElement">
                     <label for="newConfigLimbs">Limbs</label>
-                    <input type="text" name="newConfigLimbs" id="newConfigLimbs" placeholder="Bow limbs brand">
+                    <input type="text" name="newConfigLimbs" id="newConfigLimbs" placeholder="Bow limbs details">
                 </div>
 
                 <div class="inputElement">
                     <label for="newConfigString">String</label>
-                    <input type="text" name="newConfigString" id="newConfigString" placeholder="Bow string brand">
+                    <input type="text" name="newConfigString" id="newConfigString" placeholder="Bow string details">
                 </div>
 
                 <div class="inputElement">
-                    <label for="newConfigSize">Size</label>
+                    <label for="newConfigSize">Size (inch)</label>
                     <input type="number" name="newConfigSize" id="newConfigSize" placeholder="Bow size in inches">
                 </div>
 
                 <div class="inputElement">
-                    <label for="newConfigDraw">Draw weight</label>
+                    <label for="newConfigDraw">Draw Weight (lb)</label>
                     <input type="number" name="newConfigDraw" id="newConfigDraw" placeholder="Draw weight in pounds">
                 </div>
 
                 <div class="inputElement">
-                    <label for="newConfigBrace">Brace height</label>
+                    <label for="newConfigBrace">Brace Height (cm)</label>
                     <input type="number" name="newConfigBrace" id="newConfigBrace" placeholder="Brace height">
                 </div>
 
                 <div class="inputElement">
-                    <label for="newConfigTiller">Tiller</label>
+                    <label for="newConfigTiller">Tiller (mm)</label>
                     <input type="number" name="newConfigTiller" id="newConfigTiller" placeholder="Bow tiller">
                 </div>
 
                 <div class="inputElement">
-                    <label for="newConfigNocking">Nocking point height</label>
+                    <label for="newConfigNocking">Nocking Point Position (mm)</label>
                     <input type="number" name="newConfigNocking" id="newConfigNocking" placeholder="Nocking point height">
                 </div>
 
+                <hr>
+
                 <div class="inputElement">
-                    <label for="newConfigComment">Session Comment</label>
+                    <label for="newConfigArrowsName">Arrows</label>
+                    <input type="text" name="newConfigArrowsName" id="newConfigArrowsName" placeholder="Arrows name">
+                </div>
+
+                <div class="inputElement">
+                    <label for="newConfigArrowsSize">Arrows Length (inch)</label>
+                    <input type="number" name="newConfigArrowsSize" id="newConfigArrowsSize" placeholder="Arrows length in inches">
+                </div>
+
+                <div class="inputElement">
+                    <label for="newConfigArrowsSpine">Arrows Spine</label>
+                    <input type="number" name="newConfigArrowsSpine" id="newConfigArrowsSpine" placeholder="Arrows spine">
+                </div>
+
+                <div class="inputElement">
+                    <label for="newConfigArrowsDetails">Arrows Details</label>
+                    <textarea name="newConfigArrowsDetails" id="newConfigArrowsDetails" rows="3" placeholder="Put arrows additional details here..." maxlength="500"></textarea>
+                </div>
+
+                <hr>
+
+                <div class="inputElement">
+                    <label for="newConfigComment">Configuration Notes</label>
                     <textarea name="newConfigComment" id="newConfigComment" rows="5" placeholder="Put some additional comments here..." maxlength="500"></textarea>
                 </div>
 

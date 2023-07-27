@@ -19,6 +19,7 @@ firebase.auth().onAuthStateChanged((user) => {
             });
             userSessionsIndicator.innerText = liveSessionsNumber;
         }, 400);
+        getEquipmentConfigs();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html';
         window.location.replace(redirectLocation);
@@ -43,6 +44,7 @@ createNewEquipmentConfigButton.addEventListener('click', () => {
     window.location.href = redirectLocation;
 });
 
+
 // Download data functionality
 downloadDataButton.addEventListener('click', () => {
     getSessionsSnapshot();
@@ -65,3 +67,73 @@ downloadDataButton.addEventListener('click', () => {
         URL.revokeObjectURL(downloadLink.href);
     }, 700)
 });
+
+
+// Render equipment configs
+async function getEquipmentConfigs() {
+    // Reference to specific document in the database
+    const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+    equipmentConfigsList.innerHTML = '';
+    // Trying to fetch data from the document
+    try {
+        const doc = await docRef.get();
+        if (doc.exists) {
+            // Rendering configs cards
+            let list = doc.data().equipmentConfigs.reverse();
+            let liveConfigsNumber = 0;
+            list.forEach (item => {
+                if (item.status === 'live'){
+                    liveConfigsNumber = ++liveConfigsNumber
+                }
+            });
+            // Checking if any configs saved
+            if (liveConfigsNumber > 0) {
+                list.forEach (config => {
+                    if (config.status === 'live') {
+                        const renderedConfig = document.createElement("article");
+                        renderedConfig.id = config.uid;
+                        renderedConfig.classList.add('hidden');
+                        
+                        let configContents = '';
+                        if (config.riser) {
+                            configContents = configContents + `${config.riser}  `;
+                        }
+                        if (config.limbs) {
+                            configContents = configContents + `${config.limbs}  `;
+                        }
+                        if (config.string) {
+                            configContents = configContents + `${config.string}  `;
+                        }
+                        if (config.length) {
+                            configContents = configContents + `${config.length}" `;
+                        }
+                        if (config.draw) {
+                            configContents = configContents + `${config.draw}lb  `;
+                        }
+
+                        renderedConfig.innerHTML = `
+                            <h5>${config.name}</h5>
+                            <p class="fullWidth">${configContents}</p>
+                        `;
+
+                        equipmentConfigsList.appendChild(renderedConfig);
+                        renderedConfig.classList.remove('hidden');
+                        renderedConfig.classList.add('fadeIn');
+                    };
+                });
+
+            } else {
+                // Displaying a notice when there are no configs
+                const noConfigsNotice = document.createElement("div");
+                noConfigsNotice.className = 'screenNotice';
+                noConfigsNotice.innerHTML = `
+                    <h5>No Configs Yet</h5>
+                    <p>You can save your equipment details by adding your first config.</p>
+                `;
+                equipmentConfigsList.appendChild(noConfigsNotice);
+            }
+        }
+    } catch (error) {
+        createToastMessage('fail', error.message);
+    }
+}

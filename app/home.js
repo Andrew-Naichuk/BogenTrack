@@ -138,6 +138,5 @@ async function getSessions(){
         }
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
     }
 };

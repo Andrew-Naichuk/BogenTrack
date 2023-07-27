@@ -95,6 +95,6 @@ saveNewSessionButton.addEventListener('click', function(){
             window.location.replace(redirectLocation);
         }, 1000);
     } else {
-        window.alert('Date is not filled');
+        createToastMessage('fail', 'Date is not filled!')
     };
 });
