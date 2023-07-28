@@ -54,17 +54,35 @@
                 <h2 id="SessionName">Session</h2>
                 <button id="editSessionBtn" type="button" class="secondary fix70">Edit</button>
             </header>
-            <main>
+
+            <figure>
                 <div class="indicator">
-                    <h2 id="sessionTotalPointsIndicator" class="accented">0</h2>
+                    <h2 id="sessionTotalSetsIndicator" class="">0</h2>
+                    <h6 class="faded">Total Sets</h6>   
+                </div>
+                <div class="indicator">
+                    <h2 id="sessionTotalArrowsIndicator" class="">0</h2>
+                    <h6 class="faded">Total Arrows</h6>   
+                </div>
+            </figure>
+
+            <figure class="stickyIndicator">
+                <div class="indicator">
+                    <h2 id="sessionTotalPointsIndicator" class="">0</h2>
                     <h6 class="faded">Total Points</h6>
                 </div>
                 <div class="indicator">
-                    <h2 id="sessionAverageShotIndicator" class="accented">0</h2>
+                    <h2 id="sessionAverageShotIndicator" class="">0</h2>
                     <h6 class="faded">Average Result</h6>
                 </div>
-            </main>
+            </figure>
+
             <button class="secondary width-100 shadow" id="sessionStatsButton"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#1771A2" d="M9 17H7v-7h2v7m4 0h-2V7h2v10m4 0h-2v-4h2v4m2 2H5V5h14v14.1M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2Z"/></svg> Session Statistics</button>
+            
+            <figure>
+                <hr>
+            </figure>
+            
             <div class="contentContainer" id="roundsListContainer"></div>
             <footer>
                 <button id="createRoundBtn" type="button" class="primary">Create Set</button>

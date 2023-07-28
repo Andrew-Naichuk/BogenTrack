@@ -49,16 +49,22 @@ createRoundButton.addEventListener('click', function(){
 function updateSessionIndicators(){
     let sessionTotal = 0;
     let sessionAverage = 0;
-    let numberOfRounds;
+    let numberOfRounds = 0;
+    let numberOfArrows = 0;
 
     const sessionRounds = document.querySelectorAll('article');
     numberOfRounds = sessionRounds.length;
     sessionRounds.forEach(sessionRound => {
+        const arrowsContainer = sessionRound.querySelectorAll('#scoreNote');
+        numberOfArrows = numberOfArrows + arrowsContainer.length;
         let total = sessionRound.getAttribute("data-total");
         let average = sessionRound.getAttribute("data-average");
         sessionTotal = sessionTotal + Number(total);
         sessionAverage = sessionAverage + Number(average);
     });
+
+    sessionTotalSetsIndicator.innerText = numberOfRounds;
+    sessionTotalArrowsIndicator.innerText = numberOfArrows;
     sessionTotalPointsIndicator.innerText = sessionTotal;
     let averageResult = sessionAverage / numberOfRounds;
     if (averageResult) {
@@ -180,7 +186,7 @@ async function getRounds(){
                                 if (Number(arrow) === 9 || Number(arrow) === 10) {
                                     arrowColor = 'gold'
                                 }
-                                renderedArrowsResult = renderedArrowsResult + `<h5 class="${arrowColor}">` + arrow + '</h5>';
+                                renderedArrowsResult = renderedArrowsResult + `<h5 id="scoreNote" class="${arrowColor}">` + arrow + '</h5>';
                             });
 
                             // Creating and configuring the rendered round element

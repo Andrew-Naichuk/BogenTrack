@@ -51,7 +51,7 @@ body {
     box-sizing: inherit;
     font-family: 'Montserrat', sans-serif;
 }
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, figure {
     margin: 0;
     padding: 0;
     font-weight: normal;
@@ -175,15 +175,12 @@ article:hover {
     box-shadow: var(--shadow-button);
     transform: scale(1.02);
 }
-main {
-    position: sticky;
-    top: 7.4rem;
+figure {
     display: flex;
     justify-content: space-around;
     padding: 0rem 2rem;
     gap: 1.2rem;
     width: 100%;
-    z-index: 999;
 }
 input, textarea {
     width: 100%;
@@ -332,6 +329,11 @@ hr {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+}
+.stickyIndicator {
+    position: sticky;
+    top: 7.4rem;
+    z-index: 999;
 }
 
 
