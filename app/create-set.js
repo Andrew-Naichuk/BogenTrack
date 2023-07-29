@@ -38,6 +38,9 @@ function checkScoreList(){
         scoreNotice.classList.add('faded');
         scoreNotice.innerText = 'Add arrows scores by clicking respective buttons below';
         roundScoresList.appendChild(scoreNotice);
+        // Setting indicators to default
+        setTotalScoreIndicator.innerText = '0';
+        setAverageIndicator.innerText = '0';
     } else {
         // Removing notice from filled container
         const notice = roundScoresList.querySelector('#scoreNotice');
@@ -45,6 +48,40 @@ function checkScoreList(){
             roundScoresList.removeChild(notice);
         };
     };
+};
+
+
+// Function to update indicators
+function updateIndicators(usecase, element){
+    // updating indicators is involved in both adding and removing scores
+    // thus function takes usecase parameter to operate properly
+    // use 'add' or 'remove' usecase parameter on coresponding steps
+    // 'element' parameter is used to get clicked button (in current implementation - button)
+    if (usecase === 'add') {
+        if (element.id === 'X'){
+            setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) + 10;
+        };
+        if (element.id === 'M'){
+            setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) + 0;
+        };
+        if (element.id !== 'M' && element.id !== 'X'){
+            setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) + Number(element.id);
+        };
+    };
+
+    if (usecase === 'remove') {
+        if (element.id === 'X'){
+            setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) - 10;
+        };
+        if (element.id === 'M'){
+            setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) - 0;
+        };
+        if (element.id !== 'M' && element.id !== 'X'){
+            setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) - Number(element.id);
+        };
+    };
+    const averageResult = Number(setTotalScoreIndicator.innerText) / roundScoresList.querySelectorAll('h5').length;
+    setAverageIndicator.innerText = averageResult.toString().slice(0, 4);
 };
 
 
@@ -58,6 +95,7 @@ keyboardButtons.forEach(button => {
         newScore.classList.add('centered-text');
         newScore.innerText = button.id;
         roundScoresList.appendChild(newScore);
+        updateIndicators('add',button);
         // Highlighting delete option while hovering score
         newScore.addEventListener('mouseenter', function(){
             newScore.innerText = '⨉';
@@ -70,6 +108,7 @@ keyboardButtons.forEach(button => {
         // Delete score from list by click
         newScore.addEventListener('click', function(){
             roundScoresList.removeChild(newScore);
+            updateIndicators('remove',button);
             checkScoreList();
         });
         // Checking for notice status

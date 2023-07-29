@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 }
             });
             userSessionsIndicator.innerText = liveSessionsNumber;
-        }, 400);
+        }, 600);
         getEquipmentConfigs();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html';

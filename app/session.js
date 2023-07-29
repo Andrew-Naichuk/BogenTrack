@@ -17,8 +17,8 @@ firebase.auth().onAuthStateChanged((user) => {
             });
             getRounds();
             // Changing indicators values
-            setTimeout(updateSessionIndicators, 400);
-        }, 400);
+            setTimeout(updateSessionIndicators, 600);
+        }, 800);
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);

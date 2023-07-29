@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged((user) => {
         setTimeout(function(){
             updateSessionsChart();
             updateShotsChart();
-        }, 400);
+        }, 1000);
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);

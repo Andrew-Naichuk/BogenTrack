@@ -10,3 +10,6 @@ const createRoundCommentField = document.querySelector('#newRoundComment');
 
 const roundScoreKeyboard = document.querySelector('#roundScoreKeyboard');
 const roundScoresList = document.querySelector('#roundScoresList');
+
+const setTotalScoreIndicator = document.querySelector('#setTotalScoreIndicator');
+const setAverageIndicator = document.querySelector('#setAverageIndicator');
