@@ -8,22 +8,29 @@ const analytics = firebase.analytics();
 // Auth status observer
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        getSessionsSnapshot();
-        setTimeout(function(){
-            sessionsSnapshot.forEach(session => {
-                session.rounds.forEach(round => {
-                    if (round.uid === window.location.search.replace('?','')) {
-                        roundNameIndicator.innerText = round.time;
-                    };
-                });
-            });
-            getArrows();
-        }, 400);
+        updatePageOnAuth();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);
     }
 });
+
+
+// Page content handler
+async function updatePageOnAuth(){
+    showLoading();
+    await getSessionsSnapshot();
+    await getArrows();
+    isLoading = false;
+
+    sessionsSnapshot.forEach(session => {
+        session.rounds.forEach(round => {
+            if (round.uid === window.location.search.replace('?','')) {
+                roundNameIndicator.innerText = round.time;
+            };
+        });
+    });
+};
 
 
 // Back to session functionality

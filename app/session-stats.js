@@ -8,16 +8,23 @@ const analytics = firebase.analytics();
 // Auth status observer
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        getSessionsSnapshot();
-        setTimeout(function(){
-            updateRoundsChart();
-            updateShotsChart();
-        }, 1000);
+        updatePageOnAuth();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);
     }
 });
+
+
+// Page content handler
+async function updatePageOnAuth(){
+    showLoading();
+    await getSessionsSnapshot();
+    isLoading = false;
+
+    updateRoundsChart();
+    updateShotsChart();
+};
 
 
 // Back to session navigation

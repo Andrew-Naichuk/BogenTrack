@@ -479,6 +479,24 @@ header>button:hover>svg>path {
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-default);
 }
+.loadingScreen {
+    position: absolute;
+    top: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+    background-color: var(--glass-bg-color);
+    backdrop-filter: blur(0.3rem);
+}
+.loadingActive {
+    display: flex;
+    z-index: 9999;
+}
+
 .success {
     background-color: var(--green-glass-bg-color);
 }

@@ -8,23 +8,31 @@ const analytics = firebase.analytics();
 // Auth status observer
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        userEmailIndicator.innerText = auth.currentUser.email;
-        getSessionsSnapshot();
-        setTimeout(function(){
-            let liveSessionsNumber = 0;
-            sessionsSnapshot.forEach(session => {
-                if (!session.status || session.status === 'live') {
-                    liveSessionsNumber = ++liveSessionsNumber;
-                }
-            });
-            userSessionsIndicator.innerText = liveSessionsNumber;
-        }, 600);
-        getEquipmentConfigs();
+        updatePageOnAuth();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html';
         window.location.replace(redirectLocation);
     }
 });
+
+
+// Page content handler
+async function updatePageOnAuth(){
+    userEmailIndicator.innerText = auth.currentUser.email;
+    showLoading();
+    await getSessionsSnapshot();
+    await getEquipmentConfigs();
+    isLoading = false;
+
+    let liveSessionsNumber = 0;
+    sessionsSnapshot.forEach(session => {
+        if (!session.status || session.status === 'live') {
+            liveSessionsNumber = ++liveSessionsNumber;
+        }
+    });
+    userSessionsIndicator.innerText = liveSessionsNumber;
+};
+
 
 // Sign Out Functionality
 signOutButton.addEventListener('click', async function(){

@@ -8,12 +8,20 @@ const analytics = firebase.analytics();
 // Auth status observer
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        getSessions();
+        updatePageOnAuth();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);
     }
 });
+
+
+// Page content handler
+async function updatePageOnAuth(){
+    showLoading();
+    await getSessions();
+    isLoading = false;
+};
 
 
 // Add new session button functionality

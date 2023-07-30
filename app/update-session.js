@@ -8,47 +8,20 @@ const analytics = firebase.analytics();
 // Auth status observer
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        // Populating edit screen with data of currently selected section
-        (async function(){
-            try {
-                // Get reference to the user document in the btUsers collection
-                const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
-                // Retrieve the document from the database
-                const doc = await docRef.get();
-                sessionsSnapshot = doc.data().sessions;
-
-                let sessionExists = false;
-
-                // Find currently selected session in DB and populate inputs with its data
-                sessionsSnapshot.forEach(session => {
-                    if (session.uid === window.location.search.replace('?','')) {
-
-                        sessionExists = true;
-
-                        updateSessionDateField.value = session.date;
-                        if (session.distance) {
-                            updateSessionDistanceField.value = session.distance;
-                        } else {
-                            updateSessionDistanceField.value = '';
-                        };
-                        updateSessionCommentField.value = session.comment;
-                    }
-                });
-                
-                // Check if needed session was found for redirect to 404 if not
-                if (sessionExists === false) {
-                    let redirectLocation = loadedLocation + '/404.html';
-                    window.location.replace(redirectLocation);
-                };
-            } catch (error) {
-                window.alert(error)
-            }
-        })();
+        updatePageOnAuth();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);
     }
 });
+
+
+// Page content handler
+async function updatePageOnAuth(){
+    showLoading();
+    await getCurrentValues();
+    isLoading = false;
+};
 
 
 // Canceling updating session functionality
@@ -68,6 +41,44 @@ updateSessionDistanceField.addEventListener('input', function(){
         updateSessionDistanceField.value = 1;
     }
 });
+
+
+// Get current values of session functionality
+async function getCurrentValues(){
+    try {
+        // Get reference to the user document in the btUsers collection
+        const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+        // Retrieve the document from the database
+        const doc = await docRef.get();
+        sessionsSnapshot = doc.data().sessions;
+
+        let sessionExists = false;
+
+        // Find currently selected session in DB and populate inputs with its data
+        sessionsSnapshot.forEach(session => {
+            if (session.uid === window.location.search.replace('?','')) {
+
+                sessionExists = true;
+
+                updateSessionDateField.value = session.date;
+                if (session.distance) {
+                    updateSessionDistanceField.value = session.distance;
+                } else {
+                    updateSessionDistanceField.value = '';
+                };
+                updateSessionCommentField.value = session.comment;
+            }
+        });
+        
+        // Check if needed session was found for redirect to 404 if not
+        if (sessionExists === false) {
+            let redirectLocation = loadedLocation + '/404.html';
+            window.location.replace(redirectLocation);
+        };
+    } catch (error) {
+        window.alert(error)
+    }
+};
 
 
 // Update Session Functionality
