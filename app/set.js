@@ -168,7 +168,7 @@ deleteRoundButton.addEventListener('click', function(){
                         });
                     });
                     window.location.href = redirectLocation;
-                }, 1000);
+                }, 1500);
             };
         });
     });

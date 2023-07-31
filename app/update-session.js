@@ -138,7 +138,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                 setTimeout(function(){
                     let redirectLocation = loadedLocation + '/app/session.html?' + window.location.search.replace('?','');
                     window.location.replace(redirectLocation);
-                }, 1000);
+                }, 1500);
             } else {
                 window.alert('Date is not filled');
             };
@@ -189,7 +189,7 @@ deleteSessionButton.addEventListener('click', function(){
             setTimeout(function(){
                 let redirectLocation = loadedLocation + '/app/home.html';
                 window.location.replace(redirectLocation);
-            }, 1000);
+            }, 1500);
         };
     });
 });

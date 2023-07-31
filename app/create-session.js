@@ -139,9 +139,9 @@ saveNewSessionButton.addEventListener('click', function(){
         // Navigating back to sessions list and updating it
         createToastMessage('success', 'New session created!')
         setTimeout(function(){
-            let redirectLocation = loadedLocation + '/app/home.html';
+            let redirectLocation = loadedLocation + '/app/session.html?' + newSession.uid;
             window.location.replace(redirectLocation);
-        }, 1000);
+        }, 1500);
     } else {
         createToastMessage('fail', 'Date is not filled!')
     };

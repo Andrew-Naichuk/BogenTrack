@@ -180,7 +180,7 @@ saveNewRoundButton.addEventListener('click', function(){
             setTimeout(function(){
                 let redirectLocation = loadedLocation + '/app/session.html?' + window.location.search.replace('?','');
                 window.location.replace(redirectLocation);
-            }, 1000);
+            }, 1500);
         } else {
             createToastMessage('fail', 'No scores were added');
         };

@@ -56,7 +56,6 @@ createRoundButton.addEventListener('click', function(){
 // Updatind Session Screen Indicators
 function updateSessionIndicators(){
     let sessionTotal = 0;
-    let sessionAverage = 0;
     let numberOfRounds = 0;
     let numberOfArrows = 0;
 
@@ -66,15 +65,13 @@ function updateSessionIndicators(){
         const arrowsContainer = sessionRound.querySelectorAll('#scoreNote');
         numberOfArrows = numberOfArrows + arrowsContainer.length;
         let total = sessionRound.getAttribute("data-total");
-        let average = sessionRound.getAttribute("data-average");
         sessionTotal = sessionTotal + Number(total);
-        sessionAverage = sessionAverage + Number(average);
     });
 
     sessionTotalSetsIndicator.innerText = numberOfRounds;
     sessionTotalArrowsIndicator.innerText = numberOfArrows;
     sessionTotalPointsIndicator.innerText = sessionTotal;
-    let averageResult = sessionAverage / numberOfRounds;
+    let averageResult = sessionTotal / numberOfArrows;
     if (averageResult) {
         sessionAverageShotIndicator.innerText = averageResult.toString().slice(0, 4);
     } else {
