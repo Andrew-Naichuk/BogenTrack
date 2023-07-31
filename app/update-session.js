@@ -43,6 +43,28 @@ updateSessionDistanceField.addEventListener('input', function(){
 });
 
 
+// Goals fields validation functionality
+// It should not be allowed to set negative, zero or higher than 10 scores
+updateSessionTotalGoalField.addEventListener('input', function(){
+    if (updateSessionTotalGoalField.value) {
+        if (updateSessionTotalGoalField.value < 1) {
+            updateSessionTotalGoalField.value = 1;
+        };
+    };
+});
+updateSessionAverageGoalField.addEventListener('input', function(){
+    if (updateSessionAverageGoalField.value) {
+        if (updateSessionAverageGoalField.value < 1) {
+            updateSessionAverageGoalField.value = 1;
+        };
+        if (updateSessionAverageGoalField.value > 10) {
+            updateSessionAverageGoalField.value = 10;
+        };
+    };
+});
+
+
+
 // Get current values of session functionality
 async function getCurrentValues(){
     try {
@@ -59,14 +81,17 @@ async function getCurrentValues(){
             if (session.uid === window.location.search.replace('?','')) {
 
                 sessionExists = true;
+
                 // Updating date input
                 updateSessionDateField.value = session.date;
+
                 // Updating distance input
                 if (session.distance) {
                     updateSessionDistanceField.value = session.distance;
                 } else {
                     updateSessionDistanceField.value = '';
                 };
+
                 // Updating equipment selector
                 let configsExist = false;
                 try {
@@ -91,6 +116,15 @@ async function getCurrentValues(){
                         }
                     });
                 };
+
+                // Updating goals inputs
+                if (session.goalTotal) {
+                    updateSessionTotalGoalField.value = session.goalTotal;
+                };
+                if (session.goalAverage) {
+                    updateSessionAverageGoalField.value = session.goalAverage;
+                };
+
                 // Updating comment input
                 updateSessionCommentField.value = session.comment;
             }
@@ -117,6 +151,8 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                 session.date = updateSessionDateField.value;
                 session.distance = updateSessionDistanceField.value;
                 session.equipment = updateSessionConfigField.value;
+                session.goalTotal = updateSessionTotalGoalField.value;
+                session.goalAverage = updateSessionAverageGoalField.value;
                 session.comment = updateSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')');
     
                 // Asynchronous function for database operations

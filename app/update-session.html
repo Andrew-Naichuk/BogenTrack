@@ -54,24 +54,41 @@
                 <h2>Edit Session</h2>
                 <button id="deleteSessionModalBtn" type="button" class="danger fix50">Delete</button>
             </header>
-            <div class="contentContainer">
+            <div class="contentContainer increased-gap">
                 <div class="inputElement">
                     <label for="updateSessionDate">Session Date (required)</label>
                     <input type="date" name="updateSessionDate" id="updateSessionDate">
                 </div>
+
                 <div class="inputElement">
                     <label for="updateSessionDistance">Shooting Distance</label>
                     <input type="number" name="updateSessionDistance" id="updateSessionDistance" placeholder="Distance to target in meters">
                 </div>
+
                 <div class="inputElement">
-                    <label for="updateSessionConfig">Equipment configuration</label>
+                    <label for="updateSessionConfig">Equipment Configuration</label>
                     <select name="updateSessionConfig" id="updateSessionConfig">
                         <option value="none">None</option>
                     </select>
                 </div>
+
+                <hr>
+
+                <div class="inputElement">
+                    <label for="updateSessionTotalGoal">Goal on Total</label>
+                    <input type="number" name="updateSessionTotalGoal" id="updateSessionTotalGoal" placeholder="Total session points goal">
+                </div>
+
+                <div class="inputElement">
+                    <label for="updateSessionAverageGoal">Goal on Average</label>
+                    <input type="number" name="updateSessionAverageGoal" id="updateSessionAverageGoal" placeholder="Average session score goal">
+                </div>
+
+                <hr>
+
                 <div class="inputElement">
                     <label for="updateSessionComment">Session Comment</label>
-                    <textarea name="updateSessionComment" id="updateSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+                    <textarea name="updateSessionComment" id="updateSessionComment" rows="6" placeholder="Put some additional comments here..." maxlength="500"></textarea>
                 </div>
             </div>
 

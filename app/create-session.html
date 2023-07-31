@@ -54,24 +54,41 @@
                 <h2>Create Session</h2>
                 <button id="" type="button" class="secondary fix50 transparent"></button>
             </header>
-            <div class="contentContainer">
+            <div class="contentContainer increased-gap">
                 <div class="inputElement">
                     <label for="newSessionDate">Session Date (required)</label>
                     <input type="date" name="newSessionDate" id="newSessionDate">
                 </div>
+
                 <div class="inputElement">
                     <label for="newSessionDistance">Shooting Distance</label>
                     <input type="number" name="newSessionDistance" id="newSessionDistance" placeholder="Distance to target in meters">
                 </div>
+
                 <div class="inputElement">
-                    <label for="newSessionConfig">Equipment configuration</label>
+                    <label for="newSessionConfig">Equipment Configuration</label>
                     <select name="newSessionConfig" id="newSessionConfig">
                         <option value="none">None</option>
                     </select>
                 </div>
+
+                <hr>
+
+                <div class="inputElement">
+                    <label for="newSessionTotalGoal">Goal on Total</label>
+                    <input type="number" name="newSessionTotalGoal" id="newSessionTotalGoal" placeholder="Total session points goal">
+                </div>
+
+                <div class="inputElement">
+                    <label for="newSessionAverageGoal">Goal on Average</label>
+                    <input type="number" name="newSessionAverageGoal" id="newSessionAverageGoal" placeholder="Average session score goal">
+                </div>
+
+                <hr>
+
                 <div class="inputElement">
                     <label for="newSessionComment">Session Comment</label>
-                    <textarea name="newSessionComment" id="newSessionComment" rows="10" placeholder="Put some additional comments here..." maxlength="500"></textarea>
+                    <textarea name="newSessionComment" id="newSessionComment" rows="6" placeholder="Put some additional comments here..." maxlength="500"></textarea>
                 </div>
             </div>
             <footer>

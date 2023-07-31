@@ -37,6 +37,27 @@ createSessionDistanceField.addEventListener('input', function(){
 });
 
 
+// Goals fields validation functionality
+// It should not be allowed to set negative, zero or higher than 10 scores
+newSessionTotalGoalField.addEventListener('input', function(){
+    if (newSessionTotalGoalField.value) {
+        if (newSessionTotalGoalField.value < 1) {
+            newSessionTotalGoalField.value = 1;
+        };
+    };
+});
+newSessionAverageGoalField.addEventListener('input', function(){
+    if (newSessionAverageGoalField.value) {
+        if (newSessionAverageGoalField.value < 1) {
+            newSessionAverageGoalField.value = 1;
+        };
+        if (newSessionAverageGoalField.value > 10) {
+            newSessionAverageGoalField.value = 10;
+        };
+    };
+});
+
+
 // Populating equipment selector with options if any
 async function getEquipmentOptions() {
     // Reference to specific document in the database
@@ -97,6 +118,8 @@ saveNewSessionButton.addEventListener('click', function(){
             "date": createSessionDateField.value,
             "distance": createSessionDistanceField.value,
             "equipment": newSessionConfigField.value,
+            "goalTotal": newSessionTotalGoalField.value,
+            "goalAverage": newSessionAverageGoalField.value,
             "comment": createSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
             "rounds": [],
         };

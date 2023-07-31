@@ -6,6 +6,8 @@ const updateSessionDateField = document.querySelector('#updateSessionDate');
 const updateSessionDistanceField = document.querySelector('#updateSessionDistance');
 const updateSessionConfigField = document.querySelector('#updateSessionConfig');
 const updateSessionCommentField = document.querySelector('#updateSessionComment');
+const updateSessionTotalGoalField = document.querySelector('#updateSessionTotalGoal');
+const updateSessionAverageGoalField = document.querySelector('#updateSessionAverageGoal');
 
 const saveUpdatedSessionButton = document.querySelector('#saveUpdatedSessionBtn');
 const cancelUpdatedSessionButton = document.querySelector('#cancelUpdatedSessionBtn');
