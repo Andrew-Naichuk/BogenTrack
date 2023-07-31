@@ -110,9 +110,25 @@ async function getRounds(){
                         sessionRenderedDistance.classList.add('sessionPageDistance');
                         sessionRenderedDistance.classList.add('fadeIn');
                         sessionRenderedDistance.innerHTML = `
-                            <h4>Distance — ${listItem.distance} meters</h4>
+                            <h5>Distance — ${listItem.distance} meters</h5>
                         `
                         roundsListContainer.appendChild(sessionRenderedDistance);
+                    };
+
+                    // Rendering session equipment if any
+                    if (listItem.equipment && listItem.equipment !== 'none') {
+                        const sessionRenderedEquipment = document.createElement("div");
+                        sessionRenderedEquipment.classList.add('sessionPageDistance');
+                        sessionRenderedEquipment.classList.add('fadeIn');
+                        const equipmentList = doc.data().equipmentConfigs;
+                        equipmentList.forEach(equipment => {
+                            if (equipment.uid === listItem.equipment) {
+                                sessionRenderedEquipment.innerHTML = `
+                                <h5>Equipment — ${equipment.name}</h5>
+                            `
+                            };
+                        });
+                        roundsListContainer.appendChild(sessionRenderedEquipment);
                     };
 
                     // Rendering session comment if any
@@ -121,7 +137,7 @@ async function getRounds(){
                         sessionRenderedComment.classList.add('sessionPageComment');
                         sessionRenderedComment.classList.add('fadeIn');
                         sessionRenderedComment.innerHTML = `
-                            <h4>Session Notes:</h4>
+                            <h5>Session Notes:</h5>
                             <p>${listItem.comment}</p>
                         `;
                         roundsListContainer.appendChild(sessionRenderedComment);

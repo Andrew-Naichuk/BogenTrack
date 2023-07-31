@@ -135,7 +135,7 @@ async function getEquipmentConfigs() {
     
                             renderedConfig.innerHTML = `
                                 <h5>${config.name}</h5>
-                                <p class="faded">${configContents}</p>
+                                <p>${configContents}</p>
                             `;
     
                             equipmentConfigsList.appendChild(renderedConfig);

@@ -9,6 +9,7 @@ const analytics = firebase.analytics();
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         createSessionDateField.value = getCurrentDate();
+        getEquipmentOptions();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);
@@ -36,6 +37,52 @@ createSessionDistanceField.addEventListener('input', function(){
 });
 
 
+// Populating equipment selector with options if any
+async function getEquipmentOptions() {
+    // Reference to specific document in the database
+    const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+    // Trying to fetch data from the document
+    try {
+        const doc = await docRef.get();
+        if (doc.exists) {
+            // Rendering configs cards
+            let configsExist = false;
+            try {
+                const existingConfigs = doc.data().equipmentConfigs;
+                if (existingConfigs) {
+                    configsExist = true;
+                };
+            } catch (error) {
+                configsExist = false;
+            };
+
+            if (configsExist) {
+                let list = doc.data().equipmentConfigs;
+                let liveConfigsNumber = 0;
+                list.forEach (item => {
+                    if (item.status === 'live'){
+                        liveConfigsNumber = ++liveConfigsNumber
+                    }
+                });
+                // Checking if any configs saved
+                if (liveConfigsNumber > 0) {
+                    list.forEach (config => {
+                        if (config.status === 'live') {
+                            const renderedOption = document.createElement("option");
+                            renderedOption.value = config.uid;
+                            renderedOption.innerText = config.name;
+                            newSessionConfigField.appendChild(renderedOption);
+                        }
+                    })
+                }
+            }
+        }
+    } catch (error) {
+        
+    }
+};
+
+
 
 // Add New Session Functionality
 saveNewSessionButton.addEventListener('click', function(){
@@ -49,6 +96,7 @@ saveNewSessionButton.addEventListener('click', function(){
             "status": 'live',
             "date": createSessionDateField.value,
             "distance": createSessionDistanceField.value,
+            "equipment": newSessionConfigField.value,
             "comment": createSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
             "rounds": [],
         };

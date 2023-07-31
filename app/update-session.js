@@ -59,13 +59,39 @@ async function getCurrentValues(){
             if (session.uid === window.location.search.replace('?','')) {
 
                 sessionExists = true;
-
+                // Updating date input
                 updateSessionDateField.value = session.date;
+                // Updating distance input
                 if (session.distance) {
                     updateSessionDistanceField.value = session.distance;
                 } else {
                     updateSessionDistanceField.value = '';
                 };
+                // Updating equipment selector
+                let configsExist = false;
+                try {
+                    const equipmentList = doc.data().equipmentConfigs;
+                    if (equipmentList) {
+                        configsExist = true;
+                    };
+                } catch (error) {
+                    configsExist = false;
+                };
+                if (configsExist) {
+                    const equipmentList = doc.data().equipmentConfigs;
+                    equipmentList.forEach(equipment => {
+                        const renderedOption = document.createElement("option");
+                        renderedOption.value = equipment.uid;
+                        renderedOption.innerText = equipment.name;
+                        updateSessionConfigField.appendChild(renderedOption);
+                    });
+                    equipmentList.forEach(equipment => {
+                        if (equipment.uid === session.equipment) {
+                            updateSessionConfigField.value = equipment.uid;
+                        }
+                    });
+                };
+                // Updating comment input
                 updateSessionCommentField.value = session.comment;
             }
         });
@@ -90,6 +116,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                 session.status = 'live';
                 session.date = updateSessionDateField.value;
                 session.distance = updateSessionDistanceField.value;
+                session.equipment = updateSessionConfigField.value;
                 session.comment = updateSessionCommentField.value.replace(/</g, '(').replace(/>/g, ')');
     
                 // Asynchronous function for database operations

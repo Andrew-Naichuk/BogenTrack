@@ -182,10 +182,13 @@ figure {
     gap: 1.2rem;
     width: 100%;
 }
-input, textarea {
+input, textarea, select {
     width: 100%;
     font-size: 1.6rem;
     padding: 0.8rem 1.2rem;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance: none;
 }
 input[type=checkbox]{
     width: fit-content;
@@ -196,7 +199,7 @@ label {
     font-size: 1.6rem;
     width: 100%;
 }
-input, textarea {
+input, textarea, select {
     border: var(--borders-color) 0.1rem solid;
     border-radius: var(--radius-default);
 }
