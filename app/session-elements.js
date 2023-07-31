@@ -6,6 +6,9 @@ const roundsListContainer = document.querySelector('#roundsListContainer');
 const editSessionButton = document.querySelector('#editSessionBtn');
 const sessionStatsButton = document.querySelector('#sessionStatsButton');
 
+const totalGoalChartContainer = document.querySelector('#totalGoalChartContainer');
+const averageGoalChartContainer = document.querySelector('#averageGoalChartContainer');
+
 const sessionTotalSetsIndicator = document.querySelector('#sessionTotalSetsIndicator');
 const sessionTotalArrowsIndicator = document.querySelector('#sessionTotalArrowsIndicator');
 const sessionTotalPointsIndicator = document.querySelector('#sessionTotalPointsIndicator');

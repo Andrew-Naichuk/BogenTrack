@@ -333,6 +333,21 @@ hr {
     align-items: center;
     gap: 0.8rem;
 }
+.barChart {
+    display: flex;
+    width: 100%;
+    height: 2.2rem;
+    background-color: var(--borders-color);
+    backdrop-filter: blur(1rem);
+    box-shadow: var(--shadow-min);
+    border-radius: var(--radius-min);
+    overflow: hidden;
+}
+.barChartGraph {
+    display: flex;
+    width: 0%;
+    background-color: var(--main-accent-color);
+}
 .stickyIndicator {
     position: sticky;
     top: 7.4rem;
@@ -529,6 +544,9 @@ header>button:hover>svg>path {
 }
 .width-100 {
     width: 100%;
+}
+.added-gap {
+    gap: 1rem;
 }
 .increased-gap {
     gap: 2rem;
