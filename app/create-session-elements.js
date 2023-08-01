@@ -2,6 +2,7 @@
 const toastContainer = document.querySelector('#toastContainer');
 const createSessionScreen = document.querySelector('#createSessionScreen');
 
+const sessionCardColorPickers = document.querySelectorAll('.colorTile');
 const createSessionDateField = document.querySelector('#newSessionDate');
 const createSessionDistanceField = document.querySelector('#newSessionDistance');
 const createSessionCommentField = document.querySelector('#newSessionComment');
@@ -11,3 +12,6 @@ const newSessionAverageGoalField = document.querySelector('#newSessionAverageGoa
 
 const saveNewSessionButton = document.querySelector('#saveNewSessionBtn');
 const cancelNewSessionButton = document.querySelector('#cancelNewSessionBtn');
+
+// Page service variables:
+let sessionCardColor = 'white';

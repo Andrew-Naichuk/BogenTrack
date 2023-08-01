@@ -28,6 +28,18 @@ cancelNewSessionButton.addEventListener('click', function(){
 });
 
 
+// Color picker functionality
+sessionCardColorPickers.forEach(colorPicker => {
+    colorPicker.addEventListener('click', ()=>{
+        sessionCardColorPickers.forEach(otherPicker =>{
+            otherPicker.classList.remove('selected');
+        });
+        colorPicker.classList.add('selected');
+        sessionCardColor = colorPicker.id;
+    });
+});
+
+
 // Distance field validation functionality for create session
 // It should not be allowed to set negative or zero distance
 createSessionDistanceField.addEventListener('input', function(){
@@ -115,6 +127,7 @@ saveNewSessionButton.addEventListener('click', function(){
         const newSession = {
             "uid": generateUID(),
             "status": 'live',
+            "cardColor": sessionCardColor,
             "date": createSessionDateField.value,
             "distance": createSessionDistanceField.value,
             "equipment": newSessionConfigField.value,

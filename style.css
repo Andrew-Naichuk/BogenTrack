@@ -24,6 +24,13 @@
     --red-arrow: #de1212;
     --gold-arrow: #e8d311;
 
+    --tint-red: #FFEEEE;
+    --tint-yellow: #FFFEEE;
+    --tint-green: #F0FFEE;
+    --tint-cyan: #EEFFFF;
+    --tint-blue: #EEF1FF;
+    --tint-purple: #F9EEFF;
+
     --shadow-min: rgba(0, 0, 0, 0.05) 0rem 0.2rem 2rem;
     --shadow-default: rgba(0, 0, 0, 0.07) 0rem 0.5rem 3rem;
     --shadow-button: rgba(0, 0, 0, 0.1) 0rem 0rem 2.5rem;
@@ -336,7 +343,7 @@ hr {
 .barChart {
     display: flex;
     width: 100%;
-    height: 2.2rem;
+    height: 2.8rem;
     background-color: var(--borders-color);
     backdrop-filter: blur(1rem);
     box-shadow: var(--shadow-min);
@@ -346,12 +353,27 @@ hr {
 .barChartGraph {
     display: flex;
     width: 0%;
-    background-color: var(--main-accent-color);
+    background-color: var(--button-hover-color);
 }
 .stickyIndicator {
     position: sticky;
     top: 7.4rem;
     z-index: 999;
+}
+.colorPicker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.8rem;
+}
+.colorTile {
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-max);
+    border: var(--borders-glass-color) 0.1rem solid;
+    transition: 0.3s;
+    box-shadow: none;
 }
 
 
@@ -451,6 +473,9 @@ header>button:hover>svg>path {
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
+.animated {
+    transition: 3s ease-in-out;
+}
 
 
 
@@ -533,8 +558,36 @@ header>button:hover>svg>path {
 .faded {
     opacity: 0.5;
 }
+
+
 .highlighted {
     background: var(--highlight-bg-color);
+}
+.bg-white {
+    background-color: var(--main-bg-color);
+}
+.bg-red {
+    background-color: var(--tint-red);
+}
+.bg-yellow {
+    background-color: var(--tint-yellow);
+}
+.bg-green {
+    background-color: var(--tint-green);
+}
+.bg-cyan {
+    background-color: var(--tint-cyan);
+}
+.bg-blue {
+    background-color: var(--tint-blue);
+}
+.bg-purple {
+    background-color: var(--tint-purple);
+}
+
+.selected {
+    border: var(--main-accent-color) 0.4rem solid;
+    box-shadow: var(--shadow-button);
 }
 .accented {
     color: var(--main-accent-color);

@@ -26,7 +26,7 @@ async function updatePageOnAuth(){
 
 // Add new session button functionality
 createSessionButton.addEventListener('click', function(){
-    let redirectLocation = loadedLocation + '/app/create-session.html'
+    let redirectLocation = loadedLocation + '/app/create-session.html';
     window.location.href = redirectLocation;
 });
 
@@ -66,19 +66,19 @@ async function getSessions(){
                     // Assigning color to the rendered item based on value
                     let averageColor;
                     if (averageResult < 3) {
-                        averageColor = 'white'
+                        averageColor = 'white';
                     }
                     if (averageResult >= 3) {
-                        averageColor = 'black'
+                        averageColor = 'black';
                     }
                     if (averageResult >= 5) {
-                        averageColor = 'blue'
+                        averageColor = 'blue';
                     }
                     if (averageResult >= 7) {
-                        averageColor = 'red'
+                        averageColor = 'red';
                     }
                     if (averageResult >= 9) {
-                        averageColor = 'gold'
+                        averageColor = 'gold';
                     }
                     let displayAverage = averageResult.toString().slice(0, 3);
     
@@ -86,6 +86,12 @@ async function getSessions(){
                     const renderedSession = document.createElement("article");
                     renderedSession.id = listItem.uid;
                     renderedSession.classList.add('hidden');
+
+                    // Checking if session has card color
+                    if (listItem.cardColor) {
+                        renderedSession.classList.add(`bg-${listItem.cardColor}`);
+                    };
+
                     // Checking if session has rounds to render it as new or filled
                     let sessionLiveRounds = 0;
                     listItem.rounds.forEach (round => {
@@ -104,15 +110,16 @@ async function getSessions(){
                         </div>
                     `;
                     } else {
-                        renderedSession.classList.add('highlighted')
-                        renderedSession.setAttribute("data-display-name", listItem.date)
+                        renderedSession.classList.remove('bg-white');
+                        renderedSession.classList.add('highlighted');
+                        renderedSession.setAttribute("data-display-name", listItem.date);
                         renderedSession.innerHTML = `
                         <div class="articleRow">
                             <h5>${listItem.date}</h5>
                             <h5 class="fix50">New</h5>
                         </div>
-                        `
-                    }
+                        `;
+                    };
     
                     // Making sessions clickable to open their details
                     renderedSession.addEventListener('click', function(){
@@ -143,7 +150,7 @@ async function getSessions(){
                 <p>Start tracking your results by adding your first training session.</p>
             `;
             sessionsListContainer.appendChild(noSessionsNotice);
-        }
+        };
     } catch (error) {
         createToastMessage('fail', error.message);
     }

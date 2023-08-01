@@ -34,6 +34,18 @@ cancelUpdatedSessionButton.addEventListener('click', function(){
 });
 
 
+// Color picker functionality
+sessionCardColorPickers.forEach(colorPicker => {
+    colorPicker.addEventListener('click', ()=>{
+        sessionCardColorPickers.forEach(otherPicker =>{
+            otherPicker.classList.remove('selected');
+        });
+        colorPicker.classList.add('selected');
+        sessionCardColor = colorPicker.id;
+    });
+});
+
+
 // Distance field validation functionality for update session
 // It should not be allowed to set negative or zero distance
 updateSessionDistanceField.addEventListener('input', function(){
@@ -81,6 +93,23 @@ async function getCurrentValues(){
             if (session.uid === window.location.search.replace('?','')) {
 
                 sessionExists = true;
+
+                // Updating card color picker
+                if (session.cardColor) {
+                    sessionCardColorPickers.forEach(colorPicker => {
+                        if (colorPicker.id === session.cardColor) {
+                            sessionCardColor = colorPicker.id;
+                            colorPicker.classList.add('selected');
+                        };
+                    });
+                } else {
+                    sessionCardColorPickers.forEach(colorPicker => {
+                        if (colorPicker.id === 'white') {
+                            sessionCardColor = colorPicker.id;
+                            colorPicker.classList.add('selected');
+                        };
+                    });
+                };
 
                 // Updating date input
                 updateSessionDateField.value = session.date;
@@ -148,6 +177,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
         if (session.uid === window.location.search.replace('?','')){
             if (updateSessionDateField.value.length === 10) {
                 session.status = 'live';
+                session.cardColor = sessionCardColor;
                 session.date = updateSessionDateField.value;
                 session.distance = updateSessionDistanceField.value;
                 session.equipment = updateSessionConfigField.value;

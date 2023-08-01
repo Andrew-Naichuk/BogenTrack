@@ -85,18 +85,24 @@ function updateSessionIndicators(){
             // Total score goal chart
             if (session.goalTotal) {
                 totalGoalChartContainer.classList.remove('hidden');
+                totalGoalChartContainer.querySelector('.barChartGraph').classList.add('animated');
                 const currentProgress = sessionTotal / (session.goalTotal / 100);
                 const currentProgressDisplay = currentProgress.toString().slice(0, 5);
-                totalGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
+                setTimeout(()=>{
+                    totalGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
+                }, 10);
                 totalGoalChartContainer.querySelector('h5').innerText = totalGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalTotal} (${currentProgressDisplay}%)`;
             };
 
             // Average score goal chart
             if (session.goalAverage) {
                 averageGoalChartContainer.classList.remove('hidden');
+                averageGoalChartContainer.querySelector('.barChartGraph').classList.add('animated');
                 const currentProgress = averageResult / (session.goalAverage / 100);
                 const currentProgressDisplay = currentProgress.toString().slice(0, 5);
-                averageGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
+                setTimeout(()=>{
+                    averageGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
+                }, 10);
                 averageGoalChartContainer.querySelector('h5').innerText = averageGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalAverage} (${currentProgressDisplay}%)`;
             };
         }
