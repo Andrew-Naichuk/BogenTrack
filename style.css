@@ -24,12 +24,12 @@
     --red-arrow: #de1212;
     --gold-arrow: #e8d311;
 
-    --tint-red: #FFEEEE;
-    --tint-yellow: #FFFEEE;
-    --tint-green: #F0FFEE;
-    --tint-cyan: #EEFFFF;
-    --tint-blue: #EEF1FF;
-    --tint-purple: #F9EEFF;
+    --tint-red: #FFD3D3;
+    --tint-yellow: #FBF7B7;
+    --tint-green: #D2F8C8;
+    --tint-cyan: #BCEDED;
+    --tint-blue: #C4CDF8;
+    --tint-purple: #E3BCFE;
 
     --shadow-min: rgba(0, 0, 0, 0.05) 0rem 0.2rem 2rem;
     --shadow-default: rgba(0, 0, 0, 0.07) 0rem 0.5rem 3rem;
@@ -598,12 +598,17 @@ header>button:hover>svg>path {
 .width-100 {
     width: 100%;
 }
+
+.reduced-gap {
+    gap: 0.4rem;
+}
 .added-gap {
     gap: 1rem;
 }
 .increased-gap {
     gap: 2rem;
 }
+
 .fullWidth {
     display: flex;
     min-width: 6rem;

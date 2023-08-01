@@ -137,6 +137,19 @@ async function getEquipmentConfigs() {
                                 <h5>${config.name}</h5>
                                 <p>${configContents}</p>
                             `;
+
+                            // Making setups clickable to open their details
+                            renderedConfig.addEventListener('click', function(){
+                                let container = renderedConfig;
+                                let clickedElement = event.target;
+                                while (clickedElement && clickedElement !== container && clickedElement !== document) {
+                                    clickedElement = clickedElement.parentElement;
+                                }
+                                if (clickedElement === container) {
+                                    let redirectLocation = loadedLocation + '/app/equip-config.html?' + `${container.id}`
+                                    window.location.href = redirectLocation;
+                                }
+                            });
     
                             equipmentConfigsList.appendChild(renderedConfig);
                             renderedConfig.classList.remove('hidden');
