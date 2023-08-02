@@ -25,12 +25,16 @@ async function updatePageOnAuth(){
     isLoading = false;
 
     let liveSessionsNumber = 0;
-    sessionsSnapshot.forEach(session => {
-        if (!session.status || session.status === 'live') {
-            liveSessionsNumber = ++liveSessionsNumber;
-        }
-    });
-    userSessionsIndicator.innerText = liveSessionsNumber;
+    try {
+        sessionsSnapshot.forEach(session => {
+            if (!session.status || session.status === 'live') {
+                liveSessionsNumber = ++liveSessionsNumber;
+            }
+        });
+        userSessionsIndicator.innerText = liveSessionsNumber;
+    } catch (error) {
+        userSessionsIndicator.innerText = liveSessionsNumber;
+    };
 };
 
 

@@ -59,25 +59,25 @@ function updateSessionIndicators(){
     let sessionTotal = 0;
     let numberOfRounds = 0;
     let numberOfArrows = 0;
+    let averageResult = 0;
 
     const sessionRounds = document.querySelectorAll('article');
     numberOfRounds = sessionRounds.length;
-    sessionRounds.forEach(sessionRound => {
-        const arrowsContainer = sessionRound.querySelectorAll('#scoreNote');
-        numberOfArrows = numberOfArrows + arrowsContainer.length;
-        let total = sessionRound.getAttribute("data-total");
-        sessionTotal = sessionTotal + Number(total);
-    });
+    if (numberOfRounds > 0) {
+        sessionRounds.forEach(sessionRound => {
+            const arrowsContainer = sessionRound.querySelectorAll('#scoreNote');
+            numberOfArrows = numberOfArrows + arrowsContainer.length;
+            let total = sessionRound.getAttribute("data-total");
+            sessionTotal = sessionTotal + Number(total);
+        });
+        averageResult = sessionTotal / numberOfArrows;
+    };
 
     sessionTotalSetsIndicator.innerText = numberOfRounds;
     sessionTotalArrowsIndicator.innerText = numberOfArrows;
     sessionTotalPointsIndicator.innerText = sessionTotal;
-    let averageResult = sessionTotal / numberOfArrows;
-    if (averageResult) {
-        sessionAverageShotIndicator.innerText = averageResult.toString().slice(0, 4);
-    } else {
-        sessionAverageShotIndicator.innerText = '0'
-    }
+    sessionAverageShotIndicator.innerText = averageResult.toString().slice(0, 4);
+
 
     // Updating goals gauges if any
     sessionsSnapshot.forEach(session => {
@@ -87,7 +87,12 @@ function updateSessionIndicators(){
                 totalGoalChartContainer.classList.remove('hidden');
                 totalGoalChartContainer.querySelector('.barChartGraph').classList.add('animated');
                 const currentProgress = sessionTotal / (session.goalTotal / 100);
-                const currentProgressDisplay = currentProgress.toString().slice(0, 5);
+                let currentProgressDisplay;
+                if (currentProgress < 100) {
+                    currentProgressDisplay = currentProgress.toString().slice(0, 5);
+                } else {
+                    currentProgressDisplay = '100';
+                };
                 setTimeout(()=>{
                     totalGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
                 }, 10);
@@ -99,7 +104,12 @@ function updateSessionIndicators(){
                 averageGoalChartContainer.classList.remove('hidden');
                 averageGoalChartContainer.querySelector('.barChartGraph').classList.add('animated');
                 const currentProgress = averageResult / (session.goalAverage / 100);
-                const currentProgressDisplay = currentProgress.toString().slice(0, 5);
+                let currentProgressDisplay;
+                if (currentProgress < 100) {
+                    currentProgressDisplay = currentProgress.toString().slice(0, 5);
+                } else {
+                    currentProgressDisplay = '100';
+                };
                 setTimeout(()=>{
                     averageGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
                 }, 10);

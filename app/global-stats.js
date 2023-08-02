@@ -31,6 +31,7 @@ function updateSessionsChart () {
     // Preparing arrays for chart visualization
     let sessionsNames = [];
     let sessionsScores = [];
+
     sessionsSnapshot.forEach (session => {
         // Filtering only live sessions with some scores
         if (session.status === 'live' && session.rounds.length > 0) {

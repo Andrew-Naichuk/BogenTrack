@@ -474,7 +474,7 @@ header>button:hover>svg>path {
     100% { opacity: 0; }
 }
 .animated {
-    transition: 3s ease-in-out;
+    transition: 2s ease-in-out;
 }
 
 
