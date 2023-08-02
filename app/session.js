@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged((user) => {
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html'
         window.location.replace(redirectLocation);
-    }
+    };
 });
 
 
@@ -27,7 +27,7 @@ async function updatePageOnAuth(){
     sessionsSnapshot.forEach(session => {
         if (session.uid === window.location.search.replace('?','')) {
             sessionNameIndicator.innerText = session.date;
-        }
+        };
     });
     updateSessionIndicators();
 };
@@ -61,8 +61,10 @@ function updateSessionIndicators(){
     let numberOfArrows = 0;
     let averageResult = 0;
 
+    // Getting pool of all represented rounds
     const sessionRounds = document.querySelectorAll('article');
     numberOfRounds = sessionRounds.length;
+    // Collecting values
     if (numberOfRounds > 0) {
         sessionRounds.forEach(sessionRound => {
             const arrowsContainer = sessionRound.querySelectorAll('#scoreNote');
@@ -73,6 +75,7 @@ function updateSessionIndicators(){
         averageResult = sessionTotal / numberOfArrows;
     };
 
+    // Updating text indicators
     sessionTotalSetsIndicator.innerText = numberOfRounds;
     sessionTotalArrowsIndicator.innerText = numberOfArrows;
     sessionTotalPointsIndicator.innerText = sessionTotal;
@@ -87,15 +90,18 @@ function updateSessionIndicators(){
                 totalGoalChartContainer.classList.remove('hidden');
                 totalGoalChartContainer.querySelector('.barChartGraph').classList.add('animated');
                 const currentProgress = sessionTotal / (session.goalTotal / 100);
+                // Handling friendly display value
                 let currentProgressDisplay;
                 if (currentProgress < 100) {
                     currentProgressDisplay = currentProgress.toString().slice(0, 5);
                 } else {
                     currentProgressDisplay = '100';
                 };
+                // Animating chart by passing new value
                 setTimeout(()=>{
                     totalGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
                 }, 10);
+                // Updating indicator text values
                 totalGoalChartContainer.querySelector('h5').innerText = totalGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalTotal} (${currentProgressDisplay}%)`;
             };
 
@@ -104,18 +110,21 @@ function updateSessionIndicators(){
                 averageGoalChartContainer.classList.remove('hidden');
                 averageGoalChartContainer.querySelector('.barChartGraph').classList.add('animated');
                 const currentProgress = averageResult / (session.goalAverage / 100);
+                // Handling friendly display value
                 let currentProgressDisplay;
                 if (currentProgress < 100) {
                     currentProgressDisplay = currentProgress.toString().slice(0, 5);
                 } else {
                     currentProgressDisplay = '100';
                 };
+                // Animating chart by passing new value
                 setTimeout(()=>{
                     averageGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
                 }, 10);
+                // Updating indicator text values
                 averageGoalChartContainer.querySelector('h5').innerText = averageGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalAverage} (${currentProgressDisplay}%)`;
             };
-        }
+        };
     });
 };
 
@@ -162,7 +171,7 @@ async function getRounds(){
                             if (equipment.uid === listItem.equipment) {
                                 sessionRenderedEquipment.innerHTML = `
                                 <h5>Equipment — ${equipment.name}</h5>
-                            `
+                            `;
                             };
                         });
                         roundsListContainer.appendChild(sessionRenderedEquipment);
@@ -186,7 +195,7 @@ async function getRounds(){
                     roundsList.forEach(round => {
                         if (!round.status || round.status === 'live') {
                             liveRoundsNumber = liveRoundsNumber + 1;
-                        }
+                        };
                     });
 
                     // Handling case when there are no rounds in the session
@@ -297,6 +306,5 @@ async function getRounds(){
         }
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
     }
 };

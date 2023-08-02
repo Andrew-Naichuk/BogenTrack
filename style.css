@@ -52,7 +52,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--main-bg-color);
+    background-image: linear-gradient(to top, #f1f6f951 0%, #f8fafb51 100%);
 }
 *, *:before, *:after {
     box-sizing: inherit;
@@ -104,6 +104,7 @@ a {
     text-decoration: none;
     color: var(--button-bg-color);
     transition: 0.3s;
+    user-select: none;
 }
 a:hover {
     color: var(--button-hover-color);
@@ -176,6 +177,7 @@ article {
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-default);
     transition: ease-in-out 0.2s;
+    user-select: none;
 }
 article:hover {
     cursor: pointer;
@@ -215,13 +217,6 @@ textarea {
     min-width: 100%;
     max-height: 50vh;
     min-height: 10rem;
-}
-datalist {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0rem 1.2rem;
 }
 hr {
     width: 100%;
@@ -299,6 +294,7 @@ hr {
     background-color: var(--glass-bg-color);
     backdrop-filter: blur(1rem);
     box-shadow: var(--shadow-min);
+    user-select: none;
 }
 .sessionPageComment {
     display: flex;
@@ -373,7 +369,9 @@ hr {
     border-radius: var(--radius-max);
     border: var(--borders-glass-color) 0.1rem solid;
     transition: 0.3s;
+    cursor: pointer;
     box-shadow: none;
+    user-select: none;
 }
 
 
@@ -394,6 +392,7 @@ input[type="button"], button {
     box-shadow: none;
     border-radius: var(--radius-max);
     transition: 0.3s;
+    user-select: none;
 }
 input[type="button"].primary, button.primary {
     background-color: var(--button-bg-color);
@@ -521,6 +520,7 @@ header>button:hover>svg>path {
     backdrop-filter: blur(1rem);
     box-shadow: var(--shadow-min);
     border-radius: var(--radius-default);
+    user-select: none;
 }
 .loadingScreen {
     position: absolute;
@@ -534,6 +534,7 @@ header>button:hover>svg>path {
     z-index: -999;
     background-color: var(--glass-bg-color);
     backdrop-filter: blur(0.3rem);
+    user-select: none;
 }
 .loadingActive {
     display: flex;
