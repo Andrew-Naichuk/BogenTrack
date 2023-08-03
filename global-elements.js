@@ -35,6 +35,7 @@ const firebaseConfig = {
 
 // Global functions
 
+
 // Showing loading state
 function showLoading(){
     let loadInterval;
