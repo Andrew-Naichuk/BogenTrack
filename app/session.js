@@ -100,9 +100,16 @@ function updateSessionIndicators(){
                 // Animating chart by passing new value
                 setTimeout(()=>{
                     totalGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
+                    if (currentProgress >= 100) {
+                        totalGoalChartContainer.querySelector('.barChartGraph').classList.add('achieved');
+                    };
                 }, 10);
                 // Updating indicator text values
-                totalGoalChartContainer.querySelector('h5').innerText = totalGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalTotal} (${currentProgressDisplay}%)`;
+                if (currentProgress < 100) {
+                    totalGoalChartContainer.querySelector('h5').innerText = totalGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalTotal} (${currentProgressDisplay}%)`;
+                } else {
+                    totalGoalChartContainer.querySelector('h5').innerText = totalGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalTotal} Achieved ✓`;
+                }
             };
 
             // Average score goal chart
@@ -120,9 +127,16 @@ function updateSessionIndicators(){
                 // Animating chart by passing new value
                 setTimeout(()=>{
                     averageGoalChartContainer.querySelector('.barChartGraph').style.width = `${currentProgress}%`;
+                    if (currentProgress >= 100) {
+                        averageGoalChartContainer.querySelector('.barChartGraph').classList.add('achieved');
+                    };
                 }, 10);
                 // Updating indicator text values
-                averageGoalChartContainer.querySelector('h5').innerText = averageGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalAverage} (${currentProgressDisplay}%)`;
+                if (currentProgress < 100) {
+                    averageGoalChartContainer.querySelector('h5').innerText = averageGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalAverage} (${currentProgressDisplay}%)`;
+                } else {
+                    averageGoalChartContainer.querySelector('h5').innerText = averageGoalChartContainer.querySelector('h5').innerText + ` — ${session.goalAverage} Achieved ✓`;
+                }
             };
         };
     });

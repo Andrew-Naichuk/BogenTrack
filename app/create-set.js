@@ -91,7 +91,7 @@ keyboardButtons.forEach(button => {
     button.addEventListener('click', function(){
         // Adding score by button click
         const newScore = document.createElement('h5');
-        newScore.classList.add('fix50');
+        newScore.classList.add('fix36');
         newScore.classList.add('centered-text');
         newScore.innerText = button.id;
         roundScoresList.appendChild(newScore);

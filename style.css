@@ -10,6 +10,7 @@
     
     --main-accent-color: #1489c9;
     --danger-color: #c80d0d;
+    --success-accent-color: #78eb84;
     --borders-color: #dddfe9;
     --borders-glass-color: #efeff5cf;
 
@@ -547,6 +548,9 @@ header>button:hover>svg>path {
 .fail {
     background-color: var(--red-glass-bg-color);
 }
+.achieved {
+    background-color: var(--success-accent-color);
+}
 .hidden {
     display: none;
 }
@@ -615,6 +619,9 @@ header>button:hover>svg>path {
     min-width: 6rem;
     justify-content: center;
     gap: 0.4rem;
+}
+.fix36 {
+    min-width: 3.6rem;
 }
 .fix50 {
     min-width: 5rem;
