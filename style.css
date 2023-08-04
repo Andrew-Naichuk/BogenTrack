@@ -7,6 +7,8 @@
     --red-glass-bg-color: #fdd0d0a0;
     --main-text-color: #202020;
     --secondary-text-color: #5a5a5a;
+
+    --blue-gradient: linear-gradient(206deg, #4195f5 0%, #315bf1 100%);
     
     --main-accent-color: #1489c9;
     --danger-color: #c80d0d;
@@ -14,7 +16,7 @@
     --borders-color: #dddfe9;
     --borders-glass-color: #efeff5cf;
 
-    --button-bg-color: #1771a2;
+    --button-bg-color: #315bf1;
     --button-hover-color: #1193d8;
     --button-text-color: #ffffff;
     --icon-default-color: #abaeb1;
@@ -350,7 +352,7 @@ hr {
 .barChartGraph {
     display: flex;
     width: 0%;
-    background-color: var(--button-hover-color);
+    background: var(--blue-gradient);
 }
 .stickyIndicator {
     position: sticky;
@@ -543,13 +545,13 @@ header>button:hover>svg>path {
 }
 
 .success {
-    background-color: var(--green-glass-bg-color);
+    background: var(--green-glass-bg-color);
 }
 .fail {
     background-color: var(--red-glass-bg-color);
 }
 .achieved {
-    background-color: var(--success-accent-color);
+    background: var(--success-accent-color);
 }
 .hidden {
     display: none;

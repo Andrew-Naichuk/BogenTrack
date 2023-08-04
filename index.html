@@ -19,9 +19,9 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./web-style.css">
 
         <!-- Clarity Tracking -->
         <script type="text/javascript">
@@ -42,6 +42,95 @@
     </head>
 
     <body>
+
+        <header>
+            <a href="https://bogentrack.app"><img src="./rsc/bt-logo-full.png" alt="BogenTrack logo" loading="lazy" id="logo"></a>
+            <nav>
+                <a href="./#explore">Explore</a>
+                <a href="./app/signup.html"><button type="button" class="primary">Sign Up</button></a>
+            </nav>
+        </header>
+
+        <!-- HERO SECTION -->
+        <section class="columns-layout">
+            <div class="column">
+                <img src="./rsc/hero-image.png" alt="Bogentrack app home screen" loading="lazy">
+            </div>
+
+            <div class="column">
+                <h1>Unlock Your Archery Potential</h1>
+                <p>Simplified archery training tracker designed to take your shooting skills to new heights with zero friction. The most intuitive web app that empowers you to effortlessly record and analyze your training sessions.</p>
+                <div class="feature">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <path d="M29.0612 10.0611L13.0612 26.0611C12.9218 26.201 12.7563 26.3119 12.5739 26.3876C12.3916 26.4633 12.1961 26.5023 11.9987 26.5023C11.8013 26.5023 11.6058 26.4633 11.4235 26.3876C11.2411 26.3119 11.0756 26.201 10.9362 26.0611L3.9362 19.0611C3.79667 18.9216 3.68599 18.756 3.61047 18.5737C3.53496 18.3914 3.49609 18.196 3.49609 17.9986C3.49609 17.8013 3.53496 17.6059 3.61047 17.4236C3.68599 17.2413 3.79667 17.0757 3.9362 16.9361C4.07573 16.7966 4.24137 16.6859 4.42367 16.6104C4.60598 16.5349 4.80137 16.496 4.9987 16.496C5.19602 16.496 5.39141 16.5349 5.57372 16.6104C5.75602 16.6859 5.92167 16.7966 6.0612 16.9361L11.9999 22.8749L26.9387 7.93864C27.2205 7.65684 27.6027 7.49854 28.0012 7.49854C28.3997 7.49854 28.7819 7.65684 29.0637 7.93864C29.3455 8.22043 29.5038 8.60262 29.5038 9.00114C29.5038 9.39965 29.3455 9.78184 29.0637 10.0636L29.0612 10.0611Z" fill="#1989c5"/>
+                    </svg>
+                    <h5>Keep track of your shooting scores</h5>
+                </div>
+                <div class="feature">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <path d="M29.0612 10.0611L13.0612 26.0611C12.9218 26.201 12.7563 26.3119 12.5739 26.3876C12.3916 26.4633 12.1961 26.5023 11.9987 26.5023C11.8013 26.5023 11.6058 26.4633 11.4235 26.3876C11.2411 26.3119 11.0756 26.201 10.9362 26.0611L3.9362 19.0611C3.79667 18.9216 3.68599 18.756 3.61047 18.5737C3.53496 18.3914 3.49609 18.196 3.49609 17.9986C3.49609 17.8013 3.53496 17.6059 3.61047 17.4236C3.68599 17.2413 3.79667 17.0757 3.9362 16.9361C4.07573 16.7966 4.24137 16.6859 4.42367 16.6104C4.60598 16.5349 4.80137 16.496 4.9987 16.496C5.19602 16.496 5.39141 16.5349 5.57372 16.6104C5.75602 16.6859 5.92167 16.7966 6.0612 16.9361L11.9999 22.8749L26.9387 7.93864C27.2205 7.65684 27.6027 7.49854 28.0012 7.49854C28.3997 7.49854 28.7819 7.65684 29.0637 7.93864C29.3455 8.22043 29.5038 8.60262 29.5038 9.00114C29.5038 9.39965 29.3455 9.78184 29.0637 10.0636L29.0612 10.0611Z" fill="#1989c5"/>
+                    </svg>
+                    <h5>Set and track trainings goals</h5>
+                </div>
+                <div class="feature">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none">
+                        <path d="M29.0612 10.0611L13.0612 26.0611C12.9218 26.201 12.7563 26.3119 12.5739 26.3876C12.3916 26.4633 12.1961 26.5023 11.9987 26.5023C11.8013 26.5023 11.6058 26.4633 11.4235 26.3876C11.2411 26.3119 11.0756 26.201 10.9362 26.0611L3.9362 19.0611C3.79667 18.9216 3.68599 18.756 3.61047 18.5737C3.53496 18.3914 3.49609 18.196 3.49609 17.9986C3.49609 17.8013 3.53496 17.6059 3.61047 17.4236C3.68599 17.2413 3.79667 17.0757 3.9362 16.9361C4.07573 16.7966 4.24137 16.6859 4.42367 16.6104C4.60598 16.5349 4.80137 16.496 4.9987 16.496C5.19602 16.496 5.39141 16.5349 5.57372 16.6104C5.75602 16.6859 5.92167 16.7966 6.0612 16.9361L11.9999 22.8749L26.9387 7.93864C27.2205 7.65684 27.6027 7.49854 28.0012 7.49854C28.3997 7.49854 28.7819 7.65684 29.0637 7.93864C29.3455 8.22043 29.5038 8.60262 29.5038 9.00114C29.5038 9.39965 29.3455 9.78184 29.0637 10.0636L29.0612 10.0611Z" fill="#1989c5"/>
+                    </svg>
+                    <h5>Explore insightful visualizations to see progress</h5>
+                </div>
+                <a href="./app/signup.html"><button type="button" class="primary">Get started for free →</button></a>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section>
+            <h2 class="centered-text">What Archers Say</h2>
+            <div class="columns-layout added-gap">
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-1.jpg" class="testimonial-photo" alt="Photo of BogenTrack app user">
+                        <h4>Alex</h4>
+                        <h5> − Archery Hobbyist</h5>
+                    </div>
+                    <p>"Session goals and clear progress visualization keep me motivated and focused on achieving better scores. I've made remarkable progress thanks to it."</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-2.jpg" class="testimonial-photo" alt="Photo of BogenTrack app user">
+                        <h4>Lily</h4>
+                        <h5> − Enthusiastic Archer</h5>
+                    </div>
+                    <p>"This thing is user-friendly and beautifully designed. Color-coded scores and charts give me an instant understanding of my performance - it's a game-changer."</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-3.jpg" class="testimonial-photo" alt="Photo of BogenTrack app user">
+                        <h4>David</h4>
+                        <h5> − Gear Enthusiast</h5>
+                    </div>
+                    <p>"Finally an app working on any device and storing all my data. Also being able to download and play with all my rough data is a lot of fun."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPLORE SECTION -->
+        <section id="explore">
+            <h2 class="centered-text">Why You Would Love It</h2>
+            <div class="columns-layout added-gap">
+                <div class="column">
+                    <h3>All Data in One Place</h3>
+                    <p>From tracking your shooting sessions and rounds with details like distance, date, and comments, to creating charts and equipment sets for precise analysis – BogenTrack does it all.</p>
+                    <p>Your notes are securely stored in the cloud, ensuring you have access to it anytime, anywhere, and on any device with internet connectivity. </p>
+                    <p>No more worries about losing your progress or switching between devices. Simply log in and enjoy every detail at your fingertips.</p>
+                </div>
+
+                <div class="column">
+                    <img src="./rsc/Device-Mockup-1.png" alt="Bogentrack sessions screen functionality preview" loading="lazy">
+                </div>
+            </div>
+        </section>
 
     </body>
 
