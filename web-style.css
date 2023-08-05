@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: #ffffff;
     --main-text-color: #0a2540;
+    --main-accent-color: #aadfff;
 
     --button-bg-color: #1989c5;
     --button-bg-gradient: linear-gradient(206deg, #2f8df9 0%, #1543E7 100%);
@@ -106,6 +107,14 @@ header {
     max-width: 120rem;
     padding: 2.6rem;
 }
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 120rem;
+    padding: 6rem 2.6rem;
+}
 nav {
     display: flex;
     flex-direction: row;
@@ -121,12 +130,20 @@ section {
     max-width: 120rem;
     padding: 6rem 2.6rem;
 }
+hr {
+    width: 100%;
+    max-width: 120rem;
+    opacity: 0.2;
+}
 
 img {
     height: 100%;
     width: 100%;
     max-height: 60rem;
     object-fit: contain;
+}
+svg {
+    min-width: 2.4rem;
 }
 img#logo {
     height: 2rem;
@@ -139,7 +156,6 @@ img.testimonial-photo {
 
 
 
-
 /* BUTTONS */
 button {
     display: flex;
@@ -147,7 +163,7 @@ button {
     align-items: center;
     gap: 0.4rem;
     background: transparent;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.4rem;
     min-width: 3.6rem;
     font-size: 1.6rem;
     font-weight: 600;
@@ -169,7 +185,6 @@ button:hover {
 
 
 
-
 /* CUSTOM CLASSES */
 .columns-layout{
     display: flex;
@@ -182,7 +197,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2rem;
+    gap: 2.2rem;
     width: 100%;
 }
 .feature {
@@ -204,7 +219,36 @@ button:hover {
 }
 .price {
     max-width: 40rem;
+    padding: 3.2rem;
 }
+.promoted {
+    border: var(--main-accent-color) 0.4rem solid;
+}
+.chips {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    padding: 0.5rem 1.2rem;
+    background: var(--main-accent-color);
+    color: var(--button-text-color);
+    border-radius: var(--radius-max);
+}
+.question, .heading-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.8rem;
+    padding: 0rem 1.6rem;
+}
+.question>* {
+    width: inherit;
+}
+.heading-block>* {
+    max-width: 70rem;
+}
+
 .centered-text {
     text-align: center;
 }
@@ -213,4 +257,95 @@ button:hover {
 }
 .full-width {
     width: 100%;
+}
+.desktop-only {
+    display: block;
+}
+.mobile-only {
+    display: none;
+}
+
+
+
+/* ANIMATIONS */
+img, .testimonial, .price {
+    transition: 0.4s ease-in-out;
+}
+img:hover, .testimonial:hover, .price:hover {
+    transform: scale(1.02)
+}
+
+
+
+
+@media screen and (min-width: 0px) and (max-width: 960px) {
+    h1 {
+        text-align: center;
+    }
+    section {
+        padding: 3rem 2.6rem;
+    }
+    footer {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 3rem;
+    }
+    .columns-layout{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .column {
+        padding: 1rem 3rem;
+    }
+    .desktop-only {
+        display: none;
+    }
+    .mobile-only {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width: 580px) {
+    button {
+        width: 100%;
+    }
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+    footer>nav, header>nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    h1 {
+        font-size: 3.2rem;
+    }
+    h2 {
+        font-size: 2.8rem;
+    }
+    h3 {
+        font-size: 2.4rem;
+    }
+    h4 {
+        font-size: 1.8rem;
+    }
+    h5 {
+        font-size: 1.6rem;
+    }
+    h6 {
+        font-size: 1.4rem;
+    }
+    p {
+        font-size: 1.6rem;
+    }
+    a {
+        font-size: 1.6rem;
+    }
+    .column {
+        padding: 1rem 0rem;
+    }
 }
