@@ -48,10 +48,15 @@
         </div>
 
         <section id="entryScreen" data-identifier="signup">
-            <img src="../rsc/bt-logo-full.png" alt="BogenTrack App Logo">
             <!-- Sign Up Form -->
             <form id="signupForm" class="visible">
-                <h2>New Account</h2>
+                <a href="https://bogentrack.app"><img src="../rsc/bt-logo-full.png" alt="BogenTrack App Logo"></a>
+                <h3>New Account</h3>
+                <button id="googleLoginBtn" type="button" class="secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
+                    Sign up with Google
+                </button>
+                <h6 class="faded">or</h6>
                 <div class="inputElement">
                     <label for="signupEmail">Your Email</label>
                     <input type="email" name="email" id="signupEmail" maxlength="100">

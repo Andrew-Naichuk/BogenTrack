@@ -163,8 +163,8 @@ form {
     align-items: center;
     width: 100%;
     height: fit-content;
-    max-width: 34rem;
-    padding: 2rem;
+    max-width: 38rem;
+    padding: 4rem 2.6rem 2.6rem 2.6rem;
     gap: 1.8rem;
     background-color: var(--main-bg-color);
     box-shadow: var(--shadow-default);

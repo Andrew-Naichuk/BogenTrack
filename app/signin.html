@@ -48,10 +48,15 @@
         </div>
 
         <section id="entryScreen" data-identifier="login">
-            <img src="../rsc/bt-logo-full.png" alt="BogenTrack App Logo">
             <!-- Log In Form -->
             <form id="loginForm" class="visible">
-                <h2>Log In</h2>
+                <a href="https://bogentrack.app"><img src="../rsc/bt-logo-full.png" alt="BogenTrack App Logo"></a>
+                <h3>Log In</h3>
+                <button id="googleLoginBtn" type="button" class="secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
+                    Continue with Google
+                </button>
+                <h6 class="faded">or</h6>
                 <div class="inputElement">
                     <label for="loginEmail">Email</label>
                     <input type="email" name="email" id="loginEmail" maxlength="100">
@@ -61,11 +66,6 @@
                     <input type="password" name="password" id="loginPassword" maxlength="100">
                 </div>
                 <input type="button" id="mainLoginBtn" class="primary" value="Log In">
-                <h6 class="faded">or</h6>
-                <button id="googleLoginBtn" type="button" class="secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
-                    Continue with Google
-                </button>
                 <p class="faded centered-text">By proceeding with login you are accepting Bogentrack Terms and Conditions. <a href="../terms.html" target="_blank">Learn more here.</a></p>
                 <p class="faded">New to BogenTrack? Sign up now!</p>
                 <a href="./signup.html"><input type="button" id="toSignUpBtn" class="secondary" value="Create an Account"></a>

@@ -234,7 +234,7 @@ button:hover {
     color: var(--button-text-color);
     border-radius: var(--radius-max);
 }
-.question, .heading-block {
+.question, .heading-block, .stat {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -254,6 +254,9 @@ button:hover {
 }
 .added-gap {
     gap: 3rem;
+}
+.def-gap {
+    gap: 1.6rem;
 }
 .full-width {
     width: 100%;

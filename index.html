@@ -43,8 +43,10 @@
 
     <body>
 
+        <!-- HEADER -->
         <header>
             <a href="https://bogentrack.app"><img src="./rsc/bt-logo-full.png" alt="BogenTrack logo" loading="lazy" id="logo"></a>
+
             <nav>
                 <a href="./#explore">Explore</a>
                 <a href="./#pricing">Pricing</a>
@@ -57,10 +59,12 @@
 
         <!-- HERO SECTION -->
         <section class="columns-layout">
+            <!-- Hero Image -->
             <div class="column">
                 <img src="./rsc/hero-image.webp" alt="Bogentrack app home screen">
             </div>
 
+            <!-- Hero Content Block -->
             <div class="column">
                 <h1>Unlock Your True Archery Potential</h1>
                 <p>Simplified archery training tracker designed to take your target shooting skills to new heights with zero friction. The most intuitive web app that empowers you to effortlessly record and analyze your training sessions.</p>
@@ -86,47 +90,68 @@
             </div>
         </section>
 
-        <!-- TESTIMONIALS SECTION -->
+
+
+        <!-- STATS SECTION -->
         <section>
-            <h2 class="centered-text">What Archers Say</h2>
+            <hr>
+            <!-- Stats Card -->
             <div class="columns-layout added-gap">
-                <div class="testimonial">
-                    <div class="feature">
-                        <img src="./rsc/user-photo-1.webp" class="testimonial-photo" alt="Photo of BogenTrack app user">
-                        <h4>Alex</h4>
-                        <h5>Hobbyist</h5>
-                    </div>
-                    <p>"Session goals and clear progress visualization keep me motivated and focused on achieving better scores. I've made remarkable progress thanks to it."</p>
+                <div class="stat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 3.75C19.9949 3.75 16.0798 4.93764 12.7497 7.16274C9.41962 9.38784 6.82412 12.5505 5.29145 16.2507C3.75877 19.9509 3.35776 24.0225 4.13911 27.9506C4.92046 31.8787 6.84908 35.4869 9.6811 38.3189C12.5131 41.1509 16.1213 43.0796 20.0494 43.8609C23.9775 44.6423 28.0491 44.2412 31.7493 42.7086C35.4496 41.1759 38.6122 38.5804 40.8373 35.2503C43.0624 31.9202 44.25 28.0051 44.25 24C44.2441 18.6312 42.1087 13.484 38.3123 9.68767C34.516 5.89134 29.3688 3.75596 24 3.75ZM39.75 24C39.7505 25.7221 39.4673 27.4325 38.9119 29.0625L31.3125 24.375C30.8676 24.0993 30.369 23.9216 29.85 23.8538L25.5713 23.2762C24.9099 23.1911 24.2378 23.2826 23.6232 23.5415C23.0087 23.8003 22.4736 24.2173 22.0725 24.75H21.3094L20.8013 23.7C20.5542 23.1858 20.1925 22.7352 19.7439 22.3828C19.2953 22.0304 18.7718 21.7857 18.2138 21.6675L17.7113 21.5625L18.4613 20.25H21.1594C21.7929 20.2499 22.416 20.0892 22.9706 19.7831L25.2675 18.5156C25.5193 18.3749 25.7545 18.2063 25.9688 18.0131L31.0163 13.4512C31.4147 13.0908 31.7311 12.649 31.944 12.1557C32.1568 11.6624 32.2612 11.1291 32.25 10.5919C34.5409 12.0006 36.4328 13.9724 37.7457 16.3195C39.0586 18.6665 39.7486 21.3107 39.75 24ZM26.3925 8.4375L27.555 10.5187L23.0156 14.625L20.9663 15.75H18.0263C17.3658 15.7508 16.7173 15.9255 16.1458 16.2567C15.5744 16.5878 15.1003 17.0636 14.7713 17.6362L13.9294 19.1081L12.69 15.8025L14.5481 11.4113C16.2246 10.1512 18.136 9.23899 20.17 8.72831C22.2041 8.21762 24.3197 8.11875 26.3925 8.4375ZM8.25001 24C8.24962 22.2931 8.5283 20.5976 9.07501 18.9806L10.5263 22.8525C10.7452 23.4418 11.1097 23.9663 11.5856 24.377C12.0616 24.7878 12.6337 25.0715 13.2488 25.2019L16.9106 25.9894L17.4731 27.1331C17.7195 27.6376 18.0755 28.0808 18.5151 28.4301C18.9546 28.7795 19.4666 29.0263 20.0138 29.1525L19.0763 31.2375C18.7779 31.9073 18.6825 32.6499 18.8018 33.3734C18.9211 34.0969 19.2499 34.7696 19.7475 35.3081L19.7869 35.3494L23.1919 38.8556L23.025 39.7163C19.0264 39.4642 15.2736 37.6993 12.5293 34.7802C9.785 31.861 8.25494 28.0066 8.25001 24ZM27.6844 39.3113C27.791 38.7349 27.7617 38.1416 27.599 37.5786C27.4363 37.0155 27.1445 36.4981 26.7469 36.0675L26.7075 36.0262L23.385 32.6044L25.5169 27.8194L29.0794 28.2994L36.8475 33.0769C34.6469 36.194 31.3918 38.4087 27.6844 39.3113Z" fill="url(#paint0_linear_301_1575)"/>
+                        <defs>
+                          <linearGradient id="paint0_linear_301_1575" x1="45" y1="3" x2="4.5" y2="43.5" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#72B2FF"/>
+                            <stop offset="1" stop-color="#537BFF"/>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    <h3>over 10</h3>
+                    <h6>countries worldwide usage</h6>
                 </div>
 
-                <div class="testimonial">
-                    <div class="feature">
-                        <img src="./rsc/user-photo-2.webp" class="testimonial-photo" alt="Photo of BogenTrack app user">
-                        <h4>Lily</h4>
-                        <h5>Competitive archer</h5>
-                    </div>
-                    <p>"This thing is user-friendly and beautifully designed. Color-coded scores and charts give me an instant understanding of my performance - it's a game-changer."</p>
+                <!-- Stats Card -->
+                <div class="stat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M42 8.25H6C5.00544 8.25 4.05161 8.64509 3.34835 9.34835C2.64509 10.0516 2.25 11.0054 2.25 12V16.5C2.24982 17.3645 2.54834 18.2025 3.09502 18.8722C3.6417 19.5419 4.40298 20.0021 5.25 20.175V36C5.25 36.9946 5.64509 37.9484 6.34835 38.6517C7.05161 39.3549 8.00544 39.75 9 39.75H39C39.9946 39.75 40.9484 39.3549 41.6517 38.6517C42.3549 37.9484 42.75 36.9946 42.75 36V20.175C43.597 20.0021 44.3583 19.5419 44.905 18.8722C45.4517 18.2025 45.7502 17.3645 45.75 16.5V12C45.75 11.0054 45.3549 10.0516 44.6517 9.34835C43.9484 8.64509 42.9946 8.25 42 8.25ZM6.75 12.75H41.25V15.75H6.75V12.75ZM9.75 35.25V20.25H38.25V35.25H9.75ZM30.75 25.5C30.75 26.0967 30.5129 26.669 30.091 27.091C29.669 27.5129 29.0967 27.75 28.5 27.75H19.5C18.9033 27.75 18.331 27.5129 17.909 27.091C17.4871 26.669 17.25 26.0967 17.25 25.5C17.25 24.9033 17.4871 24.331 17.909 23.909C18.331 23.4871 18.9033 23.25 19.5 23.25H28.5C29.0967 23.25 29.669 23.4871 30.091 23.909C30.5129 24.331 30.75 24.9033 30.75 25.5Z" fill="url(#paint0_linear_301_1585)"/>
+                        <defs>
+                          <linearGradient id="paint0_linear_301_1585" x1="46.5555" y1="7.66667" x2="16.6281" y2="48.9951" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#72B2FF"/>
+                            <stop offset="1" stop-color="#537BFF"/>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    <h3>10.000+</h3>
+                    <h6>saved trainings and rounds</h6>
                 </div>
 
-                <div class="testimonial">
-                    <div class="feature">
-                        <img src="./rsc/user-photo-3.webp" class="testimonial-photo" alt="Photo of BogenTrack app user">
-                        <h4>David</h4>
-                        <h5>Gear geek</h5>
-                    </div>
-                    <p>"Finally an app working on any device and storing all my data. Also being able to download and play with all my rough data is a lot of fun."</p>
+                <!-- Stats Card -->
+                <div class="stat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M41.1898 21.9862C41.1054 21.6259 40.9334 21.2919 40.6891 21.0139C40.4448 20.7359 40.1357 20.5225 39.7892 20.3925L29.5817 16.5656L32.2067 3.44061C32.3026 2.96058 32.2394 2.46236 32.0266 2.0215C31.8138 1.58064 31.4631 1.22121 31.0275 0.99772C30.592 0.774229 30.0955 0.698876 29.6132 0.783088C29.131 0.867301 28.6894 1.10648 28.3554 1.46436L7.35541 23.9644C7.10275 24.2348 6.9207 24.5634 6.8254 24.921C6.73009 25.2786 6.72447 25.6542 6.80903 26.0145C6.89359 26.3748 7.06572 26.7087 7.31016 26.9865C7.55461 27.2644 7.86382 27.4777 8.21041 27.6075L18.4179 31.4344L15.7929 44.5594C15.6969 45.0394 15.7602 45.5376 15.9729 45.9785C16.1857 46.4193 16.5365 46.7788 16.972 47.0023C17.4076 47.2257 17.9041 47.3011 18.3863 47.2169C18.8685 47.1327 19.3102 46.8935 19.6442 46.5356L40.6442 24.0356C40.8966 23.7652 41.0784 23.4367 41.1736 23.0792C41.2687 22.7218 41.2743 22.3464 41.1898 21.9862ZM21.7592 37.6744L23.2067 30.4406C23.3114 29.9167 23.2262 29.3727 22.9665 28.9059C22.7068 28.439 22.2895 28.0798 21.7892 27.8925L12.9373 24.5756L26.2367 10.3256L24.7892 17.5594C24.6845 18.0832 24.7696 18.6273 25.0293 19.0941C25.289 19.561 25.7063 19.9202 26.2067 20.1075L35.0623 23.4244L21.7592 37.6744Z" fill="url(#paint0_linear_301_1577)"/>
+                        <defs>
+                          <linearGradient id="paint0_linear_301_1577" x1="41.8882" y1="-0.111585" x2="-2.61502" y2="32.9061" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#72B2FF"/>
+                            <stop offset="1" stop-color="#537BFF"/>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    <h3>1.000+</h3>
+                    <h6>already using regularly</h6>
                 </div>
             </div>
+            <hr>
         </section>
 
 
-        <!-- EXPLORE SECTION -->
+
+        <!-- EXPLORE SECTIONS -->
         <section id="explore">
-            <!-- <h2 class="centered-text">Why You Would Love It</h2> -->
             <div class="columns-layout added-gap">
                 <img src="./rsc/Device-Mockup-1.webp" alt="Bogentrack sessions screen functionality preview" loading="lazy" class="mobile-only">
                 <div class="column">
-                    <h3>All Data in One Place</h3>
+                    <h2>All Data in One Place</h2>
                     <p>From tracking with context, like distance, date, and comments, to creating charts and equipment sets for analysis – BogenTrack does it all.</p>
                     <p>Your notes are securely stored in cloud, ensuring <span>access anytime, anywhere, and on any device with internet connectivity.</span></p>
                     <a href="./app/signup.html"><button type="button" class="primary">Get started →</button></a>
@@ -145,7 +170,7 @@
                 </div>
 
                 <div class="column">
-                    <h3>Effortless and Intuitive</h3>
+                    <h2>Effortless and Intuitive</h2>
                     <p>Spend less time typing and more perfecting your skills with intelligent auto-populations and <span>lightning-fast logging scores on your way back from the target.</span></p>
                     <p>Enjoy an app that focuses on what matters most - your archery journey without overwhelming functions and distractions.</p>
                     <a href="./app/signup.html"><button type="button" class="primary">Get started →</button></a>
@@ -157,7 +182,7 @@
             <div class="columns-layout added-gap">
                 <div class="column">
                     <img src="./rsc/Device-Mockup-3.webp" alt="Bogentrack sessions screen functionality preview" loading="lazy" class="mobile-only">
-                    <h3>Master Archery with Ease</h3>
+                    <h2>Master Archery with Ease</h2>
                     <p>Say goodbye to unbearable screens and meet your seamless digital success companion.</p>
                     <p><span>Color-coded indicators and easy-to-read charts</span> provide instant insights into performance trends, allowing to identify strengths and areas for improvement.</p>
                     <a href="./app/signup.html"><button type="button" class="primary">Get started →</button></a>
@@ -169,6 +194,8 @@
             </div>
         </section>
 
+
+
         <!-- PRICING SECTION -->
         <section id="pricing">
             <div class="heading-block">
@@ -178,6 +205,7 @@
             </div>
 
             <div class="columns-layout added-gap">
+                <!-- Price Card -->
                 <div class="price">
                     <h4>Starter Plan</h4>
                     <div class="feature">
@@ -224,7 +252,7 @@
                     <a href="./app/signup.html" class="full-width"><button type="button" class="primary full-width">Sign up for free</button></a>
                 </div>
 
-
+                <!-- Price Card -->
                 <div class="price promoted">
                     <h4>Enthusiast Plan</h4>
                     <div class="feature">
@@ -277,7 +305,7 @@
                     <a href="./app/signup.html" class="full-width"><button type="button" class="primary full-width">Sign up for free</button></a>
                 </div>
 
-
+                <!-- Price Card -->
                 <div class="price">
                     <h4>Special Plan</h4>
                     <div class="feature">
@@ -327,6 +355,97 @@
         </section>
 
 
+
+        <!-- TESTIMONIALS SECTION -->
+        <section>
+            <h3 class="centered-text">What Archers Say</h3>
+            <div class="columns-layout added-gap">
+                <!-- User Card -->
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-1.webp" class="testimonial-photo" alt="Photo of BogenTrack app user" loading="lazy">
+                        <h4>Alex</h4>
+                        <h5>Hobbyist</h5>
+                    </div>
+                    <p>"Session goals and clear progress visualization keep me motivated and focused on achieving better scores. I've made remarkable progress thanks to it."</p>
+                </div>
+
+                <!-- User Card -->
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-2.webp" class="testimonial-photo" alt="Photo of BogenTrack app user" loading="lazy">
+                        <h4>Lily</h4>
+                        <h5>Compet. archer</h5>
+                    </div>
+                    <p>"This thing is user-friendly and beautifully designed. Color-coded scores and charts give me an instant understanding of my performance - it's a game-changer."</p>
+                </div>
+
+                <!-- User Card -->
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-3.webp" class="testimonial-photo" alt="Photo of BogenTrack app user" loading="lazy">
+                        <h4>David</h4>
+                        <h5>Gear geek</h5>
+                    </div>
+                    <p>"Finally an app working on any device and storing all my data. Also being able to download and play with all my rough data is a lot of fun."</p>
+                </div>
+            </div>
+
+            <div class="columns-layout added-gap">
+                <!-- User Card -->
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-4.webp" class="testimonial-photo" alt="Photo of BogenTrack app user" loading="lazy">
+                        <h4>Laura</h4>
+                        <h5>Compet. archer</h5>
+                    </div>
+                    <p>"Quick one-tap score recording and accessibility throughout all my devices let me focus on my trainings without any distractions. Love it."</p>
+                </div>
+
+                <!-- User Card -->
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-5.webp" class="testimonial-photo" alt="Photo of BogenTrack app user" loading="lazy">
+                        <h4>Mark</h4>
+                        <h5>Archery coach</h5>
+                    </div>
+                    <p>"I now tend to recommend this app to all my students. It's easy for beginners to get and does not overload with unnecessary functions from the very start, helping track progress easily."</p>
+                </div>
+
+                <!-- User Card -->
+                <div class="testimonial">
+                    <div class="feature">
+                        <img src="./rsc/user-photo-6.webp" class="testimonial-photo" alt="Photo of BogenTrack app user" loading="lazy">
+                        <h4>Emma</h4>
+                        <h5>Hobbyist</h5>
+                    </div>
+                    <p>"I've tried several archery scoring apps, but this one stands out for its smooth experience and simple functions - just what I really need."</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- CALL TO ACTION SECTION -->
+        <section>
+            <hr>
+            <div class="heading-block def-gap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <path d="M24 3.75C19.9949 3.75 16.0798 4.93764 12.7497 7.16274C9.41962 9.38784 6.82412 12.5505 5.29145 16.2507C3.75877 19.9509 3.35776 24.0225 4.13911 27.9506C4.92046 31.8787 6.84908 35.4869 9.6811 38.3189C12.5131 41.1509 16.1213 43.0796 20.0494 43.8609C23.9775 44.6423 28.0491 44.2412 31.7493 42.7086C35.4496 41.1759 38.6122 38.5804 40.8373 35.2503C43.0624 31.9202 44.25 28.0051 44.25 24C44.2441 18.6312 42.1087 13.484 38.3123 9.68767C34.516 5.89134 29.3688 3.75596 24 3.75ZM26.25 39.5869V34.5C26.25 33.9033 26.013 33.331 25.591 32.909C25.169 32.4871 24.5967 32.25 24 32.25C23.4033 32.25 22.831 32.4871 22.409 32.909C21.9871 33.331 21.75 33.9033 21.75 34.5V39.5869C18.3875 39.0957 15.2733 37.5325 12.8704 35.1296C10.4675 32.7267 8.90426 29.6125 8.41313 26.25H13.5C14.0967 26.25 14.669 26.0129 15.091 25.591C15.513 25.169 15.75 24.5967 15.75 24C15.75 23.4033 15.513 22.831 15.091 22.409C14.669 21.9871 14.0967 21.75 13.5 21.75H8.41313C8.90426 18.3875 10.4675 15.2733 12.8704 12.8704C15.2733 10.4675 18.3875 8.90425 21.75 8.41312V13.5C21.75 14.0967 21.9871 14.669 22.409 15.091C22.831 15.5129 23.4033 15.75 24 15.75C24.5967 15.75 25.169 15.5129 25.591 15.091C26.013 14.669 26.25 14.0967 26.25 13.5V8.41312C29.6125 8.90425 32.7268 10.4675 35.1296 12.8704C37.5325 15.2733 39.0958 18.3875 39.5869 21.75H34.5C33.9033 21.75 33.331 21.9871 32.909 22.409C32.4871 22.831 32.25 23.4033 32.25 24C32.25 24.5967 32.4871 25.169 32.909 25.591C33.331 26.0129 33.9033 26.25 34.5 26.25H39.5869C39.0958 29.6125 37.5325 32.7267 35.1296 35.1296C32.7268 37.5325 29.6125 39.0957 26.25 39.5869Z" fill="url(#paint0_linear_301_1573)"/>
+                    <defs>
+                      <linearGradient id="paint0_linear_301_1573" x1="45" y1="3" x2="4.5" y2="43.5" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#72B2FF"/>
+                        <stop offset="1" stop-color="#537BFF"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                <h2 class="centered-text">Ready to Aim Higher?</h2>
+                <p class="centered-text">Join thousands of satisfied archers who have elevated their training experience with BogenTrack. Start tracking your sessions, recording scores, and analyzing your progress with ease. </p>
+                <a href="./app/signup.html"><button type="button" class="primary full-width">Get started →</button></a>
+            </div>
+            <hr>
+        </section>
+
+
         <!-- FAQS -->
         <section id="questions">
             <h2 class="centered-text">You May Wonder</h2>
@@ -353,7 +472,7 @@
 
             <div class="question">
                 <h5>Can I export my data from BogenTrack?</h5>
-                <p>Yes, you can export all your archery training data in .json format for backup or analysis purposes. Additional format are about to be accessible as well.</p>
+                <p>Yes, you can export all your archery training data in .json format for backup or analysis purposes. Additional formats are about to be accessible as well.</p>
             </div>
 
             <div class="question">
@@ -381,12 +500,10 @@
                 <a href="./#explore">Explore</a>
                 <a href="./#pricing">Pricing</a>
                 <a href="./terms.html" target="_blank">Terms and Policies</a>
-                <a href="mailto:hello@bogentrack.app">Get in touch</a>
+                <a href="mailto:hello@bogentrack.app">Get in Touch</a>
                 <a href="./app/signup.html"><button type="button" class="primary">Sign Up</button></a>
             </nav>
-
-
         </footer>
-    </body>
 
+    </body>
 </html>

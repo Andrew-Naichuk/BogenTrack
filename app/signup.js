@@ -13,6 +13,18 @@ firebase.auth().onAuthStateChanged((user) => {
     }
 });
 
+
+// Google signup button functionality
+googleLoginButton.addEventListener('click', async function(){
+    // Attempting to sign in using Google auth popup
+    try {
+        await auth.signInWithPopup(providerGoogle);
+    } catch (error) {
+        createToastMessage('fail', error.message);
+        console.log(error.message);
+    }
+});
+
 // Sign Up Form Functionality
 signUpButton.addEventListener('click', async function(){
     try {
