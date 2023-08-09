@@ -8,8 +8,7 @@ const analytics = firebase.analytics();
 // Auth status observer
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        createRoundTimeField.value = getCurrentTime();
-        checkScoreList();
+        updatePageOnAuth();
     } else {
         let redirectLocation = loadedLocation + '/app/signin.html';
         window.location.replace(redirectLocation);
@@ -17,11 +16,24 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 
+// Page content handler
+async function updatePageOnAuth(){
+    showLoading();
+    await getSessionsSnapshot();
+    isLoading = false;
+    createRoundTimeField.value = getCurrentTime();
+    checkScoreList();
+    sessionsSnapshot.forEach(session => {
+        if (session.uid === window.location.search.replace('?','')) {
+            newSetDistanceField.value = session.distance;
+        };
+    });
+};
+
+
 // Cancel creating new set
 cancelNewRoundButton.addEventListener('click', function(){
     // Setting fields values back to default and navigating
-    createRoundTimeField.value = '';
-    createRoundCommentField.value = '';
     let redirectLocation = loadedLocation + '/app/session.html?' + window.location.search.replace('?','');
     window.location.href = redirectLocation;
 });
@@ -141,6 +153,7 @@ saveNewRoundButton.addEventListener('click', function(){
             const newRound = {
                 "uid": generateUID(),
                 "time": createRoundTimeField.value,
+                "distance": newSetDistanceField.value,
                 "comment": createRoundCommentField.value.replace(/</g, '(').replace(/>/g, ')'),
                 "arrows": arrowsScores,
                 "status": 'live',

@@ -80,6 +80,17 @@ async function getArrows(){
                         arrowsListContainer.appendChild(roundRenderedComment);
                     };
 
+                    // Rendering round distance
+                    if (round.distance) {
+                        const roundRenderedDistance = document.createElement("div");
+                        roundRenderedDistance.classList.add('sessionPageComment');
+                        roundRenderedDistance.classList.add('fadeIn');
+                        roundRenderedDistance.innerHTML = `
+                            <h4>Round distance — ${round.distance} meters</h4>
+                        `;
+                        arrowsListContainer.appendChild(roundRenderedDistance);
+                    }
+
                     // Rendering arrows of the selected round
                     let renderedArrowNumber = 1;
                     round.arrows.forEach(arrow => {

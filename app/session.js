@@ -170,7 +170,7 @@ async function getRounds(){
                         sessionRenderedDistance.classList.add('sessionPageDistance');
                         sessionRenderedDistance.classList.add('fadeIn');
                         sessionRenderedDistance.innerHTML = `
-                            <h5>Distance — ${listItem.distance} meters</h5>
+                            <h5>Default distance — ${listItem.distance} meters</h5>
                         `
                         roundsListContainer.appendChild(sessionRenderedDistance);
                     };
@@ -204,6 +204,7 @@ async function getRounds(){
                     };
 
                     let liveRoundsNumber = 0;
+                    let totalAfterRound = 0;
                     let roundsList = listItem.rounds;
                     // Checking for live rounds amount
                     roundsList.forEach(round => {
@@ -254,6 +255,9 @@ async function getRounds(){
 
                             let displayAverage = averageResult.toString().slice(0, 3);
 
+                            // Calculating total after round
+                            totalAfterRound = totalAfterRound + totalResult;
+
                             // Creating and configuring round arrows results for render
                             let renderedArrowsResult = '';
                             round.arrows.forEach(arrow =>{
@@ -279,11 +283,16 @@ async function getRounds(){
                             renderedRound.classList.add('fadeIn');
                             renderedRound.setAttribute("data-total", totalResult);
                             renderedRound.setAttribute("data-average", displayAverage);
+                            let roundDistanceRendered = ``;
+                            if (round.distance) {
+                                roundDistanceRendered = `<p class="fullWidth">${iconsBundle.distance} ${round.distance}m</p>`
+                            }
                             renderedRound.innerHTML = `
                             <div class="articleRow">
                                 <h5 class="fix50">${round.time}</h5>
-                                <p class="fullWidth">${iconsBundle.arrows} ${round.arrows.length}</p>
+                                ${roundDistanceRendered}
                                 <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
+                                <p class="fullWidth">${iconsBundle.sum} ${totalAfterRound}</p>
                                 <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
                             </div>
                             <hr>

@@ -6,6 +6,7 @@ const saveNewRoundButton = document.querySelector('#saveNewRoundBtn');
 const cancelNewRoundButton = document.querySelector('#cancelNewRoundBtn');
 
 const createRoundTimeField = document.querySelector('#newRoundTime');
+const newSetDistanceField = document.querySelector('#newSetDistance');
 const createRoundCommentField = document.querySelector('#newRoundComment');
 
 const roundScoreKeyboard = document.querySelector('#roundScoreKeyboard');
