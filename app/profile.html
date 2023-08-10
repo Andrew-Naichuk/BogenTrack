@@ -60,6 +60,17 @@
                     <h5 id="currentUserEmail">user@gbogentrack.app</h5>
                 </div>
 
+                <button id="changePasswordBtn" type="button" class="secondary shadow width-100 hidden">Change Password</button>
+                <div class="inputElement hidden" style="align-items: center;" id="newPasswordBlock">
+                    <label for="newPassword">New password</label>
+                    <input type="password" name="password" id="newPassword" maxlength="100">
+                    <h6 class="faded">Password should be min. 6 symbols long.</h6>
+                    <button id="confirmPasswordBtn" type="button" class="primary shadow width-100">Confirm New Password</button>
+                    <button id="cancelChangePasswordBtn" type="button" class="secondary shadow width-100">Cancel</button>
+                </div>
+
+                <hr>
+
                 <div class="inputElement">
                     <p>Sessions created:</p>
                     <h5 id="currentNumberOfSessions"></h5>

@@ -20,7 +20,20 @@ logInButton.addEventListener('click', async function(){
         await firebase.auth().signInWithEmailAndPassword(logInEmailField.value, logInPasswordField.value);
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
+    }
+});
+
+// Reset password functionality
+resetPasswordButton.addEventListener('click', async function(){
+    if (logInEmailField.value) {
+        try {
+            await firebase.auth().sendPasswordResetEmail(logInEmailField.value);
+            createToastMessage('success', 'Please check email and follow instructions!');
+        } catch (error) {
+            createToastMessage('fail', error.message);
+        }
+    } else {
+        createToastMessage('fail', 'Please fill Email field!');
     }
 });
 
@@ -30,6 +43,5 @@ logInGoogleButton.addEventListener('click', async function(){
         await auth.signInWithPopup(providerGoogle);
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
     }
 });

@@ -35,6 +35,11 @@ async function updatePageOnAuth(){
     } catch (error) {
         userSessionsIndicator.innerText = liveSessionsNumber;
     };
+
+    // Showing password change block if logged with password
+    if (firebase.auth().currentUser.providerData[0].providerId === 'password') {
+        changePasswordButton.classList.remove('hidden');
+    }
 };
 
 
@@ -46,6 +51,30 @@ signOutButton.addEventListener('click', async function(){
     } catch (error) {
         createToastMessage('fail', error.message);
         console.log(error.message);
+    }
+});
+
+
+// Change password functionality
+changePasswordButton.addEventListener('click', () => {
+    changePasswordButton.classList.add('hidden');
+    newPasswordBlock.classList.remove('hidden');
+    newPasswordField.value = '';
+});
+cancelChangePasswordButton.addEventListener('click', () => {
+    changePasswordButton.classList.remove('hidden');
+    newPasswordBlock.classList.add('hidden');
+    newPasswordField.value = '';
+});
+confirmPasswordButton.addEventListener('click', async function() {
+    try {
+        await firebase.auth().currentUser.updatePassword(newPasswordField.value);
+        createToastMessage('success', 'Password changed!');
+        changePasswordButton.classList.remove('hidden');
+        newPasswordBlock.classList.add('hidden');
+        newPasswordField.value = '';
+    } catch (error) {
+        createToastMessage('fail', error.message);
     }
 });
 

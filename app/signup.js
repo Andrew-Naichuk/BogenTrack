@@ -21,7 +21,6 @@ googleLoginButton.addEventListener('click', async function(){
         await auth.signInWithPopup(providerGoogle);
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
     }
 });
 
@@ -32,6 +31,5 @@ signUpButton.addEventListener('click', async function(){
         await firebase.auth().createUserWithEmailAndPassword(signUpemailField.value, signUppasswordField.value)
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
     }
 });
