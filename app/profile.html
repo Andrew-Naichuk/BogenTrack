@@ -18,7 +18,7 @@
     
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600&display=swap" rel="stylesheet">
     
         <link rel="stylesheet" href="../style.css">
     
@@ -55,9 +55,14 @@
             </header>
 
             <div class="contentContainer">
-                <div class="inputElement">
-                    <p>Logged in as:</p>
-                    <h5 id="currentUserEmail">user@gbogentrack.app</h5>
+                <div class="articleRow added-gap">
+                    <img src="" id="userProfilePicture" alt="User Photo" class="profilePicture">
+
+                    <div class="width-100">
+                        <p id="emailLabel">Logged in as:</p>
+                        <h4 id="userName" class="hidden"></h4>
+                        <h5 id="currentUserEmail">user@gbogentrack.app</h5>
+                    </div>
                 </div>
 
                 <button id="changePasswordBtn" type="button" class="secondary shadow width-100 hidden">Change Password</button>
@@ -71,10 +76,18 @@
 
                 <hr>
 
-                <div class="inputElement">
-                    <p>Sessions created:</p>
-                    <h5 id="currentNumberOfSessions"></h5>
+                <div class="articleRow">
+                    <div class="inputElement reduced-gap">
+                        <p>Sessions tracked:</p>
+                        <h5 id="currentNumberOfSessions"></h5>
+                    </div>
+
+                    <div class="inputElement reduced-gap">
+                        <p>Sessions archived:</p>
+                        <h5 id="archiveNumberOfSessions"></h5>
+                    </div>
                 </div>
+
                 <button id="downloadDataBtn" type="button" class="secondary shadow width-100">Download Rough Data</button>
 
                 <hr>

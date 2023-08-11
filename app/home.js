@@ -104,10 +104,10 @@ async function getSessions(){
                             renderedSession.setAttribute("data-display-name", listItem.date)
                             renderedSession.innerHTML = `
                             <div class="articleRow">
-                                <h5 class="fix90">${listItem.date}</h5>
-                                <p class="fullWidth">${iconsBundle.repeat} ${sessionLiveRounds}</p>
-                                <p class="fullWidth">${iconsBundle.arrows} ${totalArrows}</p>
-                                <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
+                                <h5 class="fix90 align-center">${listItem.date}</h5>
+                                <p class="fullWidth align-center">${iconsBundle.repeat} ${sessionLiveRounds}</p>
+                                <p class="fullWidth align-center">${iconsBundle.arrows} ${totalArrows}</p>
+                                <h5 class="fix50 align-center"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
                             </div>
                         `;
                         } else {

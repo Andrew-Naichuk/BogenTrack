@@ -92,7 +92,7 @@ function updateIndicators(usecase, element){
             setTotalScoreIndicator.innerText = Number(setTotalScoreIndicator.innerText) - Number(element.id);
         };
     };
-    const averageResult = Number(setTotalScoreIndicator.innerText) / roundScoresList.querySelectorAll('h5').length;
+    const averageResult = Number(setTotalScoreIndicator.innerText) / roundScoresList.querySelectorAll('h3').length;
     setAverageIndicator.innerText = averageResult.toString().slice(0, 4);
 };
 
@@ -102,7 +102,7 @@ const keyboardButtons = roundScoreKeyboard.querySelectorAll('button');
 keyboardButtons.forEach(button => {
     button.addEventListener('click', function(){
         // Adding score by button click
-        const newScore = document.createElement('h5');
+        const newScore = document.createElement('h3');
         newScore.classList.add('fix36');
         newScore.classList.add('centered-text');
         newScore.innerText = button.id;

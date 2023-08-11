@@ -289,11 +289,11 @@ async function getRounds(){
                             }
                             renderedRound.innerHTML = `
                             <div class="articleRow">
-                                <h5 class="fix50">${round.time}</h5>
+                                <h5 class="fix50 align-center">${round.time}</h5>
                                 ${roundDistanceRendered}
-                                <p class="fullWidth">${iconsBundle.target} ${totalResult}</p>
-                                <p class="fullWidth">${iconsBundle.sum} ${totalAfterRound}</p>
-                                <h5 class="fix50"><span class="faded">Ø</span> <span class="${averageColor}">${displayAverage}</span></h5>
+                                <p class="fullWidth align-center">${iconsBundle.target} ${totalResult}</p>
+                                <p class="fullWidth align-center">${iconsBundle.sum} ${totalAfterRound}</p>
+                                <h5 class="fix50 align-center">${iconsBundle.average} <span class="${averageColor}">${displayAverage}</span></h5>
                             </div>
                             <hr>
                             <div class="articleScores">

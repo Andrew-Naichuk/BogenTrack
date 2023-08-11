@@ -18,12 +18,55 @@ firebase.auth().onAuthStateChanged((user) => {
 
 // Page content handler
 async function updatePageOnAuth(){
-    userEmailIndicator.innerText = auth.currentUser.email;
     showLoading();
     await getSessionsSnapshot();
     await getEquipmentConfigs();
     isLoading = false;
 
+    updateUserInfo();
+    updateLiveSessions();
+    updateArchiveSessions();
+
+    // Showing password change block if logged with password
+    if (firebase.auth().currentUser.providerData[0].providerId === 'password') {
+        changePasswordButton.classList.remove('hidden');
+    };
+};
+
+
+// Sign Out Functionality
+signOutButton.addEventListener('click', async function(){
+    try {
+        // Attempting to sign out using auth method
+        firebase.auth().signOut();
+    } catch (error) {
+        createToastMessage('fail', error.message);
+    };
+});
+
+
+// Updating user details
+function updateUserInfo() {
+    // Updating user profile image
+    if (auth.currentUser.photoURL) {
+        userProfilePicture.setAttribute('src', auth.currentUser.photoURL);
+    } else {
+        const letter = auth.currentUser.email.charAt(0);
+        const photoLink = 'https://placehold.co/200x200/69B7FF/FFFFFF?text=' + letter.toUpperCase();
+        userProfilePicture.setAttribute('src', photoLink);
+    };
+    // Updating email indicator
+    if (auth.currentUser.displayName) {
+        emailLabel.classList.add('hidden');
+        userNameIndicator.classList.remove('hidden');
+        userNameIndicator.innerText = auth.currentUser.displayName;
+    };
+    userEmailIndicator.innerText = auth.currentUser.email;
+};
+
+
+// Updating live sessions indicator
+function updateLiveSessions() {
     let liveSessionsNumber = 0;
     try {
         sessionsSnapshot.forEach(session => {
@@ -35,24 +78,23 @@ async function updatePageOnAuth(){
     } catch (error) {
         userSessionsIndicator.innerText = liveSessionsNumber;
     };
-
-    // Showing password change block if logged with password
-    if (firebase.auth().currentUser.providerData[0].providerId === 'password') {
-        changePasswordButton.classList.remove('hidden');
-    }
 };
 
 
-// Sign Out Functionality
-signOutButton.addEventListener('click', async function(){
+// Updating archived sessions indicator
+function updateArchiveSessions() {
+    let archiveSessionsNumber = 0;
     try {
-        // Attempting to sign out using auth method
-        firebase.auth().signOut();
+        sessionsSnapshot.forEach(session => {
+            if (session.status !== 'live') {
+                archiveSessionsNumber = ++archiveSessionsNumber;
+            }
+        });
+        archiveSessionsIndicator.innerText = archiveSessionsNumber;
     } catch (error) {
-        createToastMessage('fail', error.message);
-        console.log(error.message);
-    }
-});
+        archiveSessionsIndicator.innerText = archiveSessionsNumber;
+    };
+};
 
 
 // Change password functionality
@@ -204,5 +246,5 @@ async function getEquipmentConfigs() {
         }
     } catch (error) {
         createToastMessage('fail', error.message);
-    }
-}
+    };
+};
