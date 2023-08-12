@@ -134,7 +134,7 @@ saveNewRoundButton.addEventListener('click', function(){
     if (createRoundTimeField.value.length === 5) {
         // Collecting arrows scores
         let arrowsScores = [];
-        let arrowsScoreInputs = roundScoresList.querySelectorAll('h5');
+        let arrowsScoreInputs = roundScoresList.querySelectorAll('h3');
         arrowsScoreInputs.forEach(input => {
             if (input.innerText === 'M'){
                 arrowsScores.push('0')
