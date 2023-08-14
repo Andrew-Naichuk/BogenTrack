@@ -267,7 +267,12 @@ button:hover {
 .mobile-only {
     display: none;
 }
-
+.max-60 {
+    max-width: 60rem;
+}
+.justify-between {
+    justify-content: space-between;
+}
 
 
 /* ANIMATIONS */
