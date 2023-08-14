@@ -18,7 +18,8 @@ firebase.auth().onAuthStateChanged((user) => {
 googleLoginButton.addEventListener('click', async function(){
     // Attempting to sign in using Google auth popup
     try {
-        await auth.signInWithPopup(providerGoogle);
+        // await auth.signInWithPopup(providerGoogle);
+        await auth.signInWithRedirect(providerGoogle);
     } catch (error) {
         createToastMessage('fail', error.message);
     }
