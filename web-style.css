@@ -128,7 +128,7 @@ section {
     gap: 4rem;
     width: 100%;
     max-width: 120rem;
-    padding: 6rem 2.6rem;
+    padding: 8rem 2.6rem;
 }
 hr {
     width: 100%;
@@ -287,7 +287,7 @@ img:hover, .testimonial:hover, .price:hover {
 
 
 @media screen and (min-width: 0px) and (max-width: 960px) {
-    h1 {
+    h1, h2 {
         text-align: center;
     }
     section {
@@ -355,5 +355,15 @@ img:hover, .testimonial:hover, .price:hover {
     }
     .column {
         padding: 1rem 0rem;
+    }
+    .feature#pricingHeading{
+        flex-direction: column;
+    }
+    .feature#priceBlock{
+        justify-content: center;
+    }
+    nav#callToActionButtons {
+        flex-direction: column;
+        width: 100%;
     }
 }
