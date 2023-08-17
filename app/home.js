@@ -21,6 +21,7 @@ async function updatePageOnAuth(){
     showLoading();
     await getSessions();
     isLoading = false;
+    await checkForOnboarding();
 };
 
 
@@ -29,6 +30,47 @@ createSessionButton.addEventListener('click', function(){
     let redirectLocation = loadedLocation + '/app/create-session.html';
     window.location.href = redirectLocation;
 });
+
+
+// Read user preferences for onboarding
+async function checkForOnboarding(){
+    // Reference to specific document in the database
+    const docRef = db.collection("btUsers").doc(auth.currentUser.uid);
+
+    try {
+        // Trying to fetch data from the document
+        const doc = await docRef.get();
+        if (doc.exists) {
+            // Trying to get onboarding state
+            const userPreferences = doc.data().preferences;
+            if (userPreferences) {
+                if (userPreferences.onboardingDone === false){
+                    createToastMessage('success', 'Here goes onboarding!');
+                };
+            } else {
+                try {
+                    // Pushing default preferences to DB
+                    await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                        preferences: newPreferences,
+                    });
+                } catch (error) {
+                    createToastMessage('fail', error.message);
+                };
+            };
+        } else {
+            try {
+                // Pushing default preferences to DB
+                await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                    preferences: newPreferences,
+                });
+            } catch (error) {
+                createToastMessage('fail', error.message);
+            };
+        };
+    } catch (error) {
+        createToastMessage('fail', error.message);
+    };
+};
 
 
 // Read and Render Sessions From Database
