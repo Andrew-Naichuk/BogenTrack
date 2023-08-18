@@ -73,6 +73,12 @@ async function checkForOnboarding(){
 };
 
 
+// Onboarding screens functionality
+function showOnboarding(){
+
+};
+
+
 // Read and Render Sessions From Database
 async function getSessions(){
     // Reference to specific document in the database
