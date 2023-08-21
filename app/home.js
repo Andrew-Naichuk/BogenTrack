@@ -45,7 +45,7 @@ async function checkForOnboarding(){
             const userPreferences = doc.data().preferences;
             if (userPreferences) {
                 if (userPreferences.onboardingDone === false){
-                    createToastMessage('success', 'Here goes onboarding!');
+                    await showOnboarding();
                 };
             } else {
                 try {
@@ -53,6 +53,7 @@ async function checkForOnboarding(){
                     await db.collection("btUsers").doc(auth.currentUser.uid).update({
                         preferences: newPreferences,
                     });
+                    await showOnboarding();
                 } catch (error) {
                     createToastMessage('fail', error.message);
                 };
@@ -63,6 +64,7 @@ async function checkForOnboarding(){
                 await db.collection("btUsers").doc(auth.currentUser.uid).update({
                     preferences: newPreferences,
                 });
+                await showOnboarding();
             } catch (error) {
                 createToastMessage('fail', error.message);
             };
@@ -74,7 +76,7 @@ async function checkForOnboarding(){
 
 
 // Onboarding screens functionality
-function showOnboarding(){
+async function showOnboarding(){
 
 };
 
