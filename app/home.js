@@ -42,10 +42,10 @@ async function checkForOnboarding(){
         const doc = await docRef.get();
         if (doc.exists) {
             // Trying to get onboarding state
-            const userPreferences = doc.data().preferences;
+            userPreferences = doc.data().preferences;
             if (userPreferences) {
                 if (userPreferences.onboardingDone === false){
-                    await showOnboarding();
+                    showOnboarding();
                 };
             } else {
                 try {
@@ -53,7 +53,8 @@ async function checkForOnboarding(){
                     await db.collection("btUsers").doc(auth.currentUser.uid).update({
                         preferences: newPreferences,
                     });
-                    await showOnboarding();
+                    userPreferences = newPreferences;
+                    showOnboarding();
                 } catch (error) {
                     createToastMessage('fail', error.message);
                 };
@@ -64,7 +65,8 @@ async function checkForOnboarding(){
                 await db.collection("btUsers").doc(auth.currentUser.uid).update({
                     preferences: newPreferences,
                 });
-                await showOnboarding();
+                userPreferences = newPreferences;
+                showOnboarding();
             } catch (error) {
                 createToastMessage('fail', error.message);
             };
@@ -76,9 +78,53 @@ async function checkForOnboarding(){
 
 
 // Onboarding screens functionality
-async function showOnboarding(){
-
+let currentOnboardingStep = 1;
+function showOnboarding(){
+    onboardingWindow.classList.remove('hidden');
+    // Next onboarding step button functionality
+    onboardingNextButton.addEventListener('click', ()=>{
+        if (currentOnboardingStep !== 5) {
+            // Cases where onboarding step is not final
+            currentOnboardingStep = ++currentOnboardingStep;
+            onboardingScreens.forEach(screen => {
+                if (screen.id == currentOnboardingStep) {
+                    screen.classList.remove('hidden');
+                } else {
+                    screen.classList.add('hidden');
+                };
+            });
+        } else {
+            // Final onboarding step
+            onboardingWindow.classList.add('hidden');
+            // Updating user preferences in DB with flag of onboarding being completed
+            userPreferences.onboardingDone = true;
+            (async function(){
+                try {
+                    await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                        preferences: userPreferences,
+                    });
+                } catch (error) {
+                    createToastMessage('fail', error.message);
+                }
+            })();
+        };
+    });
 };
+// Skip onboarding button functionality
+skipOnboardingButton.addEventListener('click', ()=>{
+    onboardingWindow.classList.add('hidden');
+    userPreferences.onboardingDone = true;
+    // Updating user preferences in DB with flag of onboarding being completed
+    (async function(){
+        try {
+            await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                preferences: userPreferences,
+            });
+        } catch (error) {
+            createToastMessage('fail', error.message);
+        }
+    })();
+});
 
 
 // Read and Render Sessions From Database
