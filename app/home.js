@@ -62,7 +62,7 @@ async function checkForOnboarding(){
         } else {
             try {
                 // Pushing default preferences to DB
-                await db.collection("btUsers").doc(auth.currentUser.uid).update({
+                await db.collection("btUsers").doc(auth.currentUser.uid).set({
                     preferences: newPreferences,
                 });
                 userPreferences = newPreferences;
