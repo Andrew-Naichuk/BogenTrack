@@ -56,7 +56,7 @@ submitReportButton.addEventListener('click', function(){
                         reports: firebase.firestore.FieldValue.arrayUnion(newReport),
                     });
                 } catch (error) {
-                    window.alert(error);
+                    createToastMessage('fail', error);
                 }
             } else {
                 try {
@@ -65,7 +65,7 @@ submitReportButton.addEventListener('click', function(){
                         reports: firebase.firestore.FieldValue.arrayUnion(newReport),
                     });
                 } catch (error) {
-                    window.alert(error);
+                    createToastMessage('fail', error);
                 }
             }
         })();
@@ -119,6 +119,5 @@ async function getReports(){
         }
     } catch (error) {
         createToastMessage('fail', error.message);
-        console.log(error.message);
     }
 };

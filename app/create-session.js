@@ -111,7 +111,7 @@ async function getEquipmentOptions() {
             }
         }
     } catch (error) {
-        
+        createToastMessage('fail', error.message);
     }
 };
 

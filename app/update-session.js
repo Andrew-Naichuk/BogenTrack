@@ -165,7 +165,7 @@ async function getCurrentValues(){
             window.location.replace(redirectLocation);
         };
     } catch (error) {
-        window.alert(error)
+        createToastMessage('fail', error.message);
     }
 };
 
@@ -193,7 +193,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                             sessions: sessionsSnapshot,
                         });
                     } catch (error) {
-                        window.alert(error);
+                        createToastMessage('fail', error.message);
                     }
                 })();
                 // Setting fields values back to default
@@ -206,7 +206,7 @@ saveUpdatedSessionButton.addEventListener('click', function(){
                     window.location.replace(redirectLocation);
                 }, 1500);
             } else {
-                window.alert('Date is not filled');
+                createToastMessage('fail', 'Date is not filled');
             };
         };
     });
@@ -242,7 +242,7 @@ deleteSessionButton.addEventListener('click', function(){
                         sessions: sessionsSnapshot,
                     });
                 } catch (error) {
-                    window.alert(error);
+                    createToastMessage('fail', error.message);
                 }
             })();
 

@@ -66,7 +66,6 @@ saveNewEquipConfigButton.addEventListener('click', ()=>{
                     });
                 } catch (error) {
                     createToastMessage('fail', error.message);
-                    console.log(error.message);
                 }
             } else {
                 try {
@@ -76,7 +75,6 @@ saveNewEquipConfigButton.addEventListener('click', ()=>{
                     });
                 } catch (error) {
                     createToastMessage('fail', error.message);
-                    console.log(error.message);
                 }
             };
         })();
