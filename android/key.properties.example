@@ -1,0 +1,6 @@
+# Copy to key.properties and fill in values before release builds.
+# Do not commit key.properties — it is listed in .gitignore.
+storePassword=your-keystore-password
+keyPassword=your-key-password
+keyAlias=upload
+storeFile=../upload-keystore.jks

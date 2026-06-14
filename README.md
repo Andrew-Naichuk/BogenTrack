@@ -31,6 +31,8 @@ flutter run -d android
 ### Project layout
 
 - `lib/` — Dart application code
+- `lib/features/` — feature modules (auth, sessions, equipment, notes)
+- `docs/ARCHITECTURE.md` — domain models and persistence plan
 - `lib/firebase_options.dart` — Firebase platform configuration (generated)
 - `android/`, `ios/`, `web/`, `windows/`, `linux/`, `macos/` — platform runners
 - `test/` — widget and unit tests
@@ -58,6 +60,22 @@ On Windows, ensure these are on your `PATH`:
 - `%LOCALAPPDATA%\Pub\Cache\bin` (for `flutterfire`)
 
 Re-run `flutterfire configure` after adding platforms or changing bundle IDs.
+
+**Bundle IDs** (registered separately in Firebase per platform):
+
+| Platform | Bundle / package ID |
+|----------|---------------------|
+| Android  | `uk.naich.bogen_track` |
+| iOS/macOS | `uk.naich.bogenTrack` |
+
+**Android release signing:** copy `android/key.properties.example` to `android/key.properties`, create a keystore, and fill in the values. Release builds are unsigned until `key.properties` exists.
+
+### Quality checks
+
+```bash
+flutter analyze
+flutter test
+```
 
 ## License
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://bogentrack.app">BogenTrack</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://naich.uk">Andrii Naichuk</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0</a></p>
