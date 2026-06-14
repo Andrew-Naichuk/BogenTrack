@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "673595653369",
+    "project_id": "bogentrack",
+    "storage_bucket": "bogentrack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673595653369:android:011d37fcf38eaf89bf7628",
+        "android_client_info": {
+          "package_name": "uk.naich.bogen_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673595653369-86g00eej8mgffkk0ek1fga1731ave0gm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcswvPCvRBYmURwP9DrOravMdWMXdGDJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673595653369-86g00eej8mgffkk0ek1fga1731ave0gm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "673595653369-ofo0isfmqobpbse0ugiscbclj67o5se9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "uk.naich.bogenTrack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
