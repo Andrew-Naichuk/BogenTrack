@@ -1,0 +1,33 @@
+---
+description: BogenTrack UI design language — iOS-inspired, identical on iOS + Android
+alwaysApply: true
+---
+
+# BogenTrack UI
+
+Before building or restyling UI, read `docs/DESIGN.md`.
+
+## Tokens and widgets
+
+- Colors, spacing, radius, typography, motion: `lib/core/theme/` — never hardcode colors, font sizes, or padding.
+- Screen shells, cards, buttons, scores: `lib/core/widgets/` — do not reinvent patterns.
+
+## Cross-platform rules
+
+- Identical look on iOS and Android.
+- `google_fonts` only (Newsreader + Inter) — never system/default fonts.
+- Cupertino widgets on both platforms: `CupertinoButton`, `CupertinoSwitch`, `CupertinoPicker`, `showCupertinoModalPopup`, `CupertinoSlidingSegmentedControl`.
+- Never `*.adaptive`, `showAdaptiveDialog`, or `Theme.of` / `Platform` branches for styling.
+- No Material ink ripple — use `AppButton` or `CupertinoButton` with fade feedback.
+
+## Scores
+
+Use `ScoreText` (or `FontFeature.tabularFigures()`) for **every** score, average, and total numeral.
+
+## Scope
+
+Visual and interaction design only — do not change scoring logic, domain models, or persistence unless explicitly requested.
+
+## When changing the design system
+
+Update `docs/DESIGN.md` and `lib/core/theme/` in the same PR.

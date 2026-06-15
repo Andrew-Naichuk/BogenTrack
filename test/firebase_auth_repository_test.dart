@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:bogen_track/features/auth/data/firebase_auth_repository.dart';
-import 'package:bogen_track/features/auth/domain/app_user.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
@@ -28,10 +27,10 @@ void main() {
 
     final values = await repository.authStateChanges.take(2).toList();
 
-    expect(values, [
-      null,
-      const AppUser(id: 'uid-1', email: 'archer@example.com'),
-    ]);
+    expect(values.length, 2);
+    expect(values[0], isNull);
+    expect(values[1]?.id, 'uid-1');
+    expect(values[1]?.email, 'archer@example.com');
   });
 
   test('delegates sign out to FirebaseAuth', () async {

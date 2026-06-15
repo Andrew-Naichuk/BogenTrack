@@ -1,14 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../core/widgets/app_button.dart';
 import '../data/google_auth_service.dart';
 import '../domain/auth_repository.dart';
 import '../providers/auth_providers.dart';
 import 'auth_error_message.dart';
 import 'widgets/auth_error_text.dart';
 import 'widgets/auth_form_scaffold.dart';
+import 'widgets/auth_text_field.dart';
 import 'widgets/loading_button.dart';
 
 class SignInPage extends ConsumerStatefulWidget {
@@ -19,12 +24,13 @@ class SignInPage extends ConsumerStatefulWidget {
 }
 
 class _SignInPageState extends ConsumerState<SignInPage> {
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _isLoading = false;
   String? _errorMessage;
+  String? _emailError;
+  String? _passwordError;
 
   @override
   void dispose() {
@@ -33,8 +39,23 @@ class _SignInPageState extends ConsumerState<SignInPage> {
     super.dispose();
   }
 
+  bool _validateFields() {
+    final emailError = _emailController.text.trim().isEmpty
+        ? 'Enter your email'
+        : null;
+    final passwordError =
+        _passwordController.text.isEmpty ? 'Enter your password' : null;
+
+    setState(() {
+      _emailError = emailError;
+      _passwordError = passwordError;
+    });
+
+    return emailError == null && passwordError == null;
+  }
+
   Future<void> _signIn(AuthRepository repository) async {
-    if (!_formKey.currentState!.validate()) {
+    if (!_validateFields()) {
       return;
     }
 
@@ -83,82 +104,72 @@ class _SignInPageState extends ConsumerState<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final repository = ref.watch(authRepositoryProvider);
+    final colors = AppColors.of(context);
+    final textTheme = Theme.of(context).textTheme;
+    final linkStyle = textTheme.labelLarge?.copyWith(color: colors.accent);
 
     return AuthFormScaffold(
       title: 'Sign in',
       heading: 'Welcome back',
-      formKey: _formKey,
       children: [
-        TextFormField(
+        AuthTextField(
           controller: _emailController,
+          placeholder: 'Email',
           keyboardType: TextInputType.emailAddress,
           autofillHints: const [AutofillHints.email],
-          decoration: const InputDecoration(
-            labelText: 'Email',
-            border: OutlineInputBorder(),
-          ),
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return 'Enter your email';
-            }
-            return null;
-          },
+          errorText: _emailError,
         ),
-        const SizedBox(height: 16),
-        TextFormField(
+        const SizedBox(height: AppSpacing.md),
+        AuthTextField(
           controller: _passwordController,
+          placeholder: 'Password',
           obscureText: true,
           autofillHints: const [AutofillHints.password],
-          decoration: const InputDecoration(
-            labelText: 'Password',
-            border: OutlineInputBorder(),
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Enter your password';
-            }
-            return null;
-          },
-          onFieldSubmitted: (_) => _signIn(repository),
+          errorText: _passwordError,
+          onSubmitted: () => _signIn(repository),
         ),
         if (_errorMessage != null) ...[
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.md),
           AuthErrorText(message: _errorMessage!),
         ],
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         LoadingButton(
           label: 'Sign in',
           isLoading: _isLoading,
           onPressed: () => _signIn(repository),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         Row(
           children: [
-            const Expanded(child: Divider()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'or',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+            Expanded(
+              child: Container(height: 0.5, color: colors.borderSubtle),
             ),
-            const Expanded(child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              child: Text('or', style: textTheme.labelMedium),
+            ),
+            Expanded(
+              child: Container(height: 0.5, color: colors.borderSubtle),
+            ),
           ],
         ),
-        const SizedBox(height: 24),
-        OutlinedButton.icon(
+        const SizedBox(height: AppSpacing.lg),
+        AppButton(
+          label: 'Continue with Google',
+          variant: AppButtonVariant.secondary,
+          isLoading: false,
           onPressed: _isLoading ? null : () => _signInWithGoogle(repository),
-          icon: const Icon(Icons.g_mobiledata, size: 28),
-          label: const Text('Continue with Google'),
         ),
-        const SizedBox(height: 12),
-        TextButton(
+        const SizedBox(height: AppSpacing.sm),
+        CupertinoButton(
+          padding: EdgeInsets.zero,
           onPressed: _isLoading ? null : () => context.push('/forgot-password'),
-          child: const Text('Forgot password?'),
+          child: Text('Forgot password?', style: linkStyle),
         ),
-        TextButton(
+        CupertinoButton(
+          padding: EdgeInsets.zero,
           onPressed: _isLoading ? null : () => context.push('/sign-up'),
-          child: const Text('Create an account'),
+          child: Text('Create an account', style: linkStyle),
         ),
       ],
     );

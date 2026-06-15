@@ -1,5 +1,7 @@
 # BogenTrack Architecture
 
+> UI conventions: see [`docs/DESIGN.md`](DESIGN.md). Theme code: `lib/core/theme/`. Shared widgets: `lib/core/widgets/`.
+
 This document defines the target architecture for porting archery tracking features from the legacy `app/` web prototype into Flutter.
 
 ## Layering

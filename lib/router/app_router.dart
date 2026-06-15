@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../core/widgets/error_state_view.dart';
 import '../features/auth/presentation/forgot_password_page.dart';
 import '../features/auth/presentation/sign_in_page.dart';
 import '../features/auth/presentation/sign_up_page.dart';
 import '../features/auth/providers/auth_providers.dart';
 import '../features/home/presentation/home_page.dart';
+import '../features/sessions/presentation/scorecard_page.dart';
+import '../features/sessions/presentation/session_detail_page.dart';
+import '../features/sessions/presentation/sessions_list_page.dart';
 import 'go_router_refresh_stream.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -65,6 +69,30 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/auth-error',
         builder: (context, state) => const AuthErrorPage(),
       ),
+      GoRoute(
+        path: '/sessions',
+        builder: (context, state) => const SessionsListPage(),
+      ),
+      GoRoute(
+        path: '/sessions/new',
+        builder: (context, state) => const SessionDetailPage(isNew: true),
+      ),
+      GoRoute(
+        path: '/sessions/:id',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return SessionDetailPage(sessionId: id);
+        },
+        routes: [
+          GoRoute(
+            path: 'scorecard',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return ScorecardPage(sessionId: id);
+            },
+          ),
+        ],
+      ),
     ],
   );
 });
@@ -78,41 +106,11 @@ class AuthErrorPage extends ConsumerWidget {
         ref.watch(authStateChangesProvider).error ??
         'Unknown authentication error';
 
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 400),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 48,
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Authentication error',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  '$error',
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                FilledButton(
-                  onPressed: () => context.go('/sign-in'),
-                  child: const Text('Back to sign in'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return ErrorStateView(
+      title: 'Authentication error',
+      message: '$error',
+      actionLabel: 'Back to sign in',
+      onAction: () => context.go('/sign-in'),
     );
   }
 }

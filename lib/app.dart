@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'core/theme/app_colors.dart';
+import 'core/theme/app_scroll_behavior.dart';
+import 'core/theme/app_theme.dart';
 import 'features/auth/providers/auth_providers.dart';
 import 'router/app_router.dart';
 
@@ -12,25 +16,35 @@ class BogenTrackApp extends ConsumerWidget {
     final authState = ref.watch(authStateChangesProvider);
     final router = ref.watch(routerProvider);
 
-    if (authState.isLoading) {
-      return MaterialApp(
-        title: 'BogenTrack',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2E7D32)),
-          useMaterial3: true,
-        ),
-        home: const Scaffold(
-          body: Center(child: CircularProgressIndicator()),
-        ),
-      );
-    }
-
     return MaterialApp.router(
       title: 'BogenTrack',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2E7D32)),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.light,
+      scrollBehavior: const AppScrollBehavior(),
+      builder: (context, child) {
+        Widget content = CupertinoTheme(
+          data: AppTheme.cupertino(context),
+          child: child!,
+        );
+
+        if (authState.isLoading) {
+          final colors = AppColors.of(context);
+          content = Stack(
+            children: [
+              content,
+              Positioned.fill(
+                child: ColoredBox(
+                  color: colors.surfaceBase.withValues(alpha: 0.85),
+                  child: const Center(child: CupertinoActivityIndicator()),
+                ),
+              ),
+            ],
+          );
+        }
+
+        return content;
+      },
       routerConfig: router,
     );
   }

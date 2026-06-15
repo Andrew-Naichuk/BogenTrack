@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:bogen_track/core/testing/test_app.dart';
 import 'package:bogen_track/features/auth/domain/app_user.dart';
 import 'package:bogen_track/features/auth/providers/auth_providers.dart';
 import 'package:bogen_track/features/home/presentation/home_page.dart';
@@ -15,7 +14,7 @@ void main() {
     repository.emitUser(const AppUser(id: 'test-user', email: 'archer@example.com'));
 
     await tester.pumpWidget(
-      ProviderScope(
+      testApp(
         overrides: [
           authRepositoryProvider.overrideWithValue(repository),
           authStateChangesProvider.overrideWith(
@@ -24,15 +23,13 @@ void main() {
             ),
           ),
         ],
-        child: const MaterialApp(home: HomePage()),
+        child: const HomePage(),
       ),
     );
+    await tester.pumpAndSettle();
 
     expect(find.text('BogenTrack'), findsOneWidget);
-    expect(
-      find.text('Track your archery training results and notes.'),
-      findsOneWidget,
-    );
+    expect(find.text('Your range'), findsOneWidget);
     expect(find.text('Signed in as archer@example.com'), findsOneWidget);
 
     await repository.dispose();

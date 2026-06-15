@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:bogen_track/core/testing/test_app.dart';
 import 'package:bogen_track/features/auth/presentation/sign_in_page.dart';
+import 'package:bogen_track/features/auth/presentation/widgets/loading_button.dart';
 import 'package:bogen_track/features/auth/providers/auth_providers.dart';
 import 'helpers/fake_auth_repository.dart';
 
@@ -15,24 +16,22 @@ void main() {
     final repository = FakeAuthRepository();
 
     await tester.pumpWidget(
-      ProviderScope(
+      testApp(
         overrides: [
           authRepositoryProvider.overrideWithValue(repository),
         ],
-        child: MaterialApp.router(
-          routerConfig: GoRouter(
-            routes: [
-              GoRoute(
-                path: '/',
-                builder: (context, state) => const SignInPage(),
-              ),
-            ],
-          ),
+        router: GoRouter(
+          routes: [
+            GoRoute(
+              path: '/',
+              builder: (context, state) => const SignInPage(),
+            ),
+          ],
         ),
       ),
     );
 
-    await tester.tap(find.text('Sign in'));
+    await tester.tap(find.byType(LoadingButton));
     await tester.pumpAndSettle();
 
     expect(find.text('Enter your email'), findsOneWidget);
@@ -52,26 +51,24 @@ void main() {
       );
 
     await tester.pumpWidget(
-      ProviderScope(
+      testApp(
         overrides: [
           authRepositoryProvider.overrideWithValue(repository),
         ],
-        child: MaterialApp.router(
-          routerConfig: GoRouter(
-            routes: [
-              GoRoute(
-                path: '/',
-                builder: (context, state) => const SignInPage(),
-              ),
-            ],
-          ),
+        router: GoRouter(
+          routes: [
+            GoRoute(
+              path: '/',
+              builder: (context, state) => const SignInPage(),
+            ),
+          ],
         ),
       ),
     );
 
-    await tester.enterText(find.byType(TextFormField).at(0), 'archer@example.com');
-    await tester.enterText(find.byType(TextFormField).at(1), 'password123');
-    await tester.tap(find.text('Sign in'));
+    await tester.enterText(find.byType(CupertinoTextField).at(0), 'archer@example.com');
+    await tester.enterText(find.byType(CupertinoTextField).at(1), 'password123');
+    await tester.tap(find.byType(LoadingButton));
     await tester.pumpAndSettle();
 
     expect(find.text('No account found for that email.'), findsOneWidget);

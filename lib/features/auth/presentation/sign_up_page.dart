@@ -1,12 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
 import '../providers/auth_providers.dart';
 import 'auth_error_message.dart';
 import 'widgets/auth_error_text.dart';
 import 'widgets/auth_form_scaffold.dart';
+import 'widgets/auth_text_field.dart';
 import 'widgets/loading_button.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
@@ -17,13 +21,15 @@ class SignUpPage extends ConsumerStatefulWidget {
 }
 
 class _SignUpPageState extends ConsumerState<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   bool _isLoading = false;
   String? _errorMessage;
+  String? _emailError;
+  String? _passwordError;
+  String? _confirmPasswordError;
 
   @override
   void dispose() {
@@ -33,8 +39,31 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     super.dispose();
   }
 
+  bool _validateFields() {
+    final emailError = _emailController.text.trim().isEmpty
+        ? 'Enter your email'
+        : null;
+    final passwordError = _passwordController.text.length < 8
+        ? 'Password must be at least 8 characters'
+        : null;
+    final confirmPasswordError = _confirmPasswordController.text !=
+            _passwordController.text
+        ? 'Passwords do not match'
+        : null;
+
+    setState(() {
+      _emailError = emailError;
+      _passwordError = passwordError;
+      _confirmPasswordError = confirmPasswordError;
+    });
+
+    return emailError == null &&
+        passwordError == null &&
+        confirmPasswordError == null;
+  }
+
   Future<void> _signUp() async {
-    if (!_formKey.currentState!.validate()) {
+    if (!_validateFields()) {
       return;
     }
 
@@ -64,73 +93,53 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
+    final textTheme = Theme.of(context).textTheme;
+    final linkStyle = textTheme.labelLarge?.copyWith(color: colors.accent);
+
     return AuthFormScaffold(
       title: 'Create account',
       heading: 'Create your account',
-      formKey: _formKey,
       children: [
-        TextFormField(
+        AuthTextField(
           controller: _emailController,
+          placeholder: 'Email',
           keyboardType: TextInputType.emailAddress,
           autofillHints: const [AutofillHints.email],
-          decoration: const InputDecoration(
-            labelText: 'Email',
-            border: OutlineInputBorder(),
-          ),
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return 'Enter your email';
-            }
-            return null;
-          },
+          errorText: _emailError,
         ),
-        const SizedBox(height: 16),
-        TextFormField(
+        const SizedBox(height: AppSpacing.md),
+        AuthTextField(
           controller: _passwordController,
+          placeholder: 'Password',
           obscureText: true,
           autofillHints: const [AutofillHints.newPassword],
-          decoration: const InputDecoration(
-            labelText: 'Password',
-            border: OutlineInputBorder(),
-          ),
-          validator: (value) {
-            if (value == null || value.length < 8) {
-              return 'Password must be at least 8 characters';
-            }
-            return null;
-          },
+          errorText: _passwordError,
         ),
-        const SizedBox(height: 16),
-        TextFormField(
+        const SizedBox(height: AppSpacing.md),
+        AuthTextField(
           controller: _confirmPasswordController,
+          placeholder: 'Confirm password',
           obscureText: true,
           autofillHints: const [AutofillHints.newPassword],
-          decoration: const InputDecoration(
-            labelText: 'Confirm password',
-            border: OutlineInputBorder(),
-          ),
-          validator: (value) {
-            if (value != _passwordController.text) {
-              return 'Passwords do not match';
-            }
-            return null;
-          },
-          onFieldSubmitted: (_) => _signUp(),
+          errorText: _confirmPasswordError,
+          onSubmitted: _signUp,
         ),
         if (_errorMessage != null) ...[
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSpacing.md),
           AuthErrorText(message: _errorMessage!),
         ],
-        const SizedBox(height: 24),
+        const SizedBox(height: AppSpacing.lg),
         LoadingButton(
           label: 'Create account',
           isLoading: _isLoading,
           onPressed: _signUp,
         ),
-        const SizedBox(height: 12),
-        TextButton(
+        const SizedBox(height: AppSpacing.sm),
+        CupertinoButton(
+          padding: EdgeInsets.zero,
           onPressed: _isLoading ? null : () => context.go('/sign-in'),
-          child: const Text('Already have an account? Sign in'),
+          child: Text('Already have an account? Sign in', style: linkStyle),
         ),
       ],
     );
