@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../domain/app_user.dart';
 import '../domain/auth_repository.dart';
-import 'google_auth_service.dart';
+import 'google_auth_service.dart' as google_auth;
 
 class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuthRepository({FirebaseAuth? auth}) : _auth = auth ?? FirebaseAuth.instance;
@@ -40,7 +40,7 @@ class FirebaseAuthRepository implements AuthRepository {
 
   @override
   Future<void> signInWithGoogle() {
-    return signInWithGoogle(_auth);
+    return google_auth.signInWithGoogle(_auth);
   }
 
   @override
