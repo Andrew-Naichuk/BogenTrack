@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
-import '../../../core/widgets/app_button.dart';
 import '../data/google_auth_service.dart';
 import '../domain/auth_repository.dart';
 import '../providers/auth_providers.dart';
 import 'auth_error_message.dart';
+import 'widgets/auth_divider.dart';
 import 'widgets/auth_error_text.dart';
 import 'widgets/auth_form_scaffold.dart';
+import 'widgets/auth_prompt_link.dart';
+import 'widgets/auth_social_button.dart';
 import 'widgets/auth_text_field.dart';
 import 'widgets/loading_button.dart';
 
@@ -104,72 +104,65 @@ class _SignInPageState extends ConsumerState<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final repository = ref.watch(authRepositoryProvider);
-    final colors = AppColors.of(context);
-    final textTheme = Theme.of(context).textTheme;
-    final linkStyle = textTheme.labelLarge?.copyWith(color: colors.accent);
 
     return AuthFormScaffold(
-      title: 'Sign in',
       heading: 'Welcome back',
+      subtitle: 'Track your progress and master your form',
       children: [
         AuthTextField(
           controller: _emailController,
-          placeholder: 'Email',
+          placeholder: 'Email address',
           keyboardType: TextInputType.emailAddress,
           autofillHints: const [AutofillHints.email],
           errorText: _emailError,
         ),
-        const SizedBox(height: AppSpacing.md),
+        const SizedBox(height: AppSpacing.sm),
         AuthTextField(
           controller: _passwordController,
           placeholder: 'Password',
           obscureText: true,
+          showVisibilityToggle: true,
           autofillHints: const [AutofillHints.password],
           errorText: _passwordError,
           onSubmitted: () => _signIn(repository),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        Align(
+          alignment: Alignment.centerRight,
+          child: AuthTextLink(
+            label: 'Forgot password?',
+            enabled: !_isLoading,
+            onPressed: () => context.push('/forgot-password'),
+          ),
         ),
         if (_errorMessage != null) ...[
           const SizedBox(height: AppSpacing.md),
           AuthErrorText(message: _errorMessage!),
         ],
-        const SizedBox(height: AppSpacing.lg),
+        const SizedBox(height: AppSpacing.xl),
         LoadingButton(
           label: 'Sign in',
           isLoading: _isLoading,
           onPressed: () => _signIn(repository),
         ),
-        const SizedBox(height: AppSpacing.lg),
-        Row(
-          children: [
-            Expanded(
-              child: Container(height: 0.5, color: colors.borderSubtle),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-              child: Text('or', style: textTheme.labelMedium),
-            ),
-            Expanded(
-              child: Container(height: 0.5, color: colors.borderSubtle),
-            ),
-          ],
+        const SizedBox(height: AppSpacing.authCtaLinkGap),
+        AuthPromptLink(
+          prompt: "Don't have an account? ",
+          actionLabel: 'Sign up',
+          enabled: !_isLoading,
+          onAction: () => context.push('/sign-up'),
         ),
-        const SizedBox(height: AppSpacing.lg),
-        AppButton(
+        const SizedBox(height: AppSpacing.xxl),
+        const AuthDivider(),
+        const SizedBox(height: AppSpacing.xxl),
+        AuthSocialButton(
           label: 'Continue with Google',
-          variant: AppButtonVariant.secondary,
-          isLoading: false,
+          icon: Image.asset(
+            'assets/images/auth/google.png',
+            width: 20,
+            height: 20,
+          ),
           onPressed: _isLoading ? null : () => _signInWithGoogle(repository),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: _isLoading ? null : () => context.push('/forgot-password'),
-          child: Text('Forgot password?', style: linkStyle),
-        ),
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: _isLoading ? null : () => context.push('/sign-up'),
-          child: Text('Create an account', style: linkStyle),
         ),
       ],
     );

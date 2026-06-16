@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../providers/auth_providers.dart';
 import 'auth_error_message.dart';
 import 'widgets/auth_error_text.dart';
 import 'widgets/auth_form_scaffold.dart';
+import 'widgets/auth_prompt_link.dart';
+import 'widgets/auth_terms_footer.dart';
 import 'widgets/auth_text_field.dart';
 import 'widgets/loading_button.dart';
 
@@ -21,18 +21,21 @@ class SignUpPage extends ConsumerStatefulWidget {
 }
 
 class _SignUpPageState extends ConsumerState<SignUpPage> {
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
   bool _isLoading = false;
   String? _errorMessage;
+  String? _nameError;
   String? _emailError;
   String? _passwordError;
   String? _confirmPasswordError;
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
@@ -40,6 +43,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   }
 
   bool _validateFields() {
+    final nameError =
+        _nameController.text.trim().isEmpty ? 'Enter your name' : null;
     final emailError = _emailController.text.trim().isEmpty
         ? 'Enter your email'
         : null;
@@ -52,12 +57,14 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         : null;
 
     setState(() {
+      _nameError = nameError;
       _emailError = emailError;
       _passwordError = passwordError;
       _confirmPasswordError = confirmPasswordError;
     });
 
-    return emailError == null &&
+    return nameError == null &&
+        emailError == null &&
         passwordError == null &&
         confirmPasswordError == null;
   }
@@ -93,34 +100,39 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = AppColors.of(context);
-    final textTheme = Theme.of(context).textTheme;
-    final linkStyle = textTheme.labelLarge?.copyWith(color: colors.accent);
-
     return AuthFormScaffold(
-      title: 'Create account',
-      heading: 'Create your account',
+      heading: 'Begin your journey',
+      subtitle: 'Join a community of focused archers',
       children: [
         AuthTextField(
+          controller: _nameController,
+          placeholder: 'Your name',
+          autofillHints: const [AutofillHints.name],
+          errorText: _nameError,
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        AuthTextField(
           controller: _emailController,
-          placeholder: 'Email',
+          placeholder: 'Email address',
           keyboardType: TextInputType.emailAddress,
           autofillHints: const [AutofillHints.email],
           errorText: _emailError,
         ),
-        const SizedBox(height: AppSpacing.md),
+        const SizedBox(height: AppSpacing.sm),
         AuthTextField(
           controller: _passwordController,
           placeholder: 'Password',
           obscureText: true,
+          showVisibilityToggle: true,
           autofillHints: const [AutofillHints.newPassword],
           errorText: _passwordError,
         ),
-        const SizedBox(height: AppSpacing.md),
+        const SizedBox(height: AppSpacing.sm),
         AuthTextField(
           controller: _confirmPasswordController,
           placeholder: 'Confirm password',
           obscureText: true,
+          showVisibilityToggle: true,
           autofillHints: const [AutofillHints.newPassword],
           errorText: _confirmPasswordError,
           onSubmitted: _signUp,
@@ -129,18 +141,21 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
           const SizedBox(height: AppSpacing.md),
           AuthErrorText(message: _errorMessage!),
         ],
-        const SizedBox(height: AppSpacing.lg),
+        const SizedBox(height: AppSpacing.xl),
         LoadingButton(
           label: 'Create account',
           isLoading: _isLoading,
           onPressed: _signUp,
         ),
-        const SizedBox(height: AppSpacing.sm),
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: _isLoading ? null : () => context.go('/sign-in'),
-          child: Text('Already have an account? Sign in', style: linkStyle),
+        const SizedBox(height: AppSpacing.authCtaLinkGap),
+        AuthPromptLink(
+          prompt: 'Already have an account? ',
+          actionLabel: 'Sign in',
+          enabled: !_isLoading,
+          onAction: () => context.go('/sign-in'),
         ),
+        const SizedBox(height: AppSpacing.xxl),
+        const AuthTermsFooter(),
       ],
     );
   }

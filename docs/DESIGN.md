@@ -48,6 +48,19 @@ Calm, editorial, content-first UI for an archery training tracker. The app shoul
 | `borderSubtle` | `0x14000000` |
 | `error` | `#B85C5C` |
 
+### Auth screens (gold CTA)
+
+| Token | Hex | Use |
+|-------|-----|-----|
+| `authSurface` | `#FAFAFA` | Auth screen background |
+| `authInputFill` | `#F4F4F5` | Text field fill |
+| `authInputBorder` | `#E4E4E7` | Text field border |
+| `authPrimary` | `#F4C93D` | Primary CTA fill |
+| `authOnPrimary` | `#0E0E0F` | CTA label |
+| `authLink` | `#BF9200` | Inline link emphasis |
+
+Auth inputs use `AppRadius.authInput` (14); auth CTAs use `AppRadius.authButton` (29, pill).
+
 ### Dark
 
 | Token | Hex |

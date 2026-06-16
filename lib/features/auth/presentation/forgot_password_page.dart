@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +9,7 @@ import '../providers/auth_providers.dart';
 import 'auth_error_message.dart';
 import 'widgets/auth_error_text.dart';
 import 'widgets/auth_form_scaffold.dart';
+import 'widgets/auth_prompt_link.dart';
 import 'widgets/auth_text_field.dart';
 import 'widgets/loading_button.dart';
 
@@ -72,21 +72,14 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     final colors = AppColors.of(context);
     final textTheme = Theme.of(context).textTheme;
-    final linkStyle = textTheme.labelLarge?.copyWith(color: colors.accent);
 
     return AuthFormScaffold(
-      title: 'Reset password',
-      heading: 'Forgot your password?',
+      heading: 'Restore Password',
+      subtitle: 'Enter your email to receive a reset link',
       children: [
-        Text(
-          'Enter your email and we will send you a reset link.',
-          textAlign: TextAlign.center,
-          style: textTheme.bodyLarge?.copyWith(color: colors.onSurfaceMuted),
-        ),
-        const SizedBox(height: AppSpacing.lg),
         AuthTextField(
           controller: _emailController,
-          placeholder: 'Email',
+          placeholder: 'Email address',
           keyboardType: TextInputType.emailAddress,
           autofillHints: const [AutofillHints.email],
           errorText: _emailError,
@@ -100,20 +93,21 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
           const SizedBox(height: AppSpacing.md),
           Text(
             'Password reset email sent. Check your inbox.',
-            style: textTheme.bodyMedium?.copyWith(color: colors.accent),
+            textAlign: TextAlign.center,
+            style: textTheme.bodyMedium?.copyWith(color: colors.authLink),
           ),
         ],
-        const SizedBox(height: AppSpacing.lg),
+        const SizedBox(height: AppSpacing.xl),
         LoadingButton(
-          label: 'Send reset email',
+          label: 'Restore password',
           isLoading: _isLoading,
           onPressed: _sendResetEmail,
         ),
-        const SizedBox(height: AppSpacing.sm),
-        CupertinoButton(
-          padding: EdgeInsets.zero,
-          onPressed: _isLoading ? null : () => context.go('/sign-in'),
-          child: Text('Back to sign in', style: linkStyle),
+        const SizedBox(height: AppSpacing.authCtaLinkGap),
+        AuthTextLink(
+          label: 'Back to sign in',
+          enabled: !_isLoading,
+          onPressed: () => context.go('/sign-in'),
         ),
       ],
     );

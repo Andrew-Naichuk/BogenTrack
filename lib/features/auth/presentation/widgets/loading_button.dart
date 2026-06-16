@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widgets/app_button.dart';
+import 'auth_primary_button.dart';
 
 class LoadingButton extends StatelessWidget {
   const LoadingButton({
@@ -16,7 +16,7 @@ class LoadingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppButton(
+    return AuthPrimaryButton(
       label: label,
       isLoading: isLoading,
       onPressed: onPressed,

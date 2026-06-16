@@ -13,4 +13,10 @@ abstract final class AppSpacing {
 
   /// Max width for centered form layouts.
   static const double contentMaxWidth = 400;
+
+  /// Auth screens — gap between CTA and inline link.
+  static const double authCtaLinkGap = 20;
+
+  /// Auth screens — top inset below safe area.
+  static const double authTopInset = 40;
 }

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import 'package:bogen_track/core/testing/test_app.dart';
 import 'package:bogen_track/features/auth/presentation/sign_in_page.dart';
-import 'package:bogen_track/features/auth/presentation/widgets/loading_button.dart';
 import 'package:bogen_track/features/auth/providers/auth_providers.dart';
 import 'helpers/fake_auth_repository.dart';
 
@@ -31,7 +30,14 @@ void main() {
       ),
     );
 
-    await tester.tap(find.byType(LoadingButton));
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(
+      find.text('Sign in'),
+      48,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
 
     expect(find.text('Enter your email'), findsOneWidget);
@@ -68,7 +74,12 @@ void main() {
 
     await tester.enterText(find.byType(CupertinoTextField).at(0), 'archer@example.com');
     await tester.enterText(find.byType(CupertinoTextField).at(1), 'password123');
-    await tester.tap(find.byType(LoadingButton));
+    await tester.scrollUntilVisible(
+      find.text('Sign in'),
+      48,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
 
     expect(find.text('No account found for that email.'), findsOneWidget);

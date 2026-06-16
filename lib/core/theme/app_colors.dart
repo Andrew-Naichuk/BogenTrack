@@ -13,6 +13,12 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.accent,
     required this.accentGold,
     required this.error,
+    required this.authSurface,
+    required this.authInputFill,
+    required this.authInputBorder,
+    required this.authPrimary,
+    required this.authOnPrimary,
+    required this.authLink,
   });
 
   final Color surfaceBase;
@@ -26,6 +32,14 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color accentGold;
   final Color error;
 
+  /// Auth screens — gold CTA palette from Figma.
+  final Color authSurface;
+  final Color authInputFill;
+  final Color authInputBorder;
+  final Color authPrimary;
+  final Color authOnPrimary;
+  final Color authLink;
+
   static const light = AppColors(
     surfaceBase: Color(0xFFF6F2EA),
     surface: Color(0xFFFFFFFF),
@@ -37,6 +51,12 @@ class AppColors extends ThemeExtension<AppColors> {
     accent: Color(0xFF7E8BA3),
     accentGold: Color(0xFFC7A86A),
     error: Color(0xFFB85C5C),
+    authSurface: Color(0xFFFAFAFA),
+    authInputFill: Color(0xFFF4F4F5),
+    authInputBorder: Color(0xFFE4E4E7),
+    authPrimary: Color(0xFFF4C93D),
+    authOnPrimary: Color(0xFF0E0E0F),
+    authLink: Color(0xFFBF9200),
   );
 
   static const dark = AppColors(
@@ -50,6 +70,12 @@ class AppColors extends ThemeExtension<AppColors> {
     accent: Color(0xFF7E8BA3),
     accentGold: Color(0xFFC7A86A),
     error: Color(0xFFC47272),
+    authSurface: Color(0xFF16151A),
+    authInputFill: Color(0xFF2A2830),
+    authInputBorder: Color(0xFF3A3840),
+    authPrimary: Color(0xFFF4C93D),
+    authOnPrimary: Color(0xFF0E0E0F),
+    authLink: Color(0xFFD4AD33),
   );
 
   static AppColors of(BuildContext context) {
@@ -93,6 +119,12 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? accent,
     Color? accentGold,
     Color? error,
+    Color? authSurface,
+    Color? authInputFill,
+    Color? authInputBorder,
+    Color? authPrimary,
+    Color? authOnPrimary,
+    Color? authLink,
   }) {
     return AppColors(
       surfaceBase: surfaceBase ?? this.surfaceBase,
@@ -105,6 +137,12 @@ class AppColors extends ThemeExtension<AppColors> {
       accent: accent ?? this.accent,
       accentGold: accentGold ?? this.accentGold,
       error: error ?? this.error,
+      authSurface: authSurface ?? this.authSurface,
+      authInputFill: authInputFill ?? this.authInputFill,
+      authInputBorder: authInputBorder ?? this.authInputBorder,
+      authPrimary: authPrimary ?? this.authPrimary,
+      authOnPrimary: authOnPrimary ?? this.authOnPrimary,
+      authLink: authLink ?? this.authLink,
     );
   }
 
@@ -124,6 +162,12 @@ class AppColors extends ThemeExtension<AppColors> {
       accent: Color.lerp(accent, other.accent, t)!,
       accentGold: Color.lerp(accentGold, other.accentGold, t)!,
       error: Color.lerp(error, other.error, t)!,
+      authSurface: Color.lerp(authSurface, other.authSurface, t)!,
+      authInputFill: Color.lerp(authInputFill, other.authInputFill, t)!,
+      authInputBorder: Color.lerp(authInputBorder, other.authInputBorder, t)!,
+      authPrimary: Color.lerp(authPrimary, other.authPrimary, t)!,
+      authOnPrimary: Color.lerp(authOnPrimary, other.authOnPrimary, t)!,
+      authLink: Color.lerp(authLink, other.authLink, t)!,
     );
   }
 }
